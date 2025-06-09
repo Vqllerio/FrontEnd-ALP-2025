@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tempat Wisata</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease-out;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-b from-blue-50 to-blue-100 min-h-screen pt-32 px-8">
+
+  <nav class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-green-500 shadow-md z-20 text-white">
+    <div class="flex items-center space-x-2">
+      <div class="w-10 h-10 bg-gray-700 rounded-full"></div>
+      <span class="font-bold text-xl">Nama Website</span>
+    </div>
+    <div class="space-x-6 font-medium">
+      <a href="#" class="hover:underline">Beranda</a>
+      <a href="#" class="hover:underline">Provinsi</a>
+      <a href="#" class="hover:underline">Kota</a>
+      <a href="#" class="hover:underline">Destinasi</a>
+    </div>
+  </nav>
+
+  <h1 class="text-4xl font-bold text-center text-blue-800 mb-10">Tempat Wisata Menarik di Makassar</h1>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  <div onclick="openModal(0)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+    <img src="wisata/gambar 3.jpg" alt="Pantai Losari" class="w-full h-48 object-cover"/>
+    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pantai Losari, Makassar</div>
+  </div>
+
+  <div onclick="openModal(1)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+    <img src="wisata/wisata 1.jpg" alt="Gunung Lokon" class="w-full h-48 object-cover"/>
+    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Gunung Lokon, Tomohon</div>
+  </div>
+
+  <div onclick="openModal(2)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+    <img src="wisata/wisata 2.jpg" alt="Danau Tempe" class="w-full h-48 object-cover"/>
+    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Danau Tempe, Wajo</div>
+  </div>
+
+  <div onclick="openModal(3)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+    <img src="wisata/wisata 3.jpg" alt="Taman Nasional Bantimurung" class="w-full h-48 object-cover"/>
+    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Taman Nasional Bantimurung</div>
+  </div>
+
+  <div onclick="openModal(4)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+    <img src="wisata/wisata 4.jpg" alt="Pulau Samalona" class="w-full h-48 object-cover"/>
+    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pulau Samalona</div>
+  </div>
+  <div onclick="openModal(5)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+    <img src="wisata/wisata 2.jpg" alt="Danau Tempe" class="w-full h-48 object-cover"/>
+    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Danau Tempe, Wajo</div>
+  </div>
+
+  <div onclick="openModal(6)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+    <img src="wisata/wisata 3.jpg" alt="Taman Nasional Bantimurung" class="w-full h-48 object-cover"/>
+    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Taman Nasional Bantimurung</div>
+  </div>
+  <div onclick="openModal(7)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+    <img src="wisata/wisata 2.jpg" alt="Danau Tempe" class="w-full h-48 object-cover"/>
+    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Danau Tempe, Wajo</div>
+  </div>
+
+  <div onclick="openModal(8)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+    <img src="wisata/wisata 3.jpg" alt="Taman Nasional Bantimurung" class="w-full h-48 object-cover"/>
+    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Taman Nasional Bantimurung</div>
+  </div>
+
+  <div onclick="openModal(9)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+    <img src="wisata/wisata 4.jpg" alt="Pulau Samalona" class="w-full h-48 object-cover"/>
+    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pulau Samalona</div>
+  </div>
+</div>
+
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 overflow-y-auto px-4 py-8">
+    <div class="bg-white rounded-xl p-6 w-full max-w-4xl relative shadow-xl animate-fadeIn max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal()" class="absolute top-2 right-4 text-gray-500 hover:text-red-500 text-2xl font-bold">&times;</button>
+
+      <h2 id="modalTitle" class="text-3xl font-bold mb-4 text-blue-700 text-center"></h2>
+      <img id="modalImage" src="" alt="Gambar Wisata" class="w-full h-64 object-cover rounded-lg mb-4"/>
+      <p id="modalDescription" class="text-gray-700 leading-relaxed mb-6"></p>
+
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">Perkembangan dari Tahun ke Tahun:</h3>
+
+      <div class="relative flex items-center justify-center">
+        <button id="prevBtn" class="absolute left-0 text-3xl font-bold text-gray-600 hover:text-green-600 px-4 z-10">&#8592;</button>
+        <img id="historyImage" src="" alt="Gambar sejarah" class="w-full sm:w-2/3 h-64 object-cover rounded-md border"/>
+        <button id="nextBtn" class="absolute right-0 text-3xl font-bold text-gray-600 hover:text-green-600 px-4 z-10">&#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const data = [
+      {
+        title: "Pantai Losari, Makassar",
+        description: "Pantai Losari adalah ikon wisata Makassar yang terkenal dengan pemandangan matahari terbenam yang memukau, serta kuliner khas seperti pisang epe dan coto Makassar.",
+        image: "wisata/gambar 3.jpg",
+        gallery: [
+          "wisata/losari-2010.jpg",
+          "wisata/losari-2015.jpg",
+          "wisata/losari-2020.jpg"
+        ]
+      },
+      {
+        title: "Gunung Lokon, Tomohon",
+        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
+        image: "wisata/wisata 1.jpg",
+        gallery: [
+          "wisata/lokon-2005.jpg",
+          "wisata/lokon-2015.jpg",
+          "wisata/lokon-2023.jpg"
+        ]
+      },
+      {
+        title: "Danau Tempe, Wajo",
+        description: "Danau Tempe adalah danau luas di Kabupaten Wajo yang terkenal dengan rumah apung dan festival Danau Tempe yang diadakan setiap tahun.",
+        image: "wisata/wisata 2.jpg",
+        gallery: [
+          "wisata/tempe-2010.jpg",
+          "wisata/tempe-2016.jpg",
+          "wisata/tempe-2022.jpg"
+        ]
+      },
+      {
+        title: "Gunung Lokon, Tomohon",
+        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
+        image: "wisata/wisata 1.jpg",
+        gallery: [
+          "wisata/lokon-2005.jpg",
+          "wisata/lokon-2015.jpg",
+          "wisata/lokon-2023.jpg"
+        ]
+      },
+      {
+        title: "Gunung Lokon, Tomohon",
+        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
+        image: "wisata/wisata 1.jpg",
+        gallery: [
+          "wisata/lokon-2005.jpg",
+          "wisata/lokon-2015.jpg",
+          "wisata/lokon-2023.jpg"
+        ]
+      },
+      {
+        title: "Gunung Lokon, Tomohon",
+        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
+        image: "wisata/wisata 1.jpg",
+        gallery: [
+          "wisata/lokon-2005.jpg",
+          "wisata/lokon-2015.jpg",
+          "wisata/lokon-2023.jpg"
+        ]
+      },
+      {
+        title: "Gunung Lokon, Tomohon",
+        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
+        image: "wisata/wisata 1.jpg",
+        gallery: [
+          "wisata/lokon-2005.jpg",
+          "wisata/lokon-2015.jpg",
+          "wisata/lokon-2023.jpg"
+        ]
+      },
+      {
+        title: "Gunung Lokon, Tomohon",
+        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
+        image: "wisata/wisata 1.jpg",
+        gallery: [
+          "wisata/lokon-2005.jpg",
+          "wisata/lokon-2015.jpg",
+          "wisata/lokon-2023.jpg"
+        ]
+      },
+      {
+        title: "Gunung Lokon, Tomohon",
+        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
+        image: "wisata/wisata 1.jpg",
+        gallery: [
+          "wisata/lokon-2005.jpg",
+          "wisata/lokon-2015.jpg",
+          "wisata/lokon-2023.jpg"
+        ]
+      },
+      {
+        title: "Gunung Lokon, Tomohon",
+        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
+        image: "wisata/wisata 1.jpg",
+        gallery: [
+          "wisata/lokon-2005.jpg",
+          "wisata/lokon-2015.jpg",
+          "wisata/lokon-2023.jpg"
+        ]
+      },
+    ];
+
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    function openModal(index) {
+      const item = data[index];
+      document.getElementById('modalTitle').innerText = item.title;
+      document.getElementById('modalDescription').innerText = item.description;
+      document.getElementById('modalImage').src = item.image;
+
+      currentGallery = item.gallery;
+      currentIndex = 0;
+      updateHistoryImage();
+
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
+    }
+
+    function updateHistoryImage() {
+      const historyImage = document.getElementById('historyImage');
+      if (currentGallery.length > 0) {
+        historyImage.src = currentGallery[currentIndex];
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('flex');
+      document.getElementById('modal').classList.add('hidden');
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateHistoryImage();
+      }
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (currentIndex < currentGallery.length - 1) {
+        currentIndex++;
+        updateHistoryImage();
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pilih Kota di Sulawesi Selatan</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .fade-slide-in {
+      animation: fadeSlideIn 0.6s ease-out forwards;
+    }
+    @keyframes fadeSlideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-green-100 via-green-200 to-green-300 min-h-screen flex flex-col items-center justify-center text-green-900 p-4 pt-32">
+
+  <nav class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-green-500 shadow-md z-20 text-white">
+    <div class="flex items-center space-x-2">
+      <div class="w-10 h-10 bg-gray-700 rounded-full"></div>
+      <span class="font-bold text-xl">Nama Website</span>
+    </div>
+    <div class="space-x-6 font-medium">
+      <a href="#" class="hover:underline">Beranda</a>
+      <a href="#" class="hover:underline">Provinsi</a>
+      <a href="#" class="hover:underline">Kota</a>
+      <a href="#" class="hover:underline">Destinasi</a>
+    </div>
+  </nav>
+
+  <div class="text-center">
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">Pilih Kota di Sulawesi Selatan</h1>
+    <p class="mb-6 text-lg">Temukan destinasi wisata dari kota favoritmu</p>
+    <button id="toggleBtn" class="bg-green-700 hover:bg-green-800 text-white px-6 py-3 rounded-full font-semibold transition duration-300 shadow-lg">
+      Tampilkan Kota
+    </button>
+  </div>
+
+  <div id="cityContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-10 max-w-6xl w-full hidden">
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggleBtn');
+    const cityContainer = document.getElementById('cityContainer');
+
+    const cities = [
+      "Makassar", "Pangkep", "Barru", "Bone", "Soppeng", "Wajo", "Sidrap", "Pinrang",
+      "Parepare", "Enrekang", "Tana Toraja", "Toraja Utara", "Luwu Timur", "Luwu Utara",
+      "Bantaeng", "Bulukumba", "Selayar", "Takalar", "Jeneponto", "Sinjai", "Sengkang"
+    ];
+
+    cities.forEach((city, index) => {
+      const el = document.createElement('div');
+      el.className = "bg-white rounded-xl shadow-md p-4 text-center text-green-800 font-semibold transform hover:scale-105 transition duration-300 opacity-0";
+      el.textContent = city;
+      el.style.animationDelay = `${index * 0.08}s`;
+      el.classList.add("fade-slide-in");
+      cityContainer.appendChild(el);
+    });
+
+    let shown = false;
+    toggleBtn.addEventListener('click', () => {
+      shown = !shown;
+      if (shown) {
+        cityContainer.classList.remove('hidden');
+        toggleBtn.textContent = "Sembunyikan Kota";
+        const cards = cityContainer.querySelectorAll('div');
+        cards.forEach((card, i) => {
+          setTimeout(() => {
+            card.style.opacity = 1;
+          }, i * 80);
+        });
+      } else {
+        toggleBtn.textContent = "Tampilkan Kota";
+        const cards = cityContainer.querySelectorAll('div');
+        cards.forEach((card) => {
+          card.style.opacity = 0;
+        });
+        setTimeout(() => cityContainer.classList.add('hidden'), 400);
+      }
+    });
+  </script>
+
+</body>
+</html>
