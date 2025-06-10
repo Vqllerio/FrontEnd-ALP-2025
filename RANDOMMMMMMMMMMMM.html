@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tempat Wisata</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease-out;
+    }
+    .page {
+      display: none;
+    }
+    .active-page {
+      display: block;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-b from-blue-50 to-blue-100 min-h-screen pt-32 px-8">
+
+  <nav class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-green-600 shadow-md z-20 text-white">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </div>
+      <span class="font-bold text-xl">Wisata Sulsel</span>
+    </div>
+    <div class="hidden md:flex space-x-6 font-medium">
+      <a href="#" class="hover:underline hover:text-green-100">Beranda</a>
+      <a href="#" class="hover:underline hover:text-green-100">Provinsi</a>
+      <a href="#" class="hover:underline hover:text-green-100">Kota</a>
+      <a href="#" class="hover:underline hover:text-green-100">Destinasi</a>
+    </div>
+  </nav>
+
+  <!-- Main Page -->
+  <div id="mainPage" class="page active-page">
+    <h1 class="text-4xl font-bold text-center text-blue-800 mb-10">Tempat Wisata Menarik di Makassar</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div onclick="openModal(0)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+        <img src="wisata/gambar 3.jpg" alt="Pantai Losari" class="w-full h-48 object-cover"/>
+        <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pantai Losari, Makassar</div>
+      </div>
+    </div>
+
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 overflow-y-auto px-4 py-8">
+      <div class="bg-white rounded-xl p-6 w-full max-w-4xl relative shadow-xl animate-fadeIn max-h-[90vh] overflow-y-auto">
+        <button onclick="closeModal()" class="absolute top-2 right-4 text-gray-500 hover:text-red-500 text-2xl font-bold">&times;</button>
+
+        <h2 id="modalTitle" class="text-3xl font-bold mb-4 text-blue-700 text-center">Pantai Losari, Makassar</h2>
+        <div class="mb-6">
+          <img id="modalImage" src="wisata/gambar 3.jpg" alt="Gambar Wisata" class="w-full h-64 object-cover rounded-lg"/>
+        </div>
+
+        <div class="mb-6">
+          <h3 class="text-xl font-semibold mb-2">Peta Lokasi</h3>
+          <div class="bg-gray-200 rounded-lg overflow-hidden">
+            <img id="modalMapImage" src="" alt="Peta Lokasi" class="w-full h-48 object-cover">
+
+            <div class="p-3 bg-white text-center">
+              <a id="modalMapLink" href="#" target="_blank" class="text-blue-600 hover:text-blue-800 underline text-sm">
+                Buka di Google Maps
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="bg-blue-50 p-4 rounded-lg text-center">
+            <h4 class="font-semibold mb-2">Rating</h4>
+            <div id="modalRating" class="flex justify-center">
+              ★★★★★
+            </div>
+          </div>
+          <div class="bg-blue-50 p-4 rounded-lg flex flex-col items-center justify-center col-span-2">
+            <button onclick="openDetailPage()" class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded transition w-full">
+              Sejarah & Budaya
+            </button>
+          </div>
+        </div>
+        
+        <div class="mb-4">
+          <h3 class="text-xl font-semibold mb-2">Fakta Tentang Tempat Wisata</h3>
+          <p id="modalDescription" class="text-gray-700 leading-relaxed">
+            Pantai Losari adalah ikon wisata Makassar yang terkenal dengan pemandangan matahari terbenam yang memukau, serta kuliner khas seperti pisang epe dan coto Makassar...
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Page -->
+  <div id="detailPage" class="page">
+    <div class="bg-white rounded-xl p-6 w-full relative shadow-xl max-w-6xl mx-auto">
+      <button onclick="backToModal()" class="absolute top-2 right-4 text-gray-500 hover:text-red-500 text-3xl font-bold">
+        &times;
+      </button>
+
+      <h2 id="detailTitle" class="text-3xl font-bold mb-4 text-blue-700 text-center">Sejarah & Budaya</h2>
+
+      <div class="flex justify-center mb-6 border-b">
+        <button id="tabSejarah" onclick="switchTab('sejarah')" class="px-4 py-2 font-medium border-b-2 border-purple-500 text-purple-600">
+          Sejarah
+        </button>
+        <button id="tabBudaya" onclick="switchTab('budaya')" class="px-4 py-2 font-medium border-b-2 border-transparent text-gray-500 hover:text-purple-500">
+          Budaya
+        </button>
+      </div>
+
+      <div id="contentSejarah" class="mb-8">
+        <div class="mb-6">
+          <img id="detailImageSejarah" src="wisata/gambar 3.jpg" alt="Gambar Detail" class="w-full h-64 object-cover rounded-lg"/>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Sejarah</h3>
+        <p id="sejarahContent" class="text-gray-700 leading-relaxed"></p>
+      </div>
+      
+      <div id="contentBudaya" class="mb-8 hidden">
+        <div class="mb-6">
+          <img id="detailImageBudaya" src="wisata/gambar 3.jpg" alt="Gambar Detail" class="w-full h-64 object-cover rounded-lg"/>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Budaya</h3>
+        <p id="budayaContent" class="text-gray-700 leading-relaxed"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const data = [
+      {
+        title: "Pantai Losari, Makassar",
+        description: "Pantai Losari adalah ikon wisata Makassar yang terkenal dengan pemandangan matahari terbenam...",
+        image: "wisata/gambar 3.jpg",
+        mapImage: "https://maps.googleapis.com/maps/api/staticmap?center=Pantai+Losari,Makassar&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7CPantai+Losari,Makassar&key=YOUR_API_KEY",
+        mapLink: "https://goo.gl/maps/example1",
+        rating: "★★★★★",
+        sejarah: {
+          title: "Sejarah Pantai Losari",
+          content: "Pantai Losari memiliki sejarah panjang sebagai pusat aktivitas masyarakat Makassar...",
+          image: "wisata/gambar-sejarah1.jpg"
+        },
+        budaya: {
+          title: "Budaya Pantai Losari",
+          content: "Pantai Losari mencerminkan budaya masyarakat Makassar yang terbuka dan ramah...",
+          image: "wisata/gambar-budaya1.jpg"
+        }
+      },
+    ];
+
+    let currentItemIndex = 0;
+
+    function openModal(index) {
+      currentItemIndex = index;
+      const item = data[index];
+      document.getElementById('modalTitle').innerText = item.title;
+      document.getElementById('modalDescription').innerText = item.description;
+      document.getElementById('modalImage').src = item.image;
+      document.getElementById('modalMapImage').src = item.mapImage;
+      document.getElementById('modalMapLink').href = item.mapLink;
+      document.getElementById('modalRating').innerHTML = item.rating;
+
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('flex');
+      document.getElementById('modal').classList.add('hidden');
+    }
+
+    function openDetailPage() {
+      const item = data[currentItemIndex];
+      document.getElementById('detailTitle').innerText = `${item.title} - Sejarah & Budaya`;
+      document.getElementById('detailImageSejarah').src = item.sejarah.image || item.image;
+      document.getElementById('detailImageBudaya').src = item.budaya.image || item.image;
+      document.getElementById('sejarahContent').innerText = item.sejarah.content;
+      document.getElementById('budayaContent').innerText = item.budaya.content;
+      switchTab('sejarah');
+
+      document.getElementById('mainPage').classList.remove('active-page');
+      document.getElementById('detailPage').classList.add('active-page');
+      document.getElementById('modal').classList.remove('flex');
+      document.getElementById('modal').classList.add('hidden');
+
+      window.scrollTo(0, 0);
+    }
+
+    function backToModal() {
+      document.getElementById('mainPage').classList.add('active-page');
+      document.getElementById('detailPage').classList.remove('active-page');
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
+    }
+
+    function switchTab(tab) {
+      if (tab === 'sejarah') {
+        document.getElementById('contentSejarah').classList.remove('hidden');
+        document.getElementById('contentBudaya').classList.add('hidden');
+        document.getElementById('tabSejarah').classList.add('border-purple-500', 'text-purple-600');
+        document.getElementById('tabSejarah').classList.remove('border-transparent', 'text-gray-500');
+        document.getElementById('tabBudaya').classList.remove('border-purple-500', 'text-purple-600');
+        document.getElementById('tabBudaya').classList.add('border-transparent', 'text-gray-500');
+      } else {
+        document.getElementById('contentSejarah').classList.add('hidden');
+        document.getElementById('contentBudaya').classList.remove('hidden');
+        document.getElementById('tabSejarah').classList.remove('border-purple-500', 'text-purple-600');
+        document.getElementById('tabSejarah').classList.add('border-transparent', 'text-gray-500');
+        document.getElementById('tabBudaya').classList.add('border-purple-500', 'text-purple-600');
+        document.getElementById('tabBudaya').classList.remove('border-transparent', 'text-gray-500');
+      }
+    }
+  </script>
+
+</body>
+</html>

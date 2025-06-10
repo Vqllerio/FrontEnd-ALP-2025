@@ -13,220 +13,346 @@
     .animate-fadeIn {
       animation: fadeIn 0.3s ease-out;
     }
+    .page {
+      display: none;
+    }
+    .active-page {
+      display: block;
+    }
   </style>
 </head>
 
 <body class="bg-gradient-to-b from-blue-50 to-blue-100 min-h-screen pt-32 px-8">
 
-  <nav class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-green-500 shadow-md z-20 text-white">
-    <div class="flex items-center space-x-2">
-      <div class="w-10 h-10 bg-gray-700 rounded-full"></div>
-      <span class="font-bold text-xl">Nama Website</span>
+  <nav class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-green-600 shadow-md z-20 text-white">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </div>
+      <span class="font-bold text-xl">Wisata Sulsel</span>
     </div>
-    <div class="space-x-6 font-medium">
-      <a href="#" class="hover:underline">Beranda</a>
-      <a href="#" class="hover:underline">Provinsi</a>
-      <a href="#" class="hover:underline">Kota</a>
-      <a href="#" class="hover:underline">Destinasi</a>
+    <div class="hidden md:flex space-x-6 font-medium">
+      <a href="#" class="hover:underline hover:text-green-100">Beranda</a>
+      <a href="#" class="hover:underline hover:text-green-100">Provinsi</a>
+      <a href="#" class="hover:underline hover:text-green-100">Kota</a>
+      <a href="#" class="hover:underline hover:text-green-100">Destinasi</a>
     </div>
   </nav>
 
-  <h1 class="text-4xl font-bold text-center text-blue-800 mb-10">Tempat Wisata Menarik di Makassar</h1>
+  <!-- Main Page -->
+  <div id="mainPage" class="page active-page">
+    <h1 class="text-4xl font-bold text-center text-blue-800 mb-10">Tempat Wisata Menarik di Sulawesi Selatan</h1>
 
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-  <div onclick="openModal(0)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
-    <img src="wisata/gambar 3.jpg" alt="Pantai Losari" class="w-full h-48 object-cover"/>
-    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pantai Losari, Makassar</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Pantai Losari -->
+      <div onclick="openModal(0)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+        <img src="wisata/pantai-losari.jpg" alt="Pantai Losari" class="w-full h-48 object-cover"/>
+        <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pantai Losari, Makassar</div>
+      </div>
+      
+      <!-- Fort Rotterdam -->
+      <div onclick="openModal(1)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+        <img src="wisata/fort-rotterdam.jpg" alt="Fort Rotterdam" class="w-full h-48 object-cover"/>
+        <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Fort Rotterdam, Makassar</div>
+      </div>
+      
+      <!-- Pulau Samalona -->
+      <div onclick="openModal(2)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+        <img src="wisata/pulau-samalona.jpg" alt="Pulau Samalona" class="w-full h-48 object-cover"/>
+        <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pulau Samalona, Makassar</div>
+      </div>
+      
+      <!-- Taman Nasional Bantimurung -->
+      <div onclick="openModal(3)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+        <img src="wisata/bantimurung.jpg" alt="Taman Nasional Bantimurung" class="w-full h-48 object-cover"/>
+        <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Taman Nasional Bantimurung, Maros</div>
+      </div>
+      
+      <!-- Rammang-Rammang -->
+      <div onclick="openModal(4)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+        <img src="wisata/rammang-rammang.jpg" alt="Rammang-Rammang" class="w-full h-48 object-cover"/>
+        <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Rammang-Rammang, Maros</div>
+      </div>
+      
+      <!-- Leang-Leang -->
+      <div onclick="openModal(5)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+        <img src="wisata/leang-leang.jpg" alt="Leang-Leang" class="w-full h-48 object-cover"/>
+        <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Leang-Leang, Maros</div>
+      </div>
+      
+      <!-- Malino -->
+      <div onclick="openModal(6)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+        <img src="wisata/malino.jpg" alt="Malino" class="w-full h-48 object-cover"/>
+        <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Malino, Gowa</div>
+      </div>
+      
+      <!-- Pantai Akarena -->
+      <div onclick="openModal(7)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
+        <img src="wisata/pantai-akarena.jpg" alt="Pantai Akarena" class="w-full h-48 object-cover"/>
+        <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pantai Akarena, Makassar</div>
+      </div>
+    </div>
+
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 overflow-y-auto px-4 py-8">
+      <div class="bg-white rounded-xl p-6 w-full max-w-4xl relative shadow-xl animate-fadeIn max-h-[90vh] overflow-y-auto">
+        <button onclick="closeModal()" class="absolute top-2 right-4 text-gray-500 hover:text-red-500 text-2xl font-bold">&times;</button>
+
+        <h2 id="modalTitle" class="text-3xl font-bold mb-4 text-blue-700 text-center"></h2>
+        <div class="mb-6">
+          <img id="modalImage" src="" alt="Gambar Wisata" class="w-full h-64 object-cover rounded-lg"/>
+        </div>
+
+        <div class="mb-6">
+          <h3 class="text-xl font-semibold mb-2">Peta Lokasi</h3>
+          <div class="bg-gray-200 rounded-lg overflow-hidden">
+            <img id="modalMapImage" src="" alt="Peta Lokasi" class="w-full h-48 object-cover">
+
+            <div class="p-3 bg-white text-center">
+              <a id="modalMapLink" href="#" target="_blank" class="text-blue-600 hover:text-blue-800 underline text-sm">
+                Buka di Google Maps
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="bg-blue-50 p-4 rounded-lg text-center">
+            <h4 class="font-semibold mb-2">Rating</h4>
+            <div id="modalRating" class="flex justify-center">
+              ★★★★★
+            </div>
+          </div>
+          <div class="bg-blue-50 p-4 rounded-lg flex flex-col items-center justify-center col-span-2">
+            <button onclick="openDetailPage()" class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded transition w-full">
+              Sejarah & Budaya
+            </button>
+          </div>
+        </div>
+        
+        <div class="mb-4">
+          <h3 class="text-xl font-semibold mb-2">Fakta Tentang Tempat Wisata</h3>
+          <p id="modalDescription" class="text-gray-700 leading-relaxed"></p>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div onclick="openModal(1)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
-    <img src="wisata/wisata 1.jpg" alt="Gunung Lokon" class="w-full h-48 object-cover"/>
-    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Gunung Lokon, Tomohon</div>
-  </div>
+  <!-- Detail Page -->
+  <div id="detailPage" class="page">
+    <div class="bg-white rounded-xl p-6 w-full relative shadow-xl max-w-6xl mx-auto">
+      <button onclick="backToModal()" class="absolute top-2 right-4 text-gray-500 hover:text-red-500 text-3xl font-bold">
+        &times;
+      </button>
 
-  <div onclick="openModal(2)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
-    <img src="wisata/wisata 2.jpg" alt="Danau Tempe" class="w-full h-48 object-cover"/>
-    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Danau Tempe, Wajo</div>
-  </div>
+      <h2 id="detailTitle" class="text-3xl font-bold mb-4 text-blue-700 text-center">Sejarah & Budaya</h2>
 
-  <div onclick="openModal(3)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
-    <img src="wisata/wisata 3.jpg" alt="Taman Nasional Bantimurung" class="w-full h-48 object-cover"/>
-    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Taman Nasional Bantimurung</div>
-  </div>
+      <div class="flex justify-center mb-6 border-b">
+        <button id="tabSejarah" onclick="switchTab('sejarah')" class="px-4 py-2 font-medium border-b-2 border-purple-500 text-purple-600">
+          Sejarah
+        </button>
+        <button id="tabBudaya" onclick="switchTab('budaya')" class="px-4 py-2 font-medium border-b-2 border-transparent text-gray-500 hover:text-purple-500">
+          Budaya
+        </button>
+      </div>
 
-  <div onclick="openModal(4)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
-    <img src="wisata/wisata 4.jpg" alt="Pulau Samalona" class="w-full h-48 object-cover"/>
-    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pulau Samalona</div>
-  </div>
-  <div onclick="openModal(5)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
-    <img src="wisata/wisata 2.jpg" alt="Danau Tempe" class="w-full h-48 object-cover"/>
-    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Danau Tempe, Wajo</div>
-  </div>
-
-  <div onclick="openModal(6)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
-    <img src="wisata/wisata 3.jpg" alt="Taman Nasional Bantimurung" class="w-full h-48 object-cover"/>
-    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Taman Nasional Bantimurung</div>
-  </div>
-  <div onclick="openModal(7)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
-    <img src="wisata/wisata 2.jpg" alt="Danau Tempe" class="w-full h-48 object-cover"/>
-    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Danau Tempe, Wajo</div>
-  </div>
-
-  <div onclick="openModal(8)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
-    <img src="wisata/wisata 3.jpg" alt="Taman Nasional Bantimurung" class="w-full h-48 object-cover"/>
-    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Taman Nasional Bantimurung</div>
-  </div>
-
-  <div onclick="openModal(9)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
-    <img src="wisata/wisata 4.jpg" alt="Pulau Samalona" class="w-full h-48 object-cover"/>
-    <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pulau Samalona</div>
-  </div>
-</div>
-
-  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 overflow-y-auto px-4 py-8">
-    <div class="bg-white rounded-xl p-6 w-full max-w-4xl relative shadow-xl animate-fadeIn max-h-[90vh] overflow-y-auto">
-      <button onclick="closeModal()" class="absolute top-2 right-4 text-gray-500 hover:text-red-500 text-2xl font-bold">&times;</button>
-
-      <h2 id="modalTitle" class="text-3xl font-bold mb-4 text-blue-700 text-center"></h2>
-      <img id="modalImage" src="" alt="Gambar Wisata" class="w-full h-64 object-cover rounded-lg mb-4"/>
-      <p id="modalDescription" class="text-gray-700 leading-relaxed mb-6"></p>
-
-      <h3 class="text-xl font-semibold text-gray-800 mb-4">Perkembangan dari Tahun ke Tahun:</h3>
-
-      <div class="relative flex items-center justify-center">
-        <button id="prevBtn" class="absolute left-0 text-3xl font-bold text-gray-600 hover:text-green-600 px-4 z-10">&#8592;</button>
-        <img id="historyImage" src="" alt="Gambar sejarah" class="w-full sm:w-2/3 h-64 object-cover rounded-md border"/>
-        <button id="nextBtn" class="absolute right-0 text-3xl font-bold text-gray-600 hover:text-green-600 px-4 z-10">&#8594;</button>
+      <div id="contentSejarah" class="mb-8">
+        <div class="mb-6">
+          <img id="detailImageSejarah" src="" alt="Gambar Detail" class="w-full h-64 object-cover rounded-lg"/>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Sejarah</h3>
+        <p id="sejarahContent" class="text-gray-700 leading-relaxed"></p>
+      </div>
+      
+      <div id="contentBudaya" class="mb-8 hidden">
+        <div class="mb-6">
+          <img id="detailImageBudaya" src="" alt="Gambar Detail" class="w-full h-64 object-cover rounded-lg"/>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Budaya</h3>
+        <p id="budayaContent" class="text-gray-700 leading-relaxed"></p>
       </div>
     </div>
   </div>
 
   <script>
     const data = [
+      // Pantai Losari
       {
         title: "Pantai Losari, Makassar",
-        description: "Pantai Losari adalah ikon wisata Makassar yang terkenal dengan pemandangan matahari terbenam yang memukau, serta kuliner khas seperti pisang epe dan coto Makassar.",
-        image: "wisata/gambar 3.jpg",
-        gallery: [
-          "wisata/losari-2010.jpg",
-          "wisata/losari-2015.jpg",
-          "wisata/losari-2020.jpg"
-        ]
+        description: "Pantai Losari adalah ikon wisata Makassar yang terkenal dengan pemandangan matahari terbenam yang memukau, serta kuliner khas seperti pisang epe dan coto Makassar. Pantai ini telah menjadi tempat favorit warga Makassar dan wisatawan untuk bersantai sejak dulu.",
+        image: "wisata/pantai-losari.jpg",
+        mapImage: "https://maps.googleapis.com/maps/api/staticmap?center=Pantai+Losari,Makassar&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7CPantai+Losari,Makassar&key=YOUR_API_KEY",
+        mapLink: "https://goo.gl/maps/example1",
+        rating: "★★★★★",
+        sejarah: {
+          title: "Sejarah Pantai Losari",
+          content: "Pantai Losari memiliki sejarah panjang sebagai pusat aktivitas masyarakat Makassar sejak zaman kerajaan. Pada masa lalu, pantai ini menjadi tempat berlabuhnya kapal-kapal pedagang dari berbagai penjuru Nusantara dan mancanegara. Nama 'Losari' sendiri berasal dari kata 'Lose' yang berarti bebas dan 'Sari' yang berarti inti, menggambarkan fungsinya sebagai tempat berkumpulnya masyarakat dari berbagai latar belakang.",
+          image: "wisata/pantai-losari-sejarah.jpg"
+        },
+        budaya: {
+          title: "Budaya Pantai Losari",
+          content: "Pantai Losari mencerminkan budaya masyarakat Makassar yang terbuka dan ramah. Setiap sore, pantai ini menjadi tempat berkumpulnya berbagai lapisan masyarakat untuk menikmati matahari terbenam sambil menyantap makanan khas seperti pisang epe dan coto Makassar. Tradisi ini telah berlangsung turun-temurun dan menjadi bagian dari identitas budaya kota Makassar.",
+          image: "wisata/pantai-losari-budaya.jpg"
+        }
       },
+      
+      // Fort Rotterdam
       {
-        title: "Gunung Lokon, Tomohon",
-        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
-        image: "wisata/wisata 1.jpg",
-        gallery: [
-          "wisata/lokon-2005.jpg",
-          "wisata/lokon-2015.jpg",
-          "wisata/lokon-2023.jpg"
-        ]
+        title: "Fort Rotterdam, Makassar",
+        description: "Benteng Fort Rotterdam adalah benteng peninggalan Kerajaan Gowa-Tallo dan Belanda yang terletak di pinggir pantai sebelah barat Kota Makassar. Benteng ini merupakan salah satu benteng terbaik di Indonesia yang masih terawat hingga saat ini.",
+        image: "wisata/fort-rotterdam.jpg",
+        mapImage: "https://maps.googleapis.com/maps/api/staticmap?center=Fort+Rotterdam,Makassar&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7CFort+Rotterdam,Makassar&key=YOUR_API_KEY",
+        mapLink: "https://goo.gl/maps/example2",
+        rating: "★★★★★",
+        sejarah: {
+          title: "Sejarah Fort Rotterdam",
+          content: "Fort Rotterdam awalnya bernama Benteng Ujung Pandang, dibangun pada tahun 1545 oleh Raja Gowa ke-9. Setelah Perjanjian Bungaya tahun 1667, benteng ini direbut oleh Belanda dan diubah namanya menjadi Fort Rotterdam. Benteng ini menjadi pusat pemerintahan dan perdagangan VOC di wilayah timur Nusantara.",
+          image: "wisata/fort-rotterdam-sejarah.jpg"
+        },
+        budaya: {
+          title: "Budaya Fort Rotterdam",
+          content: "Fort Rotterdam kini menjadi pusat budaya dan sejarah Makassar. Di dalam benteng terdapat Museum La Galigo yang menyimpan berbagai peninggalan sejarah Kerajaan Gowa-Tallo dan benda-benda budaya Sulawesi Selatan. Benteng ini juga sering menjadi lokasi berbagai acara budaya dan festival.",
+          image: "wisata/fort-rotterdam-budaya.jpg"
+        }
       },
+      
+      // Pulau Samalona
       {
-        title: "Danau Tempe, Wajo",
-        description: "Danau Tempe adalah danau luas di Kabupaten Wajo yang terkenal dengan rumah apung dan festival Danau Tempe yang diadakan setiap tahun.",
-        image: "wisata/wisata 2.jpg",
-        gallery: [
-          "wisata/tempe-2010.jpg",
-          "wisata/tempe-2016.jpg",
-          "wisata/tempe-2022.jpg"
-        ]
+        title: "Pulau Samalona, Makassar",
+        description: "Pulau Samalona adalah pulau kecil di depan kota Makassar yang terkenal dengan keindahan bawah lautnya. Pulau ini menjadi tempat favorit untuk snorkeling dan diving dengan terumbu karang yang masih alami.",
+        image: "wisata/pulau-samalona.jpg",
+        mapImage: "https://maps.googleapis.com/maps/api/staticmap?center=Pulau+Samalona,Makassar&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7CPulau+Samalona,Makassar&key=YOUR_API_KEY",
+        mapLink: "https://goo.gl/maps/example3",
+        rating: "★★★★☆",
+        sejarah: {
+          title: "Sejarah Pulau Samalona",
+          content: "Pulau Samalona memiliki sejarah sebagai pos pengamatan dan pertahanan sejak masa kolonial Belanda. Nama 'Samalona' berasal dari bahasa Makassar yang berarti 'satu-satunya', karena pulau ini merupakan satu-satunya pulau yang berada di teluk Makassar.",
+          image: "wisata/pulau-samalona-sejarah.jpg"
+        },
+        budaya: {
+          title: "Budaya Pulau Samalona",
+          content: "Pulau Samalona mencerminkan budaya bahari masyarakat Makassar yang telah berlayar dan memanfaatkan sumber daya laut sejak berabad-abad. Aktivitas snorkeling dan diving di sekitar pulau ini menjadi bagian dari wisata bahari yang dikembangkan dengan tetap mempertahankan kelestarian alam bawah lautnya.",
+          image: "wisata/pulau-samalona-budaya.jpg"
+        }
       },
+      
+      // Taman Nasional Bantimurung
       {
-        title: "Gunung Lokon, Tomohon",
-        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
-        image: "wisata/wisata 1.jpg",
-        gallery: [
-          "wisata/lokon-2005.jpg",
-          "wisata/lokon-2015.jpg",
-          "wisata/lokon-2023.jpg"
-        ]
+        title: "Taman Nasional Bantimurung, Maros",
+        description: "Taman Nasional Bantimurung Bulusaraung terkenal dengan air terjun dan kupu-kupunya yang beraneka warna. Tempat ini dijuluki sebagai 'Kingdom of Butterfly' oleh Alfred Russel Wallace.",
+        image: "wisata/bantimurung.jpg",
+        mapImage: "https://maps.googleapis.com/maps/api/staticmap?center=Taman+Nasional+Bantimurung,Maros&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7CTaman+Nasional+Bantimurung,Maros&key=YOUR_API_KEY",
+        mapLink: "https://goo.gl/maps/example4",
+        rating: "★★★★☆",
+        sejarah: {
+          title: "Sejarah Taman Nasional Bantimurung",
+          content: "Kawasan Bantimurung mulai dikenal sejak masa kolonial Belanda ketika Alfred Russel Wallace melakukan penelitian tentang kupu-kupu di sini pada tahun 1857. Pada tahun 2004, kawasan ini ditetapkan sebagai Taman Nasional untuk melindungi keanekaragaman hayati yang ada.",
+          image: "wisata/bantimurung-sejarah.jpg"
+        },
+        budaya: {
+          title: "Budaya Taman Nasional Bantimurung",
+          content: "Bantimurung tidak hanya menjadi tempat wisata alam tetapi juga memiliki nilai budaya. Masyarakat sekitar memiliki tradisi dan kearifan lokal dalam menjaga kelestarian alam. Air terjun Bantimurung juga dianggap memiliki nilai spiritual oleh sebagian masyarakat.",
+          image: "wisata/bantimurung-budaya.jpg"
+        }
       },
+      
+      // Rammang-Rammang
       {
-        title: "Gunung Lokon, Tomohon",
-        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
-        image: "wisata/wisata 1.jpg",
-        gallery: [
-          "wisata/lokon-2005.jpg",
-          "wisata/lokon-2015.jpg",
-          "wisata/lokon-2023.jpg"
-        ]
+        title: "Rammang-Rammang, Maros",
+        description: "Rammang-Rammang adalah kawasan karst terbesar kedua di dunia setelah di China. Tempat ini menawarkan pemandangan pegunungan batu kapur yang spektakuler dan sungai-sungai jernih.",
+        image: "wisata/rammang-rammang.jpg",
+        mapImage: "https://maps.googleapis.com/maps/api/staticmap?center=Rammang-Rammang,Maros&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7CRammang-Rammang,Maros&key=YOUR_API_KEY",
+        mapLink: "https://goo.gl/maps/example5",
+        rating: "★★★★★",
+        sejarah: {
+          title: "Sejarah Rammang-Rammang",
+          content: "Rammang-Rammang telah terbentuk selama jutaan tahun melalui proses geologi. Kawasan ini mulai dikembangkan sebagai destinasi wisata sejak tahun 2000-an. Nama 'Rammang-Rammang' berasal dari bahasa Makassar yang berarti 'kabut', karena sering diselimuti kabut di pagi hari.",
+          image: "wisata/rammang-rammang-sejarah.jpg"
+        },
+        budaya: {
+          title: "Budaya Rammang-Rammang",
+          content: "Masyarakat sekitar Rammang-Rammang masih mempertahankan tradisi dan cara hidup yang harmonis dengan alam. Mereka memiliki kearifan lokal dalam mengelola sumber daya alam karst. Desa di sekitar Rammang-Rammang juga menawarkan pengalaman budaya dengan rumah-rumah tradisional dan kehidupan sehari-hari masyarakat.",
+          image: "wisata/rammang-rammang-budaya.jpg"
+        }
       },
+      
+      // Leang-Leang
       {
-        title: "Gunung Lokon, Tomohon",
-        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
-        image: "wisata/wisata 1.jpg",
-        gallery: [
-          "wisata/lokon-2005.jpg",
-          "wisata/lokon-2015.jpg",
-          "wisata/lokon-2023.jpg"
-        ]
+        title: "Leang-Leang, Maros",
+        description: "Taman Prasejarah Leang-Leang adalah situs arkeologi yang menyimpan peninggalan prasejarah berupa lukisan dinding gua yang diperkirakan berusia sekitar 5.000 tahun.",
+        image: "wisata/leang-leang.jpg",
+        mapImage: "https://maps.googleapis.com/maps/api/staticmap?center=Leang-Leang,Maros&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7CLeang-Leang,Maros&key=YOUR_API_KEY",
+        mapLink: "https://goo.gl/maps/example6",
+        rating: "★★★★☆",
+        sejarah: {
+          title: "Sejarah Leang-Leang",
+          content: "Gua-gua di Leang-Leang pertama kali diteliti oleh arkeolog Belanda pada tahun 1950. Ditemukan berbagai artefak batu dan lukisan telapak tangan serta babi rusa yang diperkirakan berasal dari zaman mesolitikum. Lukisan ini merupakan salah satu yang tertua di dunia.",
+          image: "wisata/leang-leang-sejarah.jpg"
+        },
+        budaya: {
+          title: "Budaya Leang-Leang",
+          content: "Leang-Leang memberikan gambaran tentang kehidupan dan budaya manusia prasejarah. Situs ini menjadi bukti bahwa wilayah Sulawesi Selatan telah dihuni manusia sejak ribuan tahun lalu dengan budaya yang sudah maju. Masyarakat sekitar juga memiliki mitos dan legenda terkait gua-gua ini.",
+          image: "wisata/leang-leang-budaya.jpg"
+        }
       },
+      
+      // Malino
       {
-        title: "Gunung Lokon, Tomohon",
-        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
-        image: "wisata/wisata 1.jpg",
-        gallery: [
-          "wisata/lokon-2005.jpg",
-          "wisata/lokon-2015.jpg",
-          "wisata/lokon-2023.jpg"
-        ]
+        title: "Malino, Gowa",
+        description: "Malino adalah daerah pegunungan yang sejuk dengan pemandangan alam yang indah, perkebunan teh, dan air terjun. Tempat ini menjadi tujuan wisata favorit untuk melepas penat dari panasnya kota.",
+        image: "wisata/malino.jpg",
+        mapImage: "https://maps.googleapis.com/maps/api/staticmap?center=Malino,Gowa&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7CMalino,Gowa&key=YOUR_API_KEY",
+        mapLink: "https://goo.gl/maps/example7",
+        rating: "★★★★☆",
+        sejarah: {
+          title: "Sejarah Malino",
+          content: "Malino telah dikenal sejak zaman kolonial Belanda sebagai tempat peristirahatan karena udaranya yang sejuk. Pada tahun 1946, di Malino diadakan Konferensi Malino yang membahas rencana pembentukan negara federal di Indonesia. Kawasan ini kemudian berkembang sebagai daerah wisata dan pertanian.",
+          image: "wisata/malino-sejarah.jpg"
+        },
+        budaya: {
+          title: "Budaya Malino",
+          content: "Malino mencerminkan budaya masyarakat pegunungan Sulawesi Selatan yang agraris. Masyarakat sekitar masih mempertahankan tradisi bertani dan mengolah hasil bumi. Malino juga dikenal dengan buah markisa dan bunga yang menjadi komoditas utama daerah ini.",
+          image: "wisata/malino-budaya.jpg"
+        }
       },
+      
+      // Pantai Akarena
       {
-        title: "Gunung Lokon, Tomohon",
-        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
-        image: "wisata/wisata 1.jpg",
-        gallery: [
-          "wisata/lokon-2005.jpg",
-          "wisata/lokon-2015.jpg",
-          "wisata/lokon-2023.jpg"
-        ]
-      },
-      {
-        title: "Gunung Lokon, Tomohon",
-        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
-        image: "wisata/wisata 1.jpg",
-        gallery: [
-          "wisata/lokon-2005.jpg",
-          "wisata/lokon-2015.jpg",
-          "wisata/lokon-2023.jpg"
-        ]
-      },
-      {
-        title: "Gunung Lokon, Tomohon",
-        description: "Gunung Lokon merupakan gunung api aktif yang menjadi tujuan pendakian favorit di Sulawesi Utara dengan panorama menakjubkan dan udara sejuk.",
-        image: "wisata/wisata 1.jpg",
-        gallery: [
-          "wisata/lokon-2005.jpg",
-          "wisata/lokon-2015.jpg",
-          "wisata/lokon-2023.jpg"
-        ]
-      },
+        title: "Pantai Akarena, Makassar",
+        description: "Pantai Akarena adalah pantai dengan pasir putih yang terletak di sebelah timur Kota Makassar. Pantai ini lebih sepi dibanding Pantai Losari dan cocok untuk menikmati sunset yang tenang.",
+        image: "wisata/pantai-akarena.jpg",
+        mapImage: "https://maps.googleapis.com/maps/api/staticmap?center=Pantai+Akarena,Makassar&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7CPantai+Akarena,Makassar&key=YOUR_API_KEY",
+        mapLink: "https://goo.gl/maps/example8",
+        rating: "★★★★☆",
+        sejarah: {
+          title: "Sejarah Pantai Akarena",
+          content: "Pantai Akarena mulai dikembangkan sebagai destinasi wisata pada tahun 1990-an. Nama 'Akarena' diambil dari lagu terkenal pada masa itu. Sebelumnya, pantai ini hanya dikenal oleh masyarakat sekitar sebagai tempat memancing dan bersantai.",
+          image: "wisata/pantai-akarena-sejarah.jpg"
+        },
+        budaya: {
+          title: "Budaya Pantai Akarena",
+          content: "Pantai Akarena menunjukkan perkembangan budaya wisata pantai di Makassar. Berbeda dengan Pantai Losari yang lebih tradisional, Akarena menawarkan suasana yang lebih modern dengan berbagai fasilitas wisata. Pantai ini juga menjadi tempat berbagai kegiatan olahraga air.",
+          image: "wisata/pantai-akarena-budaya.jpg"
+        }
+      }
     ];
 
-    let currentGallery = [];
-    let currentIndex = 0;
+    let currentItemIndex = 0;
 
     function openModal(index) {
+      currentItemIndex = index;
       const item = data[index];
       document.getElementById('modalTitle').innerText = item.title;
       document.getElementById('modalDescription').innerText = item.description;
       document.getElementById('modalImage').src = item.image;
-
-      currentGallery = item.gallery;
-      currentIndex = 0;
-      updateHistoryImage();
+      document.getElementById('modalMapImage').src = item.mapImage;
+      document.getElementById('modalMapLink').href = item.mapLink;
+      document.getElementById('modalRating').innerHTML = item.rating;
 
       document.getElementById('modal').classList.remove('hidden');
       document.getElementById('modal').classList.add('flex');
-    }
-
-    function updateHistoryImage() {
-      const historyImage = document.getElementById('historyImage');
-      if (currentGallery.length > 0) {
-        historyImage.src = currentGallery[currentIndex];
-      }
     }
 
     function closeModal() {
@@ -234,19 +360,47 @@
       document.getElementById('modal').classList.add('hidden');
     }
 
-    document.getElementById('prevBtn').addEventListener('click', () => {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateHistoryImage();
-      }
-    });
+    function openDetailPage() {
+      const item = data[currentItemIndex];
+      document.getElementById('detailTitle').innerText = `${item.title} - Sejarah & Budaya`;
+      document.getElementById('detailImageSejarah').src = item.sejarah.image || item.image;
+      document.getElementById('detailImageBudaya').src = item.budaya.image || item.image;
+      document.getElementById('sejarahContent').innerText = item.sejarah.content;
+      document.getElementById('budayaContent').innerText = item.budaya.content;
+      switchTab('sejarah');
 
-    document.getElementById('nextBtn').addEventListener('click', () => {
-      if (currentIndex < currentGallery.length - 1) {
-        currentIndex++;
-        updateHistoryImage();
+      document.getElementById('mainPage').classList.remove('active-page');
+      document.getElementById('detailPage').classList.add('active-page');
+      document.getElementById('modal').classList.remove('flex');
+      document.getElementById('modal').classList.add('hidden');
+
+      window.scrollTo(0, 0);
+    }
+
+    function backToModal() {
+      document.getElementById('mainPage').classList.add('active-page');
+      document.getElementById('detailPage').classList.remove('active-page');
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
+    }
+
+    function switchTab(tab) {
+      if (tab === 'sejarah') {
+        document.getElementById('contentSejarah').classList.remove('hidden');
+        document.getElementById('contentBudaya').classList.add('hidden');
+        document.getElementById('tabSejarah').classList.add('border-purple-500', 'text-purple-600');
+        document.getElementById('tabSejarah').classList.remove('border-transparent', 'text-gray-500');
+        document.getElementById('tabBudaya').classList.remove('border-purple-500', 'text-purple-600');
+        document.getElementById('tabBudaya').classList.add('border-transparent', 'text-gray-500');
+      } else {
+        document.getElementById('contentSejarah').classList.add('hidden');
+        document.getElementById('contentBudaya').classList.remove('hidden');
+        document.getElementById('tabSejarah').classList.remove('border-purple-500', 'text-purple-600');
+        document.getElementById('tabSejarah').classList.add('border-transparent', 'text-gray-500');
+        document.getElementById('tabBudaya').classList.add('border-purple-500', 'text-purple-600');
+        document.getElementById('tabBudaya').classList.remove('border-transparent', 'text-gray-500');
       }
-    });
+    }
   </script>
 
 </body>
