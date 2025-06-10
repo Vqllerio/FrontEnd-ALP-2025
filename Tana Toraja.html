@@ -42,54 +42,45 @@
     </div>
   </nav>
 
-  <!-- Main Page -->
   <div id="mainPage" class="page active-page">
     <h1 class="text-4xl font-bold text-center text-blue-800 mb-10">Tempat Wisata Menarik di Sulawesi Selatan</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Pantai Losari -->
       <div onclick="openModal(0)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
         <img src="wisata/pantai-losari.jpg" alt="Pantai Losari" class="w-full h-48 object-cover"/>
         <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pantai Losari, Makassar</div>
       </div>
-      
-      <!-- Fort Rotterdam -->
+
       <div onclick="openModal(1)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
         <img src="wisata/fort-rotterdam.jpg" alt="Fort Rotterdam" class="w-full h-48 object-cover"/>
         <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Fort Rotterdam, Makassar</div>
       </div>
-      
-      <!-- Pulau Samalona -->
+
       <div onclick="openModal(2)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
         <img src="wisata/pulau-samalona.jpg" alt="Pulau Samalona" class="w-full h-48 object-cover"/>
         <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pulau Samalona, Makassar</div>
       </div>
-      
-      <!-- Taman Nasional Bantimurung -->
+
       <div onclick="openModal(3)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
         <img src="wisata/bantimurung.jpg" alt="Taman Nasional Bantimurung" class="w-full h-48 object-cover"/>
         <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Taman Nasional Bantimurung, Maros</div>
       </div>
-      
-      <!-- Rammang-Rammang -->
+
       <div onclick="openModal(4)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
         <img src="wisata/rammang-rammang.jpg" alt="Rammang-Rammang" class="w-full h-48 object-cover"/>
         <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Rammang-Rammang, Maros</div>
       </div>
-      
-      <!-- Leang-Leang -->
+
       <div onclick="openModal(5)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
         <img src="wisata/leang-leang.jpg" alt="Leang-Leang" class="w-full h-48 object-cover"/>
         <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Leang-Leang, Maros</div>
       </div>
-      
-      <!-- Malino -->
+
       <div onclick="openModal(6)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
         <img src="wisata/malino.jpg" alt="Malino" class="w-full h-48 object-cover"/>
         <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Malino, Gowa</div>
       </div>
-      
-      <!-- Pantai Akarena -->
+
       <div onclick="openModal(7)" class="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg hover:scale-105 transition">
         <img src="wisata/pantai-akarena.jpg" alt="Pantai Akarena" class="w-full h-48 object-cover"/>
         <div class="absolute bottom-0 bg-black bg-opacity-60 w-full text-white p-2 text-sm text-center">Pantai Akarena, Makassar</div>
@@ -140,7 +131,6 @@
     </div>
   </div>
 
-  <!-- Detail Page -->
   <div id="detailPage" class="page">
     <div class="bg-white rounded-xl p-6 w-full relative shadow-xl max-w-6xl mx-auto">
       <button onclick="backToModal()" class="absolute top-2 right-4 text-gray-500 hover:text-red-500 text-3xl font-bold">
@@ -178,7 +168,6 @@
 
   <script>
     const data = [
-      // Pantai Losari
       {
         title: "Pantai Losari, Makassar",
         description: "Pantai Losari adalah ikon wisata Makassar yang terkenal dengan pemandangan matahari terbenam yang memukau, serta kuliner khas seperti pisang epe dan coto Makassar. Pantai ini telah menjadi tempat favorit warga Makassar dan wisatawan untuk bersantai sejak dulu.",
@@ -197,8 +186,6 @@
           image: "wisata/pantai-losari-budaya.jpg"
         }
       },
-      
-      // Fort Rotterdam
       {
         title: "Fort Rotterdam, Makassar",
         description: "Benteng Fort Rotterdam adalah benteng peninggalan Kerajaan Gowa-Tallo dan Belanda yang terletak di pinggir pantai sebelah barat Kota Makassar. Benteng ini merupakan salah satu benteng terbaik di Indonesia yang masih terawat hingga saat ini.",
@@ -217,8 +204,6 @@
           image: "wisata/fort-rotterdam-budaya.jpg"
         }
       },
-      
-      // Pulau Samalona
       {
         title: "Pulau Samalona, Makassar",
         description: "Pulau Samalona adalah pulau kecil di depan kota Makassar yang terkenal dengan keindahan bawah lautnya. Pulau ini menjadi tempat favorit untuk snorkeling dan diving dengan terumbu karang yang masih alami.",
@@ -237,8 +222,6 @@
           image: "wisata/pulau-samalona-budaya.jpg"
         }
       },
-      
-      // Taman Nasional Bantimurung
       {
         title: "Taman Nasional Bantimurung, Maros",
         description: "Taman Nasional Bantimurung Bulusaraung terkenal dengan air terjun dan kupu-kupunya yang beraneka warna. Tempat ini dijuluki sebagai 'Kingdom of Butterfly' oleh Alfred Russel Wallace.",
@@ -257,8 +240,6 @@
           image: "wisata/bantimurung-budaya.jpg"
         }
       },
-      
-      // Rammang-Rammang
       {
         title: "Rammang-Rammang, Maros",
         description: "Rammang-Rammang adalah kawasan karst terbesar kedua di dunia setelah di China. Tempat ini menawarkan pemandangan pegunungan batu kapur yang spektakuler dan sungai-sungai jernih.",
@@ -277,8 +258,6 @@
           image: "wisata/rammang-rammang-budaya.jpg"
         }
       },
-      
-      // Leang-Leang
       {
         title: "Leang-Leang, Maros",
         description: "Taman Prasejarah Leang-Leang adalah situs arkeologi yang menyimpan peninggalan prasejarah berupa lukisan dinding gua yang diperkirakan berusia sekitar 5.000 tahun.",
@@ -297,8 +276,6 @@
           image: "wisata/leang-leang-budaya.jpg"
         }
       },
-      
-      // Malino
       {
         title: "Malino, Gowa",
         description: "Malino adalah daerah pegunungan yang sejuk dengan pemandangan alam yang indah, perkebunan teh, dan air terjun. Tempat ini menjadi tujuan wisata favorit untuk melepas penat dari panasnya kota.",
@@ -317,8 +294,6 @@
           image: "wisata/malino-budaya.jpg"
         }
       },
-      
-      // Pantai Akarena
       {
         title: "Pantai Akarena, Makassar",
         description: "Pantai Akarena adalah pantai dengan pasir putih yang terletak di sebelah timur Kota Makassar. Pantai ini lebih sepi dibanding Pantai Losari dan cocok untuk menikmati sunset yang tenang.",
