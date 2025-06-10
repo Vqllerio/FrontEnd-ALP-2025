@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rekomendasi Wisata Sulsel</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #177e89;
+      --secondary: #084c61;
+      --light-bg: #edf7f6;
+      --accent: #ce8950;
+      --dark: #60463b;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    .card {
+      perspective: 1000px;
+      transform-style: preserve-3d;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+    }
+
+    .card-image {
+      transform: translateZ(30px);
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .parallax-bg {
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .floating {
+      animation: floating 6s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    .shine-effect {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shine-effect::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 200%;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.13);
+      background: linear-gradient(to right,
+          rgba(255, 255, 255, 0.13) 0%,
+          rgba(255, 255, 255, 0.13) 77%,
+          rgba(255, 255, 255, 0.5) 92%,
+          rgba(255, 255, 255, 0.0) 100%);
+      transform: rotate(30deg);
+      transition: all 0.7s ease-out;
+    }
+
+    .shine-effect:hover::after {
+      left: 100%;
+    }
+
+    .tag {
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* New styles for color palette */
+    .bg-teal {
+      background-color: #177e89;
+    }
+
+    .bg-midnight-green {
+      background-color: #084c61;
+    }
+
+    .bg-azure {
+      background-color: #edf7f6;
+    }
+
+    .bg-persian-orange {
+      background-color: #ce8950;
+    }
+
+    .bg-liver {
+      background-color: #60463b;
+    }
+
+    .text-teal {
+      color: #177e89;
+    }
+
+    .text-midnight-green {
+      color: #084c61;
+    }
+
+    .text-azure {
+      color: #edf7f6;
+    }
+
+    .text-persian-orange {
+      color: #ce8950;
+    }
+
+    .text-liver {
+      color: #60463b;
+    }
+
+    .border-teal {
+      border-color: #177e89;
+    }
+
+    .border-midnight-green {
+      border-color: #084c61;
+    }
+
+    .border-persian-orange {
+      border-color: #ce8950;
+    }
+
+    .border-liver {
+      border-color: #60463b;
+    }
+
+    .hover-bg-teal:hover {
+      background-color: #177e89;
+    }
+
+    .hover-bg-midnight-green:hover {
+      background-color: #084c61;
+    }
+
+    .hover-bg-persian-orange:hover {
+      background-color: #ce8950;
+    }
+
+    .gradient-bg {
+      background: linear-gradient(90deg, #177e89, #084c61);
+    }
+
+    .gradient-bg-reverse {
+      background: linear-gradient(90deg, #084c61, #177e89);
+    }
+
+    .feature-card {
+      background: linear-gradient(145deg, #edf7f6, #d9e9e8);
+      box-shadow: 0 10px 20px rgba(96, 70, 59, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(96, 70, 59, 0.15);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    .modal-content {
+      background-color: var(--light-bg);
+      margin: 5% auto;
+      width: 85%;
+      max-width: 700px;
+      border-radius: 20px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      animation: modalAppear 0.4s ease-out;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 25px 30px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+      position: relative;
+    }
+
+    .modal-body {
+      padding: 30px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 28px;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .close-modal:hover {
+      transform: rotate(90deg) scale(1.2);
+      color: var(--accent);
+    }
+
+    @keyframes modalAppear {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-image {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 25px;
+    }
+
+    .history-btn {
+      background: linear-gradient(90deg, #ce8950, #b37444);
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.3s;
+      margin-top: 20px;
+    }
+
+    .history-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(206, 137, 80, 0.4);
+    }
+
+    /* Sejarah & Budaya Page */
+    .history-page {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--light-bg);
+      z-index: 200;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .history-header {
+      background: linear-gradient(90deg, var(--secondary), var(--primary));
+      color: white;
+      padding: 20px;
+      position: relative;
+    }
+
+    .history-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    .history-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 20px;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .modal-content {
+        width: 95%;
+        margin: 2% auto;
+      }
+
+      .modal-image {
+        height: 250px;
+      }
+
+      .history-content {
+        padding: 15px;
+      }
+
+      .history-image {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-azure">
+
+  <!-- Navigation -->
+  <nav
+    class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-midnight-green shadow-md z-20 text-azure">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 bg-azure rounded-full flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </div>
+      <span class="font-bold text-xl">Wisata Sulsel</span>
+    </div>
+    <div class="hidden md:flex space-x-6 font-medium">
+      <a href="#" class="hover:underline hover:text-c3f0f5">Beranda</a>
+      <a href="#" class="hover:underline hover:text-c3f0f5">Provinsi</a>
+      <a href="#" class="hover:underline hover:text-c3f0f5">Kota</a>
+      <a href="#" class="hover:underline hover:text-c3f0f5">Destinasi</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 bg-black/50 z-10"></div>
+    <img
+      src="https://images.unsplash.com/photo-1589394815804-9648adb3d470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+      alt="Hero Background" class="absolute inset-0 w-full h-full object-cover">
+
+    <div class="relative z-20 text-center px-4">
+      <h1 class="text-5xl md:text-7xl font-bold text-azure mb-6">
+        <span class="gradient-text">Rekomendasi Wisata</span><br>
+        Sulawesi Selatan
+      </h1>
+      <p class="text-xl text-azure/80 max-w-2xl mx-auto mb-8">
+        Temukan destinasi terbaik yang kami rekomendasikan untuk petualangan tak terlupakan
+      </p>
+      <a href="#destinasi"
+        class="inline-flex items-center px-8 py-3 gradient-bg text-azure font-semibold rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+        Jelajahi Sekarang
+        <i class="fas fa-arrow-down ml-2"></i>
+      </a>
+    </div>
+
+    <div class="absolute bottom-10 left-0 right-0 flex justify-center z-20">
+      <div class="animate-bounce w-8 h-8 bg-azure rounded-full flex items-center justify-center">
+        <i class="fas fa-chevron-down text-liver"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-16 bg-gradient-to-b from-azure to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-liver mb-4">
+          <span class="gradient-text">Keunggulan Sulawesi Selatan</span>
+        </h2>
+        <p class="text-lg text-liver max-w-3xl mx-auto">
+          Temukan alasan mengapa Sulawesi Selatan menjadi destinasi wisata yang tak terlupakan
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="feature-card rounded-2xl p-8">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mb-6">
+            <i class="fas fa-mountain text-3xl text-azure"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-liver mb-4">Pemandangan Alam Menakjubkan</h3>
+          <p class="text-liver/90">Dari pegunungan tinggi hingga pantai eksotis, Sulawesi Selatan menawarkan pemandangan
+            alam yang memukau dan beragam.</p>
+        </div>
+
+        <div class="feature-card rounded-2xl p-8">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mb-6">
+            <i class="fas fa-landmark text-3xl text-azure"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-liver mb-4">Budaya yang Kaya</h3>
+          <p class="text-liver/90">Budaya Sulawesi Selatan yang kaya dengan tradisi unik dan arsitektur khas akan
+            memberikan pengalaman budaya yang mendalam.</p>
+        </div>
+
+        <div class="feature-card rounded-2xl p-8">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mb-6">
+            <i class="fas fa-utensils text-3xl text-azure"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-liver mb-4">Kuliner Autentik</h3>
+          <p class="text-liver/90">Nikmati cita rasa autentik kuliner Sulawesi Selatan yang kaya rempah dan bercita rasa
+            unik yang tak terlupakan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Destinasi Section -->
+  <section id="destinasi" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-liver mb-4">
+        <span class="gradient-text">Destinasi Pilihan</span>
+      </h2>
+      <p class="text-lg text-liver max-w-3xl mx-auto">
+        Berikut rekomendasi tempat wisata terbaik di Sulawesi Selatan yang wajib Anda kunjungi
+      </p>
+    </div>
+
+    <!-- Filter Kategori -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      <button
+        class="px-6 py-2 bg-teal text-azure rounded-full font-medium hover:bg-12636c transition-all active:scale-95">
+        Semua
+      </button>
+      <button
+        class="px-6 py-2 bg-azure text-liver rounded-full font-medium hover:bg-gray-100 transition-all active:scale-95 border border-gray-200">
+        <i class="fas fa-mountain mr-2"></i> Pegunungan
+      </button>
+      <button
+        class="px-6 py-2 bg-azure text-liver rounded-full font-medium hover:bg-gray-100 transition-all active:scale-95 border border-gray-200">
+        <i class="fas fa-umbrella-beach mr-2"></i> Pantai
+      </button>
+      <button
+        class="px-6 py-2 bg-azure text-liver rounded-full font-medium hover:bg-gray-100 transition-all active:scale-95 border border-gray-200">
+        <i class="fas fa-landmark mr-2"></i> Budaya
+      </button>
+      <button
+        class="px-6 py-2 bg-azure text-liver rounded-full font-medium hover:bg-gray-100 transition-all active:scale-95 border border-gray-200">
+        <i class="fas fa-utensils mr-2"></i> Kuliner
+      </button>
+    </div>
+
+    <!-- Grid Destinasi -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Item 1 -->
+      <div class="card group relative rounded-2xl overflow-hidden shadow-xl h-96 shine-effect">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
+        <img
+          src="https://images.unsplash.com/photo-1589394815804-9648adb3d470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+          alt="Pantai Losari"
+          class="card-image absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+
+        <div class="absolute bottom-0 left-0 right-0 z-20 p-6">
+          <div class="tag inline-block px-3 py-1 rounded-full text-sm text-azure mb-2">
+            <i class="fas fa-map-marker-alt mr-1"></i> Makassar
+          </div>
+          <h3 class="text-2xl font-bold text-azure mb-2">Pantai Losari</h3>
+          <div class="flex items-center text-persian-orange mb-3">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+            <span class="text-azure text-sm ml-2">4.7 (1.2k ulasan)</span>
+          </div>
+          <p class="text-azure/90 mb-4">Sunset terindah di Makassar dengan deretan kuliner khas yang menggoda</p>
+          <button
+            class="detail-btn px-4 py-2 bg-azure text-teal rounded-full font-semibold text-sm hover:bg-gray-100 transition flex items-center"
+            data-id="1" data-title="Pantai Losari" data-location="Makassar" data-rating="4.7" data-reviews="1200"
+            data-description="Pantai Losari adalah ikon kota Makassar yang terkenal dengan pemandangan sunset terbaik di Indonesia. Dengan panjang sekitar 1 kilometer, pantai ini menjadi tempat favorit warga untuk bersantai di sore hari.">
+            <i class="fas fa-info-circle mr-2"></i> Detail Wisata
+          </button>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="card group relative rounded-2xl overflow-hidden shadow-xl h-96 shine-effect">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
+        <img
+          src="https://images.unsplash.com/photo-1586861203732-3625dcf8d763?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+          alt="Rammang-Rammang"
+          class="card-image absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+
+        <div class="absolute bottom-0 left-0 right-0 z-20 p-6">
+          <div class="tag inline-block px-3 py-1 rounded-full text-sm text-azure mb-2">
+            <i class="fas fa-map-marker-alt mr-1"></i> Maros
+          </div>
+          <h3 class="text-2xl font-bold text-azure mb-2">Rammang-Rammang</h3>
+          <div class="flex items-center text-persian-orange mb-3">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <span class="text-azure text-sm ml-2">5.0 (892 ulasan)</span>
+          </div>
+          <p class="text-azure/90 mb-4">Kawasan karst megah dengan pemandangan alam yang memesona</p>
+          <button
+            class="detail-btn px-4 py-2 bg-azure text-teal rounded-full font-semibold text-sm hover:bg-gray-100 transition flex items-center"
+            data-id="2" data-title="Rammang-Rammang" data-location="Maros" data-rating="5.0" data-reviews="892"
+            data-description="Rammang-Rammang adalah kawasan karst terbesar kedua di dunia setelah Cina. Terletak di Kabupaten Maros, tempat ini menawarkan pemandangan batu kapur megah yang terbentuk selama jutaan tahun.">
+            <i class="fas fa-info-circle mr-2"></i> Detail Wisata
+          </button>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="card group relative rounded-2xl overflow-hidden shadow-xl h-96 shine-effect">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
+        <img
+          src="https://images.unsplash.com/photo-1499591934245-40b55745b0dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+          alt="Fort Rotterdam"
+          class="card-image absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+
+        <div class="absolute bottom-0 left-0 right-0 z-20 p-6">
+          <div class="tag inline-block px-3 py-1 rounded-full text-sm text-azure mb-2">
+            <i class="fas fa-map-marker-alt mr-1"></i> Makassar
+          </div>
+          <h3 class="text-2xl font-bold text-azure mb-2">Fort Rotterdam</h3>
+          <div class="flex items-center text-persian-orange mb-3">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <span class="text-azure text-sm ml-2">4.9 (1.5k ulasan)</span>
+          </div>
+          <p class="text-azure/90 mb-4">Benteng bersejarah peninggalan Kerajaan Gowa yang megah</p>
+          <button
+            class="detail-btn px-4 py-2 bg-azure text-teal rounded-full font-semibold text-sm hover:bg-gray-100 transition flex items-center"
+            data-id="3" data-title="Fort Rotterdam" data-location="Makassar" data-rating="4.9" data-reviews="1500"
+            data-description="Fort Rotterdam adalah benteng peninggalan Kerajaan Gowa-Tallo yang dibangun pada tahun 1545. Setelah dikuasai Belanda, benteng ini menjadi pusat pemerintahan dan perdagangan di wilayah timur Indonesia.">
+            <i class="fas fa-info-circle mr-2"></i> Detail Wisata
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-16">
+      <button
+        class="px-8 py-3 gradient-bg text-azure font-semibold rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center">
+        Lihat Lebih Banyak
+        <i class="fas fa-arrow-right ml-2"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- Culinary Section -->
+  <section class="py-20 bg-gradient-to-b from-white to-azure">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold text-liver mb-4">
+          <span class="gradient-text">Kuliner Khas</span>
+        </h2>
+        <p class="text-lg text-liver max-w-3xl mx-auto">
+          Jelajahi cita rasa autentik Sulawesi Selatan yang akan memanjakan lidah Anda
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-azure rounded-2xl overflow-hidden shadow-lg">
+          <div class="h-48 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+              alt="Coto Makassar" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-liver mb-2">Coto Makassar</h3>
+            <p class="text-liver/90 mb-4">Sup daging sapi dengan bumbu kacang khas Makassar yang gurih dan kaya rempah.
+            </p>
+            <div class="flex justify-between items-center">
+              <span class="text-persian-orange font-semibold">Rp 25.000 - 40.000</span>
+              <button class="px-4 py-2 bg-teal text-azure rounded-full text-sm hover:bg-12636c">
+                <i class="fas fa-utensils mr-1"></i> Coba Sekarang
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-azure rounded-2xl overflow-hidden shadow-lg">
+          <div class="h-48 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1551504734-b464e7d19f0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+              alt="Konro" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-liver mb-2">Konro</h3>
+            <p class="text-liver/90 mb-4">Sup iga sapi dengan kuah coklat kehitaman yang kaya rempah dan gurih.</p>
+            <div class="flex justify-between items-center">
+              <span class="text-persian-orange font-semibold">Rp 35.000 - 60.000</span>
+              <button class="px-4 py-2 bg-teal text-azure rounded-full text-sm hover:bg-12636c">
+                <i class="fas fa-utensils mr-1"></i> Coba Sekarang
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-azure rounded-2xl overflow-hidden shadow-lg">
+          <div class="h-48 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+              alt="Es Pisang Ijo" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-liver mb-2">Es Pisang Ijo</h3>
+            <p class="text-liver/90 mb-4">Dessert pisang dibungkus adonan hijau disajikan dengan es, sirup, dan santan.
+            </p>
+            <div class="flex justify-between items-center">
+              <span class="text-persian-orange font-semibold">Rp 15.000 - 25.000</span>
+              <button class="px-4 py-2 bg-teal text-azure rounded-full text-sm hover:bg-12636c">
+                <i class="fas fa-utensils mr-1"></i> Coba Sekarang
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Detail Wisata (Sederhana) -->
+  <div id="destinationModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle" class="text-3xl font-bold"></h2>
+        <div class="flex items-center mt-2">
+          <i class="fas fa-map-marker-alt mr-2"></i>
+          <span id="modalLocation"></span>
+        </div>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <img id="modalImage" src="" alt="Destination Image" class="modal-image">
+
+        <div class="flex items-center text-persian-orange mb-4">
+          <div id="modalRating"></div>
+          <span class="text-liver text-lg ml-2 font-medium" id="modalReviews"></span>
+        </div>
+
+        <p class="text-liver text-lg mb-6" id="modalDescription"></p>
+
+        <div class="text-center">
+          <button id="historyButton" class="history-btn">
+            <i class="fas fa-landmark mr-2"></i> Sejarah & Budaya
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sejarah & Budaya Page -->
+  <div id="historyPage" class="history-page">
+    <div class="history-header">
+      <div class="back-btn" id="backBtn">
+        <i class="fas fa-arrow-left"></i>
+      </div>
+      <h2 id="historyTitle" class="text-3xl font-bold text-center mt-8"></h2>
+      <div class="text-center mt-2">
+        <i class="fas fa-map-marker-alt mr-2"></i>
+        <span id="historyLocation"></span>
+      </div>
+    </div>
+
+    <div class="history-content">
+      <img id="historyImage" src="" alt="History Image" class="history-image">
+
+      <div id="historyContent">
+        <!-- Konten sejarah dan budaya akan diisi secara dinamis -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-midnight-green text-azure py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">Wisata Sulsel</h3>
+          <p class="mb-4 text-azure/80">Portal rekomendasi wisata terbaik di Sulawesi Selatan untuk pengalaman tak
+            terlupakan.</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-azure hover:text-teal"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-azure hover:text-teal"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-azure hover:text-teal"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-azure hover:text-teal"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-4">Tautan Cepat</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Beranda</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Tentang Kami</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Destinasi</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Blog</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Kontak</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-4">Kategori Wisata</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Alam</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Budaya</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Pantai</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Kuliner</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Sejarah</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-4">Kontak Kami</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i class="fas fa-map-marker-alt mt-1 mr-3 text-teal"></i>
+              <span class="text-azure/80">Jl. Perintis Kemerdekaan No. 10, Makassar, Sulawesi Selatan</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-phone-alt mr-3 text-teal"></i>
+              <span class="text-azure/80">+62 821 1234 5678</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-envelope mr-3 text-teal"></i>
+              <span class="text-azure/80">info@wisatasulsel.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-azure/20 mt-12 pt-8 text-center text-azure/80">
+        <p>&copy; 2023 Wisata Sulsel. Hak Cipta Dilindungi.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Data sejarah dan budaya untuk setiap destinasi
+    const historyData = {
+      1: {
+        title: "Pantai Losari",
+        location: "Makassar, Sulawesi Selatan",
+        image: "https://images.unsplash.com/photo-1589394815804-9648adb3d470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        content: `
+          <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Pantai Losari</h3>
+          <p class="text-liver mb-6">
+            Pantai Losari memiliki sejarah panjang sebagai pusat kehidupan masyarakat Makassar sejak abad ke-16. 
+            Nama "Losari" berasal dari kata "Losari" yang berarti tempat berkumpulnya para nelayan. 
+            Pada masa Kerajaan Gowa-Tallo, pantai ini menjadi pusat perdagangan rempah-rempah dan titik penting 
+            dalam jalur pelayaran Nusantara.
+          </p>
+          
+          <h3 class="text-2xl font-bold text-midnight-green mb-4">Budaya dan Tradisi</h3>
+          <p class="text-liver mb-6">
+            Pantai Losari bukan hanya tempat wisata, tapi juga pusat budaya masyarakat Makassar. 
+            Setiap sore, pantai ini menjadi tempat berkumpul keluarga, muda-mudi, dan komunitas lokal. 
+            Tradisi "Mappadendang" (menonton matahari terbenam) menjadi ritual harian yang diwariskan turun-temurun.
+          </p>
+          
+          <div class="bg-azure p-6 rounded-xl mb-6">
+            <h4 class="text-xl font-bold text-persian-orange mb-3">
+              <i class="fas fa-lightbulb mr-2"></i> Fakta Menarik
+            </h4>
+            <ul class="list-disc pl-6 text-liver space-y-2">
+              <li>Pantai Losari disebut sebagai "The World's Best Sunset Spot" oleh CNN Travel</li>
+              <li>Setiap tahun diadakan Festival Losari yang menampilkan budaya dan kuliner khas Sulawesi Selatan</li>
+              <li>Patung Ikan Berdua di pantai ini menjadi ikon baru Makassar</li>
+            </ul>
+          </div>
+        `
+      },
+      2: {
+        title: "Rammang-Rammang",
+        location: "Maros, Sulawesi Selatan",
+        image: "https://images.unsplash.com/photo-1586861203732-3625dcf8d763?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        content: `
+          <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Geologis</h3>
+          <p class="text-liver mb-6">
+            Rammang-Rammang adalah kawasan karst terbesar kedua di dunia setelah Cina. 
+            Formasi batuan kapurnya terbentuk selama jutaan tahun melalui proses sedimentasi 
+            dan pengangkatan geologis. Kawasan ini menyimpan sejarah bumi yang panjang dengan 
+            usia batuan mencapai 30 juta tahun.
+          </p>
+          
+          <h3 class="text-2xl font-bold text-midnight-green mb-4">Budaya Lokal</h3>
+          <p class="text-liver mb-6">
+            Masyarakat sekitar Rammang-Rammang masih mempertahankan tradisi leluhur dalam 
+            berinteraksi dengan alam. Mereka memiliki sistem pengetahuan lokal dalam mengelola 
+            sumber daya alam tanpa merusak lingkungan. Kehidupan sehari-hari masyarakat 
+            terintegrasi dengan lanskap karst yang memesona.
+          </p>
+          
+          <div class="bg-azure p-6 rounded-xl mb-6">
+            <h4 class="text-xl font-bold text-persian-orange mb-3">
+              <i class="fas fa-lightbulb mr-2"></i> Fakta Menarik
+            </h4>
+            <ul class="list-disc pl-6 text-liver space-y-2">
+              <li>Rammang-Rammang dalam bahasa Makassar berarti "kabut" karena sering diselimuti kabut pagi</li>
+              <li>Kawasan ini memiliki lebih dari 300 gua dengan berbagai formasi stalaktit dan stalagmit</li>
+              <li>Ditemukan lukisan dinding gua berusia lebih dari 5.000 tahun di beberapa gua</li>
+            </ul>
+          </div>
+        `
+      },
+      3: {
+        title: "Fort Rotterdam",
+        location: "Makassar, Sulawesi Selatan",
+        image: "https://images.unsplash.com/photo-1499591934245-40b55745b0dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        content: `
+          <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Benteng</h3>
+          <p class="text-liver mb-6">
+            Fort Rotterdam dibangun pada tahun 1545 oleh Raja Gowa ke-9, I Manrigau Daeng Bonto Karaeng Lakiung Tumapa'risi' Kallonna. 
+            Awalnya bernama Benteng Ujung Pandang, benteng ini menjadi pusat pertahanan Kerajaan Gowa. 
+            Setelah Perjanjian Bongaya tahun 1667, benteng beralih ke tangan Belanda dan berganti nama menjadi Fort Rotterdam.
+          </p>
+          
+          <h3 class="text-2xl font-bold text-midnight-green mb-4">Arsitektur dan Budaya</h3>
+          <p class="text-liver mb-6">
+            Benteng ini memiliki arsitektur unik berbentuk penyu yang melambangkan keabadian dan ketangguhan. 
+            Di dalamnya terdapat Museum La Galigo yang menyimpan berbagai artefak sejarah Sulawesi Selatan. 
+            Fort Rotterdam menjadi saksi bisu perjuangan rakyat Sulawesi melawan penjajahan dan simbol 
+            ketahanan budaya lokal.
+          </p>
+          
+          <div class="bg-azure p-6 rounded-xl mb-6">
+            <h4 class="text-xl font-bold text-persian-orange mb-3">
+              <i class="fas fa-lightbulb mr-2"></i> Fakta Menarik
+            </h4>
+            <ul class="list-disc pl-6 text-liver space-y-2">
+              <li>Benteng ini pernah menjadi tempat pengasingan Pangeran Diponegoro</li>
+              <li>Di salah satu ruangan, pernah ditemukan naskah kuno I La Galigo sepanjang 6.000 halaman</li>
+              <li>Fort Rotterdam adalah salah satu benteng terbaik yang masih terpelihara di Indonesia</li>
+            </ul>
+          </div>
+        `
+      }
+    };
+
+    // Fungsi untuk menampilkan modal
+    function showDestinationModal(destination) {
+      // Set data ke modal
+      document.getElementById('modalTitle').textContent = destination.title;
+      document.getElementById('modalLocation').textContent = destination.location;
+      document.getElementById('modalDescription').textContent = destination.description;
+      document.getElementById('modalImage').src = destination.image;
+
+      // Set rating
+      const ratingContainer = document.getElementById('modalRating');
+      ratingContainer.innerHTML = '';
+      const fullStars = Math.floor(destination.rating);
+      const halfStar = destination.rating % 1 >= 0.5;
+
+      for (let i = 0; i < fullStars; i++) {
+        const star = document.createElement('i');
+        star.className = 'fas fa-star';
+        ratingContainer.appendChild(star);
+      }
+
+      if (halfStar) {
+        const star = document.createElement('i');
+        star.className = 'fas fa-star-half-alt';
+        ratingContainer.appendChild(star);
+      }
+
+      // Set ulasan
+      document.getElementById('modalReviews').textContent = `${destination.rating} (${destination.reviews.toLocaleString()} ulasan)`;
+
+      // Set tombol sejarah dan budaya
+      const historyButton = document.getElementById('historyButton');
+      historyButton.onclick = function () {
+        showHistoryPage(destination.id);
+      };
+
+      // Tampilkan modal
+      document.getElementById('destinationModal').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+
+    // Fungsi untuk menampilkan halaman sejarah dan budaya
+    function showHistoryPage(destinationId) {
+      const history = historyData[destinationId];
+
+      if (history) {
+        document.getElementById('historyTitle').textContent = "Sejarah & Budaya " + history.title;
+        document.getElementById('historyLocation').textContent = history.location;
+        document.getElementById('historyImage').src = history.image;
+        document.getElementById('historyContent').innerHTML = history.content;
+
+        // Sembunyikan modal dan tampilkan halaman sejarah
+        document.getElementById('destinationModal').style.display = 'none';
+        document.getElementById('historyPage').style.display = 'block';
+      }
+    }
+
+    // Fungsi untuk kembali dari halaman sejarah
+    function backFromHistory() {
+      document.getElementById('historyPage').style.display = 'none';
+      document.getElementById('destinationModal').style.display = 'block';
+    }
+
+    // Fungsi untuk menutup modal
+    function closeDestinationModal() {
+      document.getElementById('destinationModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    // Event listener untuk tombol detail
+    document.querySelectorAll('.detail-btn').forEach(button => {
+      button.addEventListener('click', function () {
+        const destination = {
+          id: this.getAttribute('data-id'),
+          title: this.getAttribute('data-title'),
+          location: this.getAttribute('data-location'),
+          rating: parseFloat(this.getAttribute('data-rating')),
+          reviews: parseInt(this.getAttribute('data-reviews')),
+          description: this.getAttribute('data-description'),
+          image: this.closest('.card').querySelector('img').src
+        };
+
+        showDestinationModal(destination);
+      });
+    });
+
+    // Event listener untuk tombol tutup modal
+    document.querySelector('.close-modal').addEventListener('click', closeDestinationModal);
+
+    // Event listener untuk tombol kembali
+    document.getElementById('backBtn').addEventListener('click', backFromHistory);
+
+    // Tutup modal saat mengklik di luar konten modal
+    window.addEventListener('click', function (event) {
+      const modal = document.getElementById('destinationModal');
+      if (event.target === modal) {
+        closeDestinationModal();
+      }
+    });
+
+    // Tutup modal dengan tombol ESC
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeDestinationModal();
+      }
+    });
+  </script>
+</body>
+
+</html>

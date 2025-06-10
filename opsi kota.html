@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pilih Kota di Sulawesi Selatan</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -10,35 +11,44 @@
     body {
       font-family: 'Poppins', sans-serif;
     }
+
     .fade-slide-in {
       animation: fadeSlideIn 0.4s ease-out forwards;
     }
+
     @keyframes fadeSlideIn {
       0% {
         opacity: 0;
         transform: translateY(10px);
       }
+
       100% {
         opacity: 1;
         transform: translateY(0);
       }
     }
+
     .card-hover {
       transition: all 0.2s ease;
     }
+
     .card-hover:hover {
       transform: translateY(-2px);
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-green-50 via-green-100 to-green-200 min-h-screen flex flex-col items-center text-green-900 p-4 pt-32">
 
-  <nav class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-green-600 shadow-md z-20 text-white">
+<body
+  class="bg-gradient-to-br from-green-50 via-green-100 to-green-200 min-h-screen flex flex-col items-center text-green-900 p-4 pt-32">
+  <nav
+    class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-green-600 shadow-md z-20 text-white">
     <div class="flex items-center space-x-3">
       <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       </div>
@@ -55,7 +65,8 @@
   <div class="text-center max-w-2xl px-4">
     <h1 class="text-3xl md:text-4xl font-bold mb-3 text-green-800">Pilih Kota di Sulawesi Selatan</h1>
     <p class="mb-6 text-lg text-green-700">Temukan destinasi wisata menarik dari kota favoritmu</p>
-    <button id="toggleBtn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium transition duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+    <button id="toggleBtn"
+      class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium transition duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
       Tampilkan Kota dan Kategori
     </button>
   </div>
@@ -87,7 +98,7 @@
     ];
 
     const categories = [
-      "Wisata Pegunungan", "Wisata Pantai", "Wisata Budaya", "Wisata Kuliner", 
+      "Wisata Pegunungan", "Wisata Pantai", "Wisata Budaya", "Wisata Kuliner",
       "Wisata Kota", "Wisata Edukasi dan sejarah", "Wisata Air Terjun"
     ];
 
@@ -174,4 +185,5 @@
     });
   </script>
 </body>
+
 </html>
