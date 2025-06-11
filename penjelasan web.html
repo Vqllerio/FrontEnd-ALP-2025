@@ -6,6 +6,11 @@
   <title>Tampilan Transisi Gambar</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
+    body {
+      background-color: #edf7f6;
+      color: #130e0c;
+      font-family: sans-serif;
+    }
     .fade {
       transition: opacity 1s ease-in-out;
     }
@@ -23,34 +28,48 @@
   </style>
 </head>
 
-<body class="bg-green-50 text-white">
-  <nav class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-green-600 shadow-md z-20 text-white">
+<body>
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 shadow-md z-20 text-white"
+    style="background-color: #0a4f60;">
     <div class="flex items-center space-x-3">
       <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="color: #0a4f60;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       </div>
       <span class="font-bold text-xl">Wisata Sulsel</span>
     </div>
     <div class="hidden md:flex space-x-6 font-medium">
-      <a href="#" class="hover:underline hover:text-green-100">Beranda</a>
-      <a href="#" class="hover:underline hover:text-green-100">Provinsi</a>
-      <a href="#" class="hover:underline hover:text-green-100">Kota</a>
-      <a href="#" class="hover:underline hover:text-green-100">Destinasi</a>
+      <a href="#" class="hover:underline text-white">Beranda</a>
+      <a href="#" class="hover:underline text-white">Provinsi</a>
+      <a href="#" class="hover:underline text-white">Kota</a>
+      <a href="#" class="hover:underline text-white">Destinasi</a>
     </div>
   </nav>
-  
-  <div class="pt-32 px-4 flex items-center justify-center content-container">
-    <div class="bg-green-400 p-8 md:p-12 rounded-xl flex flex-col md:flex-row items-center justify-between w-full max-w-7xl mx-4">
 
-      <div class="text-black text-base md:text-lg leading-relaxed w-full md:w-1/2 pr-0 md:pr-8">
-        Sulawesi Selatan merupakan surga wisata di bagian timur Indonesia, yang kaya akan keindahan alam, budaya yang unik, serta ragam kuliner yang menggoda. Mulai dari pesona pantai-pantainya yang memikat, pegunungan yang menantang, hingga jejak sejarah dan tradisi lokal yang memukau, semua bisa kamu temukan di sini.<br><br>
-        Melalui website ini, kami hadir sebagai teman perjalananmu untuk menjelajahi setiap sudut Sulawesi Selatan. Dengan informasi lengkap seputar destinasi wisata, rekomendasi aktivitas, dan tips perjalanan, kamu akan dibimbing untuk merasakan pengalaman liburan yang tak terlupakan.<br><br>
-        Mari temukan keajaiban Sulawesi Selatan bersama kami – petualanganmu dimulai dari sini!
+  <!-- Konten -->
+  <div class="pt-32 px-4 flex items-center justify-center content-container">
+    <div class="p-8 md:p-12 rounded-xl flex flex-col md:flex-row items-center justify-between w-full max-w-7xl mx-4"
+      style="background-color: #0a4f60;"> <!-- GANTI sesuai warna gambar -->
+
+      <!-- Teks -->
+      <div class="text-base md:text-lg leading-relaxed w-full md:w-1/2 pr-0 md:pr-8" style="color: #fbfdfd;">
+        <p>
+          Sulawesi Selatan merupakan surga wisata di bagian timur Indonesia, yang kaya akan keindahan alam, budaya yang unik, serta ragam kuliner yang menggoda. Mulai dari pesona pantai-pantainya yang memikat, pegunungan yang menantang, hingga jejak sejarah dan tradisi lokal yang memukau, semua bisa kamu temukan di sini.
+        </p><br>
+        <p>
+          Melalui website ini, kami hadir sebagai teman perjalananmu untuk menjelajahi setiap sudut Sulawesi Selatan. Dengan informasi lengkap seputar destinasi wisata, rekomendasi aktivitas, dan tips perjalanan, kamu akan dibimbing untuk merasakan pengalaman liburan yang tak terlupakan.
+        </p><br>
+        <p>
+          Mari temukan keajaiban Sulawesi Selatan bersama kami – petualanganmu dimulai dari sini!
+        </p>
       </div>
 
+      <!-- Gambar -->
       <div class="relative w-full md:w-2/5 h-64 md:h-96 overflow-hidden rounded-lg mt-6 md:mt-0">
         <img src="./wisata/foto 11.jpg" class="fade visible-image w-full h-full object-cover rounded-lg" id="img1" />
         <img src="./wisata/foto 13.jpg" class="fade hidden-image w-full h-full object-cover rounded-lg" id="img2" />
@@ -59,6 +78,7 @@
     </div>
   </div>
 
+  <!-- Script -->
   <script>
     const images = [
       document.getElementById("img1"),
@@ -76,7 +96,7 @@
 
       images[current].classList.remove("hidden-image");
       images[current].classList.add("visible-image");
-    }, 3000);
+    }, 2000);
   </script>
 </body>
 </html>

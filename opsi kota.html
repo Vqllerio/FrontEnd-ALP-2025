@@ -9,6 +9,8 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #edf7f6, #d3f5ec, #b6e8e2);
+      color: #130e0c;
     }
     .fade-slide-in {
       animation: fadeSlideIn 0.4s ease-out forwards;
@@ -32,12 +34,12 @@
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-green-50 via-green-100 to-green-200 min-h-screen flex flex-col items-center text-green-900 p-4 pt-32">
+<body class="min-h-screen flex flex-col items-center p-4 pt-32">
 
-  <nav class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-green-600 shadow-md z-20 text-white">
+  <nav class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 shadow-md z-20 text-white" style="background-color: #0a4f60;">
     <div class="flex items-center space-x-3">
       <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="color: #0a4f60;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
@@ -45,30 +47,31 @@
       <span class="font-bold text-xl">Wisata Sulsel</span>
     </div>
     <div class="hidden md:flex space-x-6 font-medium">
-      <a href="#" class="hover:underline hover:text-green-100">Beranda</a>
-      <a href="#" class="hover:underline hover:text-green-100">Provinsi</a>
-      <a href="#" class="hover:underline hover:text-green-100">Kota</a>
-      <a href="#" class="hover:underline hover:text-green-100">Destinasi</a>
+      <a href="#" class="hover:underline text-white">Beranda</a>
+      <a href="#" class="hover:underline text-white">Provinsi</a>
+      <a href="#" class="hover:underline text-white">Kota</a>
+      <a href="#" class="hover:underline text-white">Destinasi</a>
     </div>
   </nav>
 
   <div class="text-center max-w-2xl px-4">
-    <h1 class="text-3xl md:text-4xl font-bold mb-3 text-green-800">Pilih Kota di Sulawesi Selatan</h1>
-    <p class="mb-6 text-lg text-green-700">Temukan destinasi wisata menarik dari kota favoritmu</p>
-    <button id="toggleBtn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-medium transition duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+    <h1 class="text-3xl md:text-4xl font-bold mb-3" style="color: #084c61;">Pilih Kota di Sulawesi Selatan</h1>
+    <p class="mb-6 text-lg" style="color: #0a4f60;">Temukan destinasi wisata menarik dari kota favoritmu</p>
+    <button id="toggleBtn" class="text-white px-6 py-3 rounded-full font-medium transition duration-200 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-opacity-50"
+      style="background-color: #0a4f60;">
       Tampilkan Kota dan Kategori
     </button>
   </div>
 
   <div id="contentContainer" class="mt-8 w-full max-w-5xl px-4 hidden">
     <div class="mb-8">
-      <h2 class="text-xl font-semibold mb-3 text-green-800 pl-2 border-l-4 border-green-500">Pilih Kota/Kabupaten</h2>
+      <h2 class="text-xl font-semibold mb-3 pl-2 border-l-4" style="color: #084c61; border-color: #e29578;">Pilih Kota/Kabupaten</h2>
       <div id="cityContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
       </div>
     </div>
 
     <div>
-      <h2 class="text-xl font-semibold mb-3 text-green-800 pl-2 border-l-4 border-green-500">Pilih Kategori Wisata</h2>
+      <h2 class="text-xl font-semibold mb-3 pl-2 border-l-4" style="color: #084c61; border-color: #e29578;">Pilih Kategori Wisata</h2>
       <div id="categoryContainer" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
       </div>
     </div>
@@ -95,48 +98,53 @@
     let selectedCategoryElement = null;
     let shown = false;
 
-    // Fungsi toggle tampilan
     toggleBtn.addEventListener('click', () => {
       shown = !shown;
       if (shown) {
         contentContainer.classList.remove('hidden');
         toggleBtn.textContent = "Sembunyikan Pilihan";
-        toggleBtn.classList.replace('bg-green-600', 'bg-green-700');
+        toggleBtn.style.backgroundColor = "#084c61";
       } else {
         contentContainer.classList.add('hidden');
         toggleBtn.textContent = "Tampilkan Kota dan Kategori";
-        toggleBtn.classList.replace('bg-green-700', 'bg-green-600');
+        toggleBtn.style.backgroundColor = "#0a4f60";
         selectedCity = null;
         resetSelection();
       }
     });
 
-    // Reset seleksi
     function resetSelection() {
       cityContainer.querySelectorAll('div').forEach(div => {
-        div.classList.remove('bg-green-600', 'text-white');
+        div.style.backgroundColor = "#ffffff";
+        div.style.color = "#130e0c";
       });
       if (selectedCategoryElement) {
-        selectedCategoryElement.classList.remove('bg-green-600', 'text-white');
+        selectedCategoryElement.style.backgroundColor = "#ffffff";
+        selectedCategoryElement.style.color = "#130e0c";
         selectedCategoryElement = null;
       }
     }
 
     cities.forEach((city, index) => {
       const el = document.createElement('div');
-      el.className = "bg-white rounded-lg shadow-sm p-3 text-center font-medium cursor-pointer card-hover opacity-0 fade-slide-in";
+      el.className = "rounded-lg shadow-sm p-3 text-center font-medium cursor-pointer card-hover opacity-0 fade-slide-in";
+      el.style.backgroundColor = "#ffffff";
+      el.style.color = "#130e0c";
       el.style.animationDelay = `${index * 0.03}s`;
       el.textContent = city;
 
       el.addEventListener('click', () => {
         selectedCity = city;
         cityContainer.querySelectorAll('div').forEach(div => {
-          div.classList.remove('bg-green-600', 'text-white');
+          div.style.backgroundColor = "#ffffff";
+          div.style.color = "#130e0c";
         });
-        el.classList.add('bg-green-600', 'text-white');
+        el.style.backgroundColor = "#0a4f60";
+        el.style.color = "#ffffff";
 
         if (selectedCategoryElement) {
-          selectedCategoryElement.classList.remove('bg-green-600', 'text-white');
+          selectedCategoryElement.style.backgroundColor = "#ffffff";
+          selectedCategoryElement.style.color = "#130e0c";
           selectedCategoryElement = null;
         }
       });
@@ -146,7 +154,9 @@
 
     categories.forEach((category, index) => {
       const el = document.createElement('div');
-      el.className = "bg-white rounded-lg shadow-sm p-3 text-center font-medium cursor-pointer card-hover opacity-0 fade-slide-in";
+      el.className = "rounded-lg shadow-sm p-3 text-center font-medium cursor-pointer card-hover opacity-0 fade-slide-in";
+      el.style.backgroundColor = "#ffffff";
+      el.style.color = "#130e0c";
       el.style.animationDelay = `${index * 0.03 + 0.3}s`;
       el.textContent = category;
 
@@ -157,13 +167,16 @@
         }
 
         if (selectedCategoryElement === el) {
-          el.classList.remove('bg-green-600', 'text-white');
+          el.style.backgroundColor = "#ffffff";
+          el.style.color = "#130e0c";
           selectedCategoryElement = null;
         } else {
           if (selectedCategoryElement) {
-            selectedCategoryElement.classList.remove('bg-green-600', 'text-white');
+            selectedCategoryElement.style.backgroundColor = "#ffffff";
+            selectedCategoryElement.style.color = "#130e0c";
           }
-          el.classList.add('bg-green-600', 'text-white');
+          el.style.backgroundColor = "#0a4f60";
+          el.style.color = "#ffffff";
           selectedCategoryElement = el;
         }
 
