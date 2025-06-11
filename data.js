@@ -65,6 +65,17 @@ const destinations = [
         reviews: 876,
         userRating: 0,
         category: "pantai"
+    },
+        {
+        id: 7,
+        title: "Pulau Gladys",
+        location: "Makassar",
+        description: "Pulau kecil dengan pantai pasir pink dan terumbu karang yang jelek",
+        image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        rating: 3,
+        reviews: 1000,
+        userRating: 0,
+        category: "pantai"
     }
 ];
 
@@ -103,6 +114,7 @@ const historyData = {
         dan pengangkatan geologis. Kawasan ini menyimpan sejarah bumi yang panjang dengan 
         usia batuan mencapai 30 juta tahun.
       </p>
+      <h3>Budaya</h3>
     `
     },
     3: {
@@ -154,6 +166,20 @@ const historyData = {
       <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Pulau Samalona</h3>
       <p class="text-liver mb-6">
         Pulau Samalona telah menjadi bagian penting dalam sejarah maritim Makassar. 
+        Pada abad ke-17, pulau ini menjadi tempat persinggahan kapal-kapal Belanda 
+        sebelum memasuki pelabuhan Makassar. Mercusuar di pulau ini dibangun pada 
+        tahun 1903 dan masih berfungsi hingga kini.
+      </p>
+    `
+    },
+    7: {
+        title: "Pulau Gladys",
+        location: "Makassar, Sulawesi Selatan",
+        image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        content: `
+      <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Pulau Gladys</h3>
+      <p class="text-liver mb-6">
+        Pulau Gladys HOOEEEKk telah menjadi bagian penting dalam sejarah maritim Makassar. 
         Pada abad ke-17, pulau ini menjadi tempat persinggahan kapal-kapal Belanda 
         sebelum memasuki pelabuhan Makassar. Mercusuar di pulau ini dibangun pada 
         tahun 1903 dan masih berfungsi hingga kini.

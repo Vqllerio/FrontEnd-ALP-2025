@@ -118,39 +118,50 @@
             </p>
         </div>
 
-        <!-- Filter Kategori -->
-        <div class="flex flex-wrap justify-center gap-3 mb-12">
-            <button
-                class="px-6 py-2 bg-teal text-azure rounded-full font-medium hover:bg-12636c transition-all active:scale-95">
-                Semua
-            </button>
-            <button
-                class="px-6 py-2 bg-azure text-liver rounded-full font-medium hover:bg-gray-100 transition-all active:scale-95 border border-gray-200">
-                <i class="fas fa-mountain mr-2"></i> Pegunungan
-            </button>
-            <button
-                class="px-6 py-2 bg-azure text-liver rounded-full font-medium hover:bg-gray-100 transition-all active:scale-95 border border-gray-200">
-                <i class="fas fa-umbrella-beach mr-2"></i> Pantai
-            </button>
-            <button
-                class="px-6 py-2 bg-azure text-liver rounded-full font-medium hover:bg-gray-100 transition-all active:scale-95 border border-gray-200">
-                <i class="fas fa-landmark mr-2"></i> Budaya
-            </button>
-            <button
-                class="px-6 py-2 bg-azure text-liver rounded-full font-medium hover:bg-gray-100 transition-all active:scale-95 border border-gray-200">
-                <i class="fas fa-utensils mr-2"></i> Kuliner
-            </button>
+        <!-- Filter Section -->
+        <div class="mb-12 bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-xl font-bold text-liver mb-4">Filter Destinasi</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-liver font-medium mb-2">Kategori Wisata</label>
+                    <select id="categoryFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal">
+                        <option value="all">Semua Kategori</option>
+                        <option value="pantai">Pantai</option>
+                        <option value="alam">Alam</option>
+                        <option value="budaya">Budaya</option>
+                        <option value="pegunungan">Pegunungan</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-liver font-medium mb-2">Lokasi (Kota/Kabupaten)</label>
+                    <select id="locationFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal">
+                        <option value="all">Semua Lokasi</option>
+                        <option value="Makassar">Makassar</option>
+                        <option value="Maros">Maros</option>
+                        <option value="Gowa">Gowa</option>
+                        <option value="Toraja Utara">Toraja Utara</option>
+                        <option value="Pangkajene">Pangkajene</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4 flex justify-end">
+                <button id="applyFilter" class="px-6 py-2 bg-teal text-azure rounded-lg font-medium hover:bg-midnight-green transition">
+                    Terapkan Filter
+                </button>
+            </div>
         </div>
 
-        <!-- Grid Destinasi (akan diisi oleh JavaScript) -->
-        <div id="destinationsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        <!-- Grid Destinasi -->
+        <div id="destinationsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Destinasi akan diisi oleh JavaScript -->
+        </div>
 
         <div class="text-center mt-16">
-            <button id="loadMoreBtn"
+            <a href="pencarian.html"
                 class="px-8 py-3 gradient-bg text-azure font-semibold rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105 inline-flex items-center">
-                Lihat Lebih Banyak
+                Lihat Semua Destinasi
                 <i class="fas fa-arrow-right ml-2"></i>
-            </button>
+            </a>
         </div>
     </section>
 
@@ -246,7 +257,7 @@
                         <li><a href="#" class="text-azure/80 hover:text-teal transition">Beranda</a></li>
                         <li><a href="#" class="text-azure/80 hover:text-teal transition">Tentang Kami</a></li>
                         <li><a href="#" class="text-azure/80 hover:text-teal transition">Destinasi</a></li>
-                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Blog</a></li>
+                        <li><a href="pencarian.html" class="text-azure/80 hover:text-teal transition">Pencarian</a></li>
                         <li><a href="#" class="text-azure/80 hover:text-teal transition">Kontak</a></li>
                     </ul>
                 </div>
@@ -289,7 +300,45 @@
     </footer>
 
     <script src="data.js"></script>
+    <script>
+        // Fungsi untuk merender destinasi wisata dengan filter
+        function renderFilteredDestinations() {
+            const category = document.getElementById('categoryFilter').value;
+            const location = document.getElementById('locationFilter').value;
+            
+            let filteredDestinations = destinations;
+            
+            if (category !== 'all') {
+                filteredDestinations = filteredDestinations.filter(dest => dest.category === category);
+            }
+            
+            if (location !== 'all') {
+                filteredDestinations = filteredDestinations.filter(dest => dest.location === location);
+            }
+            
+            renderDestinations(filteredDestinations);
+        }
+
+        // Event listener untuk tombol filter
+        document.getElementById('applyFilter').addEventListener('click', renderFilteredDestinations);
+
+        // Render destinasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render 3 destinasi teratas di halaman utama
+            const featuredDestinations = destinations.slice(0, 3);
+            renderDestinations(featuredDestinations);
+            
+            // Event listener untuk tombol "Lihat Semua Destinasi"
+            document.querySelector('a[href="pencarian.html"]').addEventListener('click', function(e) {
+                // Simpan filter saat ini ke localStorage
+                const currentFilters = {
+                    category: document.getElementById('categoryFilter').value,
+                    location: document.getElementById('locationFilter').value
+                };
+                localStorage.setItem('currentFilters', JSON.stringify(currentFilters));
+            });
+        });
+    </script>
     <script src="script.js"></script>
 </body>
-
 </html>
