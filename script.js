@@ -1,4 +1,4 @@
-// Fungsi untuk merender destinasi wisata
+
 function renderDestinations(destinationsToRender) {
     const grid = document.getElementById('destinationsGrid');
     grid.innerHTML = '';
@@ -30,8 +30,6 @@ function renderDestinations(destinationsToRender) {
     `;
         grid.appendChild(card);
     });
-
-    // Tambahkan event listener untuk tombol detail
     document.querySelectorAll('.detail-btn').forEach(button => {
         button.addEventListener('click', function () {
             const id = parseInt(this.getAttribute('data-id'));
@@ -40,8 +38,6 @@ function renderDestinations(destinationsToRender) {
         });
     });
 }
-
-// Fungsi untuk merender bintang rating
 function renderStars(rating) {
     let starsHTML = '';
     const fullStars = Math.floor(rating);
@@ -62,59 +58,34 @@ function renderStars(rating) {
 
     return starsHTML;
 }
-
-// Fungsi untuk menampilkan modal detail
 function showDestinationModal(destination) {
-    // Set data ke modal
     document.getElementById('modalTitle').textContent = destination.title;
     document.getElementById('modalLocation').textContent = destination.location;
     document.getElementById('modalDescription').textContent = destination.description;
     document.getElementById('modalImage').src = destination.image;
-
-    // Set rating
     const ratingContainer = document.getElementById('modalRating');
     ratingContainer.innerHTML = renderStars(destination.rating);
-
-    // Set ulasan
     document.getElementById('modalReviews').textContent = `${destination.rating} (${destination.reviews.toLocaleString()} ulasan)`;
-
-    // Set tombol sejarah dan budaya
     const historyButton = document.getElementById('historyButton');
     historyButton.onclick = function () {
         showHistoryPage(destination.id);
     };
-
-    // Setup rating widget
     setupRatingWidget(destination);
-
-    // Tampilkan modal
     document.getElementById('destinationModal').style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
-
-// Fungsi untuk menyiapkan widget rating
 function setupRatingWidget(destination) {
     const stars = document.querySelectorAll('.rating-widget .fa-star');
     const ratingMessage = document.getElementById('ratingMessage');
-
-    // Reset semua bintang
     stars.forEach(star => {
         star.className = 'far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange';
         star.onclick = null;
     });
-
-    // Reset pesan
     ratingMessage.textContent = '';
-
-    // Tambahkan event listener ke setiap bintang
     stars.forEach(star => {
         star.addEventListener('click', function () {
             const value = parseInt(this.getAttribute('data-value'));
-
-            // Update rating di destinasi
             updateDestinationRating(destination.id, value);
-
-            // Update tampilan bintang
             stars.forEach((s, index) => {
                 if (index < value) {
                     s.className = 'fas fa-star text-2xl text-persian-orange cursor-pointer';
@@ -122,44 +93,30 @@ function setupRatingWidget(destination) {
                     s.className = 'far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange';
                 }
             });
-
-            // Tampilkan pesan sukses
+            
             ratingMessage.textContent = `Terima kasih! Anda memberi rating ${value} bintang untuk ${destination.title}`;
             ratingMessage.className = 'text-teal mt-2 text-sm';
-
-            // Simpan rating ke localStorage
             saveUserRating(destination.id, value);
         });
     });
 }
-
-// Fungsi untuk memperbarui rating destinasi
 function updateDestinationRating(destinationId, userRating) {
     const destination = destinations.find(dest => dest.id === destinationId);
     if (destination) {
-        // Hitung rating baru (rata-rata dari rating lama dan baru)
         const newRating = (destination.rating * destination.reviews + userRating) / (destination.reviews + 1);
         destination.rating = parseFloat(newRating.toFixed(1));
         destination.reviews += 1;
         destination.userRating = userRating;
-
-        // Perbarui tampilan di modal
         document.getElementById('modalRating').innerHTML = renderStars(destination.rating);
         document.getElementById('modalReviews').textContent = `${destination.rating} (${destination.reviews.toLocaleString()} ulasan)`;
-
-        // Perbarui tampilan di grid
         renderDestinations(destinations);
     }
 }
-
-// Fungsi untuk menyimpan rating pengguna di localStorage
 function saveUserRating(destinationId, rating) {
     const userRatings = JSON.parse(localStorage.getItem('userRatings')) || {};
     userRatings[destinationId] = rating;
     localStorage.setItem('userRatings', JSON.stringify(userRatings));
 }
-
-// Fungsi untuk menampilkan halaman sejarah dan budaya
 function showHistoryPage(destinationId) {
     const history = historyData[destinationId];
 
@@ -168,86 +125,46 @@ function showHistoryPage(destinationId) {
         document.getElementById('historyLocation').textContent = history.location;
         document.getElementById('historyImage').src = history.image;
         document.getElementById('historyContent').innerHTML = history.content;
-
-        // Sembunyikan modal dan tampilkan halaman sejarah
         document.getElementById('destinationModal').style.display = 'none';
         document.getElementById('historyPage').style.display = 'block';
     }
 }
-
-// Fungsi untuk kembali dari halaman sejarah
 function backFromHistory() {
     document.getElementById('historyPage').style.display = 'none';
     document.getElementById('destinationModal').style.display = 'block';
 }
-
-// Fungsi untuk menutup modal
 function closeDestinationModal() {
     document.getElementById('destinationModal').style.display = 'none';
     document.body.style.overflow = 'auto';
 }
-
-// Fungsi untuk menambahkan destinasi baru
 function addDestination(newDestination) {
-    // Generate ID baru
     const newId = Math.max(...destinations.map(d => d.id)) + 1;
     newDestination.id = newId;
-
-    // Tambahkan ke array
     destinations.push(newDestination);
-
-    // Tambahkan data sejarah
     historyData[newId] = {
         title: newDestination.title,
         location: newDestination.location,
         image: newDestination.image,
         content: `<p class="text-liver mb-6">Sejarah dan budaya untuk ${newDestination.title} akan segera ditambahkan.</p>`
     };
-
-    // Render ulang destinasi
     renderDestinations(destinations);
 }
-
-// Event listener untuk tombol tutup modal
 document.querySelector('.close-modal').addEventListener('click', closeDestinationModal);
-
-// Event listener untuk tombol kembali
 document.getElementById('backBtn').addEventListener('click', backFromHistory);
-
-// Event listener untuk tombol lihat lebih banyak
 document.getElementById('loadMoreBtn').addEventListener('click', () => {
-    // Di implementasi nyata, ini akan memuat lebih banyak data dari server
     alert('Fitur "Lihat Lebih Banyak" akan memuat lebih banyak destinasi. Dalam implementasi nyata, ini akan mengambil data dari database.');
 });
-
-// Tutup modal saat mengklik di luar konten modal
 window.addEventListener('click', function (event) {
     const modal = document.getElementById('destinationModal');
     if (event.target === modal) {
         closeDestinationModal();
     }
 });
-
-// Tutup modal dengan tombol ESC
 document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
         closeDestinationModal();
     }
 });
-
-// Inisialisasi: render destinasi saat halaman dimuat
 document.addEventListener('DOMContentLoaded', () => {
     renderDestinations(destinations);
-
-    // Contoh menambahkan destinasi baru (biasanya dari form admin)
-    // addDestination({
-    //   title: "Pulau Kapoposang",
-    //   location: "Pangkajene",
-    //   description: "Pulau eksotis dengan pantai pasir putih dan terumbu karang menakjubkan",
-    //   image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    //   rating: 4.8,
-    //   reviews: 420,
-    //   userRating: 0,
-    //   category: "pantai"
-    // });
 });

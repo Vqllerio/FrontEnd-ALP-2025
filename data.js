@@ -1,4 +1,4 @@
-// Data destinasi wisata
+
 const destinations = [
     {
         id: 1,
@@ -8,7 +8,7 @@ const destinations = [
         image: "https://images.unsplash.com/photo-1589394815804-9648adb3d470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
         rating: 4.7,
         reviews: 1200,
-        userRating: 0, // Untuk menyimpan rating pengguna
+        userRating: 0, 
         category: "pantai"
     },
     {
@@ -79,7 +79,6 @@ const destinations = [
     }
 ];
 
-// Data sejarah dan budaya untuk setiap destinasi
 const historyData = {
     1: {
         title: "Pantai Losari",
@@ -187,8 +186,6 @@ const historyData = {
     `
     }
 };
-
-// Simpan data di localStorage untuk rating pengguna
 if (!localStorage.getItem('userRatings')) {
     localStorage.setItem('userRatings', JSON.stringify({}));
 }

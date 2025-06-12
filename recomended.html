@@ -192,9 +192,25 @@
                     <button id="historyButton" class="history-btn">
                         <i class="fas fa-landmark mr-2"></i> Sejarah & Budaya
                     </button>
+                      <button id="mapsButton" class="px-6 py-2 bg-white border border-teal text-teal rounded-lg font-medium hover:bg-teal hover:text-azure transition">
+                        <i class="fas fa-map-marked-alt mr-2"></i> Lihat Peta
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
+    <div id="historyPage" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto">
+        <div class="max-w-4xl mx-auto p-6">
+            <div class="history-header mb-8">
+                <button class="back-btn px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition mb-4" id="backBtn">
+                    <i class="fas fa-arrow-left mr-2"></i> Kembali
+                </button>
+                <h2 id="historyTitle" class="text-3xl font-bold text-center mt-8 text-liver"></h2>
+                <div class="text-center mt-2">
+                    <i class="fas fa-map-marker-alt mr-2 text-teal"></i>
+                    <span id="historyLocation" class="text-liver"></span>
+                </div>
+            </div>
     </div>
 
     <div id="historyPage" class="history-page">
