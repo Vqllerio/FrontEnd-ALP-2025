@@ -13,7 +13,6 @@
 </head>
 
 <body class="min-h-screen bg-azure">
-    <!-- Navigation -->
     <nav
         class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-midnight-green shadow-md z-20 text-azure">
         <div class="flex items-center space-x-3">
@@ -35,8 +34,6 @@
             <a href="#" class="hover:underline hover:text-c3f0f5">Destinasi</a>
         </div>
     </nav>
-
-    <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 bg-black/50 z-10"></div>
         <img src="https://images.unsplash.com/photo-1589394815804-9648adb3d470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
@@ -63,8 +60,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Features Section -->
     <section class="py-16 bg-gradient-to-b from-azure to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -106,8 +101,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Destinasi Section -->
     <section id="destinasi" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="text-center mb-16">
             <h2 class="text-4xl font-bold text-liver mb-4">
@@ -117,8 +110,6 @@
                 Berikut rekomendasi tempat wisata terbaik di Sulawesi Selatan yang wajib Anda kunjungi
             </p>
         </div>
-
-        <!-- Filter Section -->
         <div class="mb-12 bg-white p-6 rounded-xl shadow-md">
             <h3 class="text-xl font-bold text-liver mb-4">Filter Destinasi</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -150,10 +141,7 @@
                 </button>
             </div>
         </div>
-
-        <!-- Grid Destinasi -->
         <div id="destinationsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Destinasi akan diisi oleh JavaScript -->
         </div>
 
         <div class="text-center mt-16">
@@ -164,8 +152,6 @@
             </a>
         </div>
     </section>
-
-    <!-- Modal Detail Wisata -->
     <div id="destinationModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -185,8 +171,6 @@
                 </div>
 
                 <p class="text-liver text-lg mb-6" id="modalDescription"></p>
-
-                <!-- Rating Widget -->
                 <div class="rating-widget mb-6">
                     <h3 class="text-xl font-bold text-midnight-green mb-3">Beri Rating:</h3>
                     <div class="flex space-x-2">
@@ -213,7 +197,6 @@
         </div>
     </div>
 
-    <!-- Sejarah & Budaya Page -->
     <div id="historyPage" class="history-page">
         <div class="history-header">
             <div class="back-btn" id="backBtn">
@@ -230,12 +213,10 @@
             <img id="historyImage" src="" alt="History Image" class="history-image">
 
             <div id="historyContent">
-                <!-- Konten sejarah dan budaya akan diisi secara dinamis -->
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-midnight-green text-azure py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -301,7 +282,6 @@
 
     <script src="data.js"></script>
     <script>
-        // Fungsi untuk merender destinasi wisata dengan filter
         function renderFilteredDestinations() {
             const category = document.getElementById('categoryFilter').value;
             const location = document.getElementById('locationFilter').value;
@@ -318,19 +298,11 @@
             
             renderDestinations(filteredDestinations);
         }
-
-        // Event listener untuk tombol filter
         document.getElementById('applyFilter').addEventListener('click', renderFilteredDestinations);
-
-        // Render destinasi saat halaman dimuat
         document.addEventListener('DOMContentLoaded', () => {
-            // Render 3 destinasi teratas di halaman utama
             const featuredDestinations = destinations.slice(0, 3);
             renderDestinations(featuredDestinations);
-            
-            // Event listener untuk tombol "Lihat Semua Destinasi"
             document.querySelector('a[href="pencarian.html"]').addEventListener('click', function(e) {
-                // Simpan filter saat ini ke localStorage
                 const currentFilters = {
                     category: document.getElementById('categoryFilter').value,
                     location: document.getElementById('locationFilter').value
