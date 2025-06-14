@@ -10,6 +10,24 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add scrollable modal */
+        .modal-body {
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        /* Fixed positioning for history page */
+        .history-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 
 <body class="min-h-screen bg-azure">
@@ -155,7 +173,7 @@
     </section>
 
     <!-- Modal Detail Wisata -->
-    <div id="destinationModal" class="modal">
+    <div id="destinationModal" class="modal hidden">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalTitle" class="text-3xl font-bold"></h2>
@@ -175,10 +193,10 @@
 
                 <p class="text-liver text-lg mb-6" id="modalDescription"></p>
 
-                <!-- Rating Widget -->
+                <!-- Improved Rating Widget -->
                 <div class="rating-widget mb-6">
                     <h3 class="text-xl font-bold text-midnight-green mb-3">Beri Rating:</h3>
-                    <div class="flex space-x-2">
+                    <div class="flex space-x-2" id="ratingStars">
                         <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange"
                             data-value="1"></i>
                         <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange"
@@ -191,9 +209,15 @@
                             data-value="5"></i>
                     </div>
                     <p id="ratingMessage" class="text-teal mt-2 text-sm"></p>
+                    <button id="submitRating" class="mt-2 px-4 py-2 bg-teal text-white rounded-md text-sm hidden">
+                        Kirim Rating
+                    </button>
                 </div>
 
-                <div class="text-center">
+                <div class="flex justify-center space-x-4">
+                    <button id="mapsButton" class="history-btn">
+                        <i class="fas fa-map-marked-alt mr-2"></i> Lihat Peta
+                    </button>
                     <button id="historyButton" class="history-btn">
                         <i class="fas fa-landmark mr-2"></i> Sejarah & Budaya
                     </button>
@@ -203,7 +227,7 @@
     </div>
 
     <!-- Sejarah & Budaya Page -->
-    <div id="historyPage" class="history-page">
+    <div id="historyPage" class="history-page hidden">
         <div class="history-header">
             <div class="back-btn" id="backBtn">
                 <i class="fas fa-arrow-left"></i>
