@@ -143,7 +143,205 @@ const destinations = [
     userRating: 0,
     category: "pegunungan"
   },
+  {
+    id: 1,
+    title: "Pantai Losari",
+    location: "Makassar",
+    description: "Sunset terindah di Makassar dengan deretan kuliner khas yang menggoda",
+    image: "https://images.unsplash.com/photo-1589394815804-9648adb3d470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.7,
+    reviews: 1200,
+    userRating: 0,
+    category: "pantai"
+  },
+  {
+    id: 2,
+    title: "Rammang-Rammang",
+    location: "Maros",
+    description: "Kawasan karst megah dengan pemandangan alam yang memesona",
+    image: "https://images.unsplash.com/photo-1586861203732-3625dcf8d763?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 5.0,
+    reviews: 892,
+    userRating: 0,
+    category: "taman"
+  },
+  {
+    id: 3,
+    title: "Fort Rotterdam",
+    location: "Makassar",
+    description: "Benteng bersejarah peninggalan Kerajaan Gowa yang megah",
+    image: "https://images.unsplash.com/photo-1499591934245-40b55745b0dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.9,
+    reviews: 1500,
+    userRating: 0,
+    category: "budaya"
+  },
+  {
+    id: 4,
+    title: "Malino",
+    location: "Gowa",
+    description: "Destinasi pegunungan sejuk dengan perkebunan teh dan air terjun",
+    image: "https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.8,
+    reviews: 1100,
+    userRating: 0,
+    category: "pegunungan"
+  },
+  {
+    id: 5,
+    title: "Tana Toraja",
+    location: "Toraja Utara",
+    description: "Budaya unik, rumah adat tongkonan, dan pemandangan alam memukau",
+    image: "https://images.unsplash.com/photo-1518544866330-95b5af6d2367?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.6,
+    reviews: 2300,
+    userRating: 0,
+    category: "budaya"
+  },
+  {
+    id: 6,
+    title: "Pulau Samalona",
+    location: "Makassar",
+    description: "Pulau kecil dengan pantai pasir putih dan terumbu karang indah",
+    image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.9,
+    reviews: 876,
+    userRating: 0,
+    category: "pantai"
+  },
+  {
+    id: 7,
+    title: "Pulau Gladys",
+    location: "Makassar",
+    description: "Pulau kecil dengan pantai pasir pink dan terumbu karang yang jelek",
+    image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 3,
+    reviews: 1000,
+    userRating: 0,
+    category: "pantai"
+  },
+  {
+    id: 8,
+    title: "Danau Tempe",
+    location: "Wajo, Sulawesi Selatan",
+    description: "Danau tektonik purba dengan budaya Bugis dan rumah apung yang unik",
+    image: "https://images.unsplash.com/photo-1594786116857-0ad8b0176e8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.8,
+    reviews: 980,
+    userRating: 0,
+    category: "Danau"
+  },
+  {
+    id: 10,
+    title: "Kuburan Londa",
+    location: "Toraja Utara",
+    description: "Makam gua purba dengan peti mati dan tengkorak ratusan tahun",
+    image: "https://images.unsplash.com/photo-1549887534-c4c3b94c52f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.6,
+    reviews: 2044,
+    userRating: 0,
+    category: "Edukasi & Sejarah"
+  },
+  {
+    id: 11,
+    title: "Museum Ne’ Gandeng",
+    location: "Toraja Utara",
+    description: "Museum adat dan penghormatan budaya leluhur Toraja",
+    image: "https://images.unsplash.com/photo-1533514114760-4389f0c1c95e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.4,
+    reviews: 576,
+    userRating: 0,
+    category: "Edukasi & Sejarah"
+  },
+  {
+    id: 12,
+    title: "Kolam Limbong",
+    location: "Toraja Utara",
+    description: "Telaga kecil tenang dengan pemandangan tebing dan suasana alam yang damai",
+    image: "https://images.unsplash.com/photo-1533599023901-bcdf5a9b3618?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.3,
+    reviews: 302,
+    userRating: 0,
+    category: "Danau"
+  },
+  {
+    id: 13,
+    title: "Kalimbuang Bori",
+    location: "Toraja Utara",
+    description: "Situs batu menhir megalitikum sakral dan upacara pemakaman adat",
+    image: "https://images.unsplash.com/photo-1525850260704-6c7729c15d7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.6,
+    reviews: 1080,
+    userRating: 0,
+    category: "Edukasi & Sejarah"
+  },
+  {
+    id: 14,
+    title: "Lolai To' Tombi",
+    location: "Toraja Utara",
+    description: "Negeri di atas awan dengan pemandangan matahari terbit dan kabut lembah",
+    image: "https://images.unsplash.com/photo-1590419856634-ff6ef45b4b7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.6,
+    reviews: 3651,
+    userRating: 0,
+    category: "pegunungan"
+  },
 
+  {
+    id: 15,
+    title: "Buttu Macca",
+    location: "Enrekang",
+    description: "Destinasi alam pegunungan dengan spot foto kreatif dan wahana ekstrem",
+    image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.8,
+    reviews: 1500,
+    userRating: 0,
+    category: "pegunungan"
+  },
+  {
+    id: 16,
+    title: "Air Terjun Lewaja",
+    location: "Enrekang",
+    description: "Air terjun alami dengan kolam segar dan nuansa pegunungan tenang",
+    image: "https://images.unsplash.com/photo-1601279528942-c9e1c3b2ad8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.0,
+    reviews: 680,
+    userRating: 0,
+    category: "air terjun"
+  },
+  {
+    id: 17,
+    title: "Mendatte Park",
+    location: "Enrekang",
+    description: "Taman wisata alam keluarga dengan panorama karst dan aktivitas camping",
+    image: "https://images.unsplash.com/photo-1594621100646-b3c8e9eb9438?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.7,
+    reviews: 745,
+    userRating: 0,
+    category: "Pegunungan"
+  },
+  {
+    id: 18,
+    title: "Dante Pine",
+    location: "Enrekang",
+    description: "Wisata alam pinus dengan wahana ekstrem dan kuliner khas Enrekang",
+    image: "https://images.unsplash.com/photo-1587497119359-b78d89fcf34f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.4,
+    reviews: 1132,
+    userRating: 0,
+    category: "Pegunungan"
+  },
+  {
+    id: 19,
+    title: "Lembah Kotu",
+    location: "Enrekang",
+    description: "Lembah karst dengan nilai sejarah dan panorama trekking menawan",
+    image: "https://images.unsplash.com/photo-1604063058114-4d9842c7383f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    rating: 4.5,
+    reviews: 430,
+    userRating: 0,
+    category: "Budaya/Edukasi/Sejarah"
+  }.category,
   {
     id: 15,
     title: "Buttu Macca",
@@ -307,7 +505,7 @@ const historyData = {
       </p>
     `
   },
-  9: {
+  8: {
     title: "Danau Tempe",
     location: "Wajo, Soppeng, Sidenreng Rappang – Sulawesi Selatan",
     image: "https://images.unsplash.com/photo-1594786116857-0ad8b0176e8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -338,7 +536,7 @@ const historyData = {
         </p>      
      `
   },
-  11: {
+  9: {
     title: "Kuburan Londa",
     location: "Toraja Utara",
     image: "https://images.unsplash.com/photo-1549887534-c4c3b94c52f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -352,7 +550,7 @@ const historyData = {
           </p>
         `
   },
-  12: {
+  10: {
     title: "Museum Ne’ Gandeng",
     location: "Toraja Utara",
     image: "https://images.unsplash.com/photo-1533514114760-4389f0c1c95e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -367,7 +565,7 @@ const historyData = {
           </p>
         `
   },
-  13: {
+  11: {
     title: "Kolam Limbong",
     location: "Toraja Utara",
     image: "https://images.unsplash.com/photo-1533599023901-bcdf5a9b3618?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -378,7 +576,7 @@ const historyData = {
           </p>
         `
   },
-  14: {
+  12: {
     title: "Kalimbuang Bori",
     location: "Toraja Utara",
     image: "https://images.unsplash.com/photo-1525850260704-6c7729c15d7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -389,7 +587,7 @@ const historyData = {
           </p>
         `
   },
-  15: {
+  13: {
     title: "Lolai To' Tombi",
     location: "Toraja Utara",
     image: "https://images.unsplash.com/photo-1590419856634-ff6ef45b4b7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -403,7 +601,7 @@ const historyData = {
           </p>
         `
   },
-  16: {
+  14: {
     title: "Buttu Macca",
     location: "Enrekang",
     image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -417,7 +615,7 @@ const historyData = {
           </p>
         `
   },
-  17: {
+  15: {
     title: "Air Terjun Lewaja",
     location: "Enrekang",
     image: "https://images.unsplash.com/photo-1601279528942-c9e1c3b2ad8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -431,7 +629,7 @@ const historyData = {
           </p>
         `
   },
-  18: {
+  16: {
     title: "Mendatte Park",
     location: "Enrekang",
     image: "https://images.unsplash.com/photo-1594621100646-b3c8e9eb9438?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -445,7 +643,7 @@ const historyData = {
           </p>
         `
   },
-  19: {
+  17: {
     title: "Dante Pine",
     location: "Enrekang",
     image: "https://images.unsplash.com/photo-1587497119359-b78d89fcf34f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -459,7 +657,7 @@ const historyData = {
           </p>
         `
   },
-  20: {
+  18: {
     title: "Lembah Kotu",
     location: "Enrekang",
     image: "https://images.unsplash.com/photo-1604063058114-4d9842c7383f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -473,8 +671,7 @@ const historyData = {
           </p>
         `
   }
-
-};
+  };
 if (!localStorage.getItem('userRatings')) {
   localStorage.setItem('userRatings', JSON.stringify({}));
 }
