@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EafTrip - Pencarian Wisata</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom right, #e6f9f6, #d9f2f0);
+            color: #130e0c;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #084c61 0%, #008080 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(90deg, #084c61 0%, #008080 100%);
+        }
+
+        .bg-azure {
+            background-color: #e7f6f3;
+        }
+
+        .text-azure {
+            color: #e7f6f3;
+        }
+
+        .bg-midnight-green {
+            background-color: #084c61;
+        }
+
+        .text-midnight-green {
+            color: #084c61;
+        }
+
+        .bg-teal {
+            background-color: #008080;
+        }
+
+        .text-teal {
+            color: #008080;
+        }
+
+        .text-liver {
+            color: #130e0c;
+        }
+
+        .text-persian-orange {
+            color: #e29578;
+        }
+
+        .bg-c3f0f5 {
+            background-color: #d0ece5;
+        }
+        
+        .hover\:bg-pale-green-hover:hover { 
+            background-color: #d0ece5; 
+        }
+        
+        .history-navbar {
+            background: linear-gradient(90deg, #084c61 0%, #008080 100%);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .prose h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #084c61;
+        }
+        
+        .prose p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Style for heart icon */
+        .heart-icon {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .heart-icon.liked {
+            color: #ff0000;
+        }
+
+        /* Custom style for location with heart */
+        .location-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .no-favorites {
+            text-align: center;
+            padding: 50px 0;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-azure">
+    <nav
+        class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-midnight-green shadow-md z-20 text-azure">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-azure rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </div>
+            <span class="font-bold text-xl">EafTrip</span>
+        </div>
+        <div class="hidden md:flex space-x-6 font-medium">
+             <div class="hidden md:flex space-x-6 font-medium">
+                <a href="welcome page.html" class="hover:underline text-white">Beranda</a>
+                <a href="#" class="hover:underline text-white">Kota</a>
+                <a href="index.html" class="hover:underline text-white">Rekomendasi</a>
+                <a href="favorit.html" class="hover:underline text-white">Favorit</a>
+                <a href="profil.html" class="hover:underline text-white">Profil</a>
+            </div>
+        </div>
+    </nav>
+    <section class="py-28 bg-gradient-to-b from-white to-azure">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-liver mb-4">
+                    <span class="gradient-text">Cari Destinasi Wisata</span>
+                </h2>
+                <p class="text-lg text-liver max-w-3xl mx-auto">
+                    Temukan tempat wisata favorit Anda di Sulawesi Selatan berdasarkan lokasi dan kategori
+                </p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
+                <form id="searchForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="searchLocation" class="block text-liver font-medium mb-2">
+                                <i class="fas fa-map-marker-alt mr-2 text-teal"></i>
+                                Pilih Kota/Kabupaten
+                            </label>
+                            <select id="searchLocation" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal text-liver">
+                                <option value="" selected disabled>-- Pilih Lokasi --</option>
+                                <option value="Makassar">Makassar</option>
+                                <option value="Maros">Maros</option>
+                                <option value="Gowa">Gowa</option>
+                                <option value="Bantaeng">Bantaeng</option>
+                                <option value="Bulukumba">Bulukumba</option>
+                                <option value="Jeneponto">Jeneponto</option>
+                                <option value="Takalar">Takalar</option>
+                                <option value="Sinjai">Sinjai</option>
+                                <option value="Bone">Bone</option>
+                                <option value="Pangkajene">Pangkajene</option>
+                                <option value="Barru">Barru</option>
+                                <option value="Soppeng">Soppeng</option>
+                                <option value="Wajo">Wajo</option>
+                                <option value="Pinrang">Pinrang</option>
+                                <option value="Enrekang">Enrekang</option>
+                                <option value="Luwu">Luwu</option>
+                                <option value="Tana Toraja">Tana Toraja</option>
+                                <option value="Luwu Utara">Luwu Utara</option>
+                                <option value="Luwu Timur">Luwu Timur</option>
+                                <option value="Toraja Utara">Toraja Utara</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="searchCategory" class="block text-liver font-medium mb-2">
+                                <i class="fas fa-tags mr-2 text-teal"></i>
+                                Pilih Kategori Wisata
+                            </label>
+                            <select id="searchCategory" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal text-liver">
+                                <option value="" selected disabled>-- Pilih Kategori --</option>
+                                <option value="all">Semua Kategori</option>
+                                <option value="pantai">Pantai/Danau</option>
+                                <option value="alam">Pegunungan</option>
+                                <option value="budaya">Budaya/Edukasi/Sejarah</option>
+                                <option value="pegunungan">Kota</option>
+                                <option value="pegunungan">Kuliner</option>
+                                <option value="pegunungan">Air Terjun</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <button type="submit" class="w-full md:w-auto px-8 py-4 gradient-bg text-azure font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center mx-auto">
+                            <i class="fas fa-search mr-3"></i>
+                            Cari Destinasi
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section id="searchResults" class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto hidden">
+        <div class="flex justify-between items-center mb-8">
+            <h3 class="text-2xl font-bold text-liver">
+                Hasil Pencarian: 
+                <span id="searchLocationLabel" class="text-teal"></span>
+                <span id="searchCategoryLabel" class="text-teal"></span>
+            </h3>
+            <span id="resultCount" class="bg-teal text-azure px-3 py-1 rounded-full text-sm font-medium"></span>
+        </div>
+        <div id="searchResultsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        </div>
+        <div id="noResults" class="text-center py-12 hidden">
+            <img src="https://cdn-icons-png.flaticon.com/512/4076/4076478.png" alt="No results" class="w-32 h-32 mx-auto mb-6 opacity-70">
+            <h4 class="text-xl font-bold text-liver mb-2">Tidak ada destinasi yang ditemukan</h4>
+            <p class="text-liver/80 max-w-md mx-auto">Maaf, kami tidak menemukan destinasi yang sesuai dengan kriteria pencarian Anda. Coba ubah filter pencarian Anda.</p>
+        </div>
+    </section>
+    <div id="destinationModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b sticky top-0 bg-white z-10">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 id="modalTitle" class="text-3xl font-bold text-liver"></h2>
+                        <div class="flex items-center mt-2">
+                            <i class="fas fa-map-marker-alt mr-2 text-teal"></i>
+                            <span id="modalLocation" class="text-liver"></span>
+                        </div>
+                    </div>
+                    <button class="close-modal text-3xl text-liver hover:text-teal">&times;</button>
+                </div>
+            </div>
+            <div class="p-6">
+                <img id="modalImage" src="" alt="Destination Image" class="w-full h-64 object-cover rounded-lg mb-6">
+
+                <div class="flex items-center text-persian-orange mb-4">
+                    <div id="modalRating" class="flex"></div>
+                    <span class="text-liver text-lg ml-2 font-medium" id="modalReviews"></span>
+                </div>
+
+                <p class="text-liver text-lg mb-6" id="modalDescription"></p>
+                <div class="rating-widget mb-6">
+                    <h3 class="text-xl font-bold text-midnight-green mb-3">Beri Rating:</h3>
+                    <div class="flex space-x-2" id="ratingStars">
+                        <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange"
+                            data-value="1"></i>
+                        <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange"
+                            data-value="2"></i>
+                        <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange"
+                            data-value="3"></i>
+                        <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange"
+                            data-value="4"></i>
+                        <i class="far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange"
+                            data-value="5"></i>
+                    </div>
+                    <p id="ratingMessage" class="text-teal mt-2 text-sm"></p>
+                    <button id="submitRating" class="mt-2 px-4 py-2 bg-teal text-white rounded-md text-sm hidden">Kirim Rating</button>
+                </div>
+
+                <div class="flex justify-center space-x-4">
+                    <button id="historyButton" class="px-6 py-2 bg-teal text-azure rounded-lg font-medium hover:bg-midnight-green transition">
+                        <i class="fas fa-landmark mr-2"></i> Sejarah & Budaya
+                    </button>
+                    <button id="mapsButton" class="px-6 py-2 bg-white border border-teal text-teal rounded-lg font-medium hover:bg-teal hover:text-azure transition">
+                        <i class="fas fa-map-marked-alt mr-2"></i> Lihat Peta
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="historyPage" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto">
+        <nav class="history-navbar py-4 px-6 flex items-center justify-between text-azure sticky top-0 z-10">
+            <div class="flex items-center space-x-3">
+                <button class="back-btn px-4 py-2 bg-azure/20 rounded-lg hover:bg-azure/30 transition" id="backBtn">
+                    <i class="fas fa-arrow-left mr-2"></i> Kembali
+                </button>
+            </div>
+            <div class="text-center">
+                <h2 id="historyTitle" class="text-xl font-bold"></h2>
+                <div class="text-sm mt-1">
+                    <i class="fas fa-map-marker-alt mr-1"></i>
+                    <span id="historyLocation"></span>
+                </div>
+            </div>
+            <div class="w-10"></div> 
+        </nav>
+
+        <div class="max-w-4xl mx-auto p-6 pt-12">
+            <div class="history-content">
+                <img id="historyImage" src="" alt="History Image" class="w-full h-96 object-cover rounded-lg mb-8 shadow-md">
+
+                <div id="historyContent" class="prose max-w-none text-liver">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const destinations = [
+            {
+                id: 1,
+                name: "Pantai Losari",
+                location: "Makassar",
+                category: "pantai",
+                image: "https://images.unsplash.com/photo-1589394815804-9648adb3d470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                rating: 4.5,
+                reviews: 1245,
+                liked: false,
+                description: "Pantai ikonik Makassar dengan pemandangan matahari terbenam yang spektakuler dan berbagai kuliner khas Makassar.",
+                history: "<h3>Sejarah Pantai Losari</h3><p>Pantai Losari telah menjadi pusat aktivitas masyarakat Makassar sejak zaman Kerajaan Gowa-Tallo. Nama 'Losari' berasal dari kata 'Lola Sarang' yang berarti tempat berkumpulnya para nelayan.</p><h3>Budaya</h3><p>Setiap sore, pantai ini menjadi tempat berkumpul masyarakat untuk menikmati matahari terbenam sambil menikmati hidangan khas seperti pisang epe dan coto Makassar.</p><p>Pantai Losari juga menjadi tempat penyelenggaraan berbagai festival budaya Makassar, seperti Festival Pesona Losari yang menampilkan tarian tradisional, musik, dan kuliner khas Sulawesi Selatan.</p>",
+                mapsLink: "https://www.google.com/maps/place/Pantai+Losari/@-5.134568,119.406229,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbee3236b0999a5:0x7270a7e43fcd0a5e!8m2!3d-5.134568!4d119.4149838!16zL20vMDJ4Z3Rj?entry=ttu"
+            },
+            {
+                id: 2,
+                name: "Bantimurung",
+                location: "Maros",
+                category: "alam",
+                image: "https://images.unsplash.com/photo-1605540436563-5bca919ae766?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                rating: 4.7,
+                reviews: 892,
+                liked: false,
+                description: "Dikenal sebagai 'Kingdom of Butterfly' dengan air terjun yang indah dan berbagai spesies kupu-kupu yang cantik.",
+                history: "<h3>Sejarah Bantimurung</h3><p>Ditemukan pertama kali oleh naturalis Inggris Alfred Russel Wallace pada abad ke-19. Namanya berasal dari kata 'Benti' yang berarti air dan 'Murung' yang berarti deras.</p><h3>Budaya</h3><p>Kawasan ini menjadi pusat penelitian kupu-kupu dan tempat wisata alam yang menyajikan keindahan alam khas karst Maros.</p><p>Masyarakat sekitar memiliki tradisi tahunan menyambut musim kupu-kupu dengan berbagai ritual adat. Kawasan ini juga menjadi inspirasi bagi banyak seniman lokal dalam menciptakan karya seni.</p>",
+                mapsLink: "https://www.google.com/maps/place/Taman+Nasional+Bantimurung+Bulusaraung/@-4.997603,119.658046,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbea1c1f8f5e0a5:0x6c3e4b4b5d5a5d5!8m2!3d-4.997603!4d119.6668008!16zL20vMDJ4Z3Rj?entry=ttu"
+            },
+            {
+                id: 3,
+                name: "Tana Toraja",
+                location: "Toraja Utara",
+                category: "budaya",
+                image: "https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                rating: 4.9,
+                reviews: 1567,
+                liked: false,
+                description: "Destinasi budaya dengan rumah adat Tongkonan, upacara Rambu Solo, dan pemandangan alam pegunungan yang memesona.",
+                history: "<h3>Sejarah Tana Toraja</h3><p>Masyarakat Toraja telah mendiami wilayah ini sejak ribuan tahun lalu dengan sistem kepercayaan Aluk Todolo. Budaya mereka sangat kental dengan upacara kematian yang unik.</p><h3>Budaya</h3><p>Budaya Toraja terkenal dengan upacara pemakaman Rambu Solo yang megah, rumah adat Tongkonan, dan ukiran kayu tradisional yang khas.</p><p>Masyarakat Toraja memiliki sistem sosial yang kompleks dengan stratifikasi sosial yang jelas. Mereka juga dikenal dengan tradisi Ma'Nene atau upacara pembersihan jenazah leluhur yang dilakukan setiap beberapa tahun sekali.</p>",
+                mapsLink: "https://www.google.com/maps/place/Tana+Toraja+Regency,+South+Sulawesi/@-3.083333,119.75,11z/data=!3m1!4b1!4m6!3m5!1s0x2d93b3d1b8c5e0a5:0x6c3e4b4b5d5a5d5!8m2!3d-3.083333!4d119.75!16zL20vMDJ4Z3Rj?entry=ttu"
+            },
+            {
+                id: 4,
+                name: "Fort Rotterdam",
+                location: "Makassar",
+                category: "sejarah",
+                image: "https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                rating: 4.3,
+                reviews: 765,
+                liked: false,
+                description: "Benteng peninggalan Kerajaan Gowa-Tallo yang menjadi saksi bisu sejarah panjang Makassar.",
+                history: "<h3>Sejarah Fort Rotterdam</h3><p>Dibangun pada tahun 1545 oleh Raja Gowa ke-9, awalnya bernama Benteng Ujung Pandang. Setelah Belanda menguasai Makassar, benteng ini diubah namanya menjadi Fort Rotterdam.</p><h3>Budaya</h3><p>Kini benteng ini menjadi museum yang menyimpan berbagai artefak sejarah Sulawesi Selatan dan pusat kegiatan budaya.</p><p>Fort Rotterdam menjadi simbol perlawanan masyarakat Makassar terhadap penjajahan. Di tempat inilah Pangeran Diponegoro pernah ditahan selama pengasingannya. Benteng ini juga menjadi pusat penyebaran agama Kristen di Sulawesi Selatan pada masa kolonial.</p>",
+                mapsLink: "https://www.google.com/maps/place/Fort+Rotterdam/@-5.134568,119.406229,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbee3236b0999a5:0x7270a7e43fcd0a5e!8m2!3d-5.134568!4d119.4149838!16zL20vMDJ4Z3Rj?entry=ttu"
+            },
+            {
+                id: 5,
+                name: "Puncak Bawakaraeng",
+                location: "Gowa",
+                category: "pegunungan",
+                image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                rating: 4.8,
+                reviews: 543,
+                liked: false,
+                description: "Gunung dengan pemandangan spektakuler yang menjadi favorit para pendaki dengan ketinggian 2.830 mdpl.",
+                history: "<h3>Sejarah Bawakaraeng</h3><p>Bawakaraeng dalam bahasa Makassar berarti 'Mulut Tuhan'. Gunung ini dianggap sakral oleh masyarakat setempat dan sering menjadi tempat ritual spiritual.</p><h3>Budaya</h3><p>Setiap tahun, banyak peziarah yang mendaki gunung ini untuk melakukan ritual tertentu, terutama pada bulan Safar dalam kalender Islam.</p><p>Menurut kepercayaan lokal, gunung ini merupakan tempat bersemayamnya arwah leluhur. Banyak cerita mistis dan legenda yang berkembang seputar gunung ini, termasuk kisah tentang kerajaan gaib yang konon berdiri di puncaknya.</p>",
+                mapsLink: "https://www.google.com/maps/place/Gunung+Bawakaraeng/@-5.316667,119.916667,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbee3236b0999a5:0x7270a7e43fcd0a5e!8m2!3d-5.316667!4d119.9254218!16zL20vMDJ4Z3Rj?entry=ttu"
+            },
+            {
+                id: 6,
+                name: "Pantai Tanjung Bira",
+                location: "Bulukumba",
+                category: "pantai",
+                image: "https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                rating: 4.6,
+                reviews: 987,
+                liked: false,
+                description: "Pantai dengan pasir putih sehalus tepung dan air laut yang jernih kebiruan, sempurna untuk berenang dan snorkeling.",
+                history: "<h3>Sejarah Tanjung Bira</h3><p>Kawasan ini dikenal sebagai tempat pembuatan kapal tradisional Phinisi. Nama Bira berasal dari nama seorang putri kerajaan yang konon menghilang di kawasan ini.</p><h3>Budaya</h3><p>Masyarakat sekitar masih mempertahankan tradisi pembuatan kapal kayu dengan teknik turun-temurun.</p><p>Pantai Tanjung Bira juga menjadi pusat pelayaran tradisional sejak zaman kerajaan. Kapal Phinisi yang dibuat di sini telah berlayar hingga ke berbagai penjuru dunia. Teknik pembuatan kapal tanpa menggunakan paku ini telah diakui oleh UNESCO sebagai Warisan Budaya Dunia.</p>",
+                mapsLink: "https://www.google.com/maps/place/Tanjung+Bira+Beach/@-5.666667,120.433333,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbea1c1f8f5e0a5:0x6c3e4b4b5d5a5d5!8m2!3d-5.666667!4d120.4420878!16zL20vMDJ4Z3Rj?entry=ttu"
+            }
+        ];
+        let selectedRating = 0;
+        let currentDestinationId = 0;
+        
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const location = document.getElementById('searchLocation').value;
+            const category = document.getElementById('searchCategory').value;
+            let filteredDestinations = destinations;
+            
+            if (location) {
+                filteredDestinations = filteredDestinations.filter(dest => dest.location === location);
+            }
+            
+            if (category && category !== 'all') {
+                filteredDestinations = filteredDestinations.filter(dest => dest.category === category);
+            }
+            displaySearchResults(filteredDestinations, location, category);
+        });
+        
+        function displaySearchResults(results, location, category) {
+            const resultsSection = document.getElementById('searchResults');
+            const resultsGrid = document.getElementById('searchResultsGrid');
+            const noResults = document.getElementById('noResults');
+            const locationLabel = document.getElementById('searchLocationLabel');
+            const categoryLabel = document.getElementById('searchCategoryLabel');
+            const resultCount = document.getElementById('resultCount');
+            locationLabel.textContent = location ? `di ${location}` : '';
+            categoryLabel.textContent = category && category !== 'all' ? ` - ${getCategoryName(category)}` : '';
+            resultCount.textContent = `${results.length} Hasil`;
+            resultsGrid.innerHTML = '';
+            
+            if (results.length > 0) {
+                noResults.classList.add('hidden');
+                resultsSection.classList.remove('hidden');
+                results.forEach(destination => {
+                    const card = createDestinationCard(destination);
+                    resultsGrid.appendChild(card);
+                });
+                
+                document.querySelectorAll('.view-detail').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const destinationId = parseInt(this.getAttribute('data-id'));
+                        showDestinationModal(destinationId);
+                    });
+                });
+
+                // Add event listeners for heart icons
+                document.querySelectorAll('.heart-icon').forEach(heart => {
+                    heart.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const destinationId = parseInt(this.getAttribute('data-id'));
+                        toggleLike(destinationId, this);
+                    });
+                });
+            } else {
+                resultsSection.classList.remove('hidden');
+                noResults.classList.remove('hidden');
+            }
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function toggleLike(destinationId, heartElement) {
+            const destination = destinations.find(dest => dest.id === destinationId);
+            if (destination) {
+                destination.liked = !destination.liked;
+                
+                if (destination.liked) {
+                    heartElement.classList.remove('far');
+                    heartElement.classList.add('fas', 'liked');
+                } else {
+                    heartElement.classList.remove('fas', 'liked');
+                    heartElement.classList.add('far');
+                }
+            }
+        }
+        
+        function getCategoryName(category) {
+            const categories = {
+                'pantai': 'Pantai',
+                'alam': 'Alam',
+                'budaya': 'Budaya',
+                'sejarah': 'Sejarah',
+                'pegunungan': 'Pegunungan',
+                'kuliner': 'Kuliner',
+                'religi': 'Religi',
+                'edukasi': 'Edukasi'
+            };
+            return categories[category] || category;
+        }
+        
+        function createDestinationCard(destination) {
+            const card = document.createElement('div');
+            card.className = 'destination-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300';
+            
+            card.innerHTML = `
+                <div class="relative h-48 overflow-hidden">
+                    <img src="${destination.image}" alt="${destination.name}" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                        <h3 class="text-xl font-bold text-azure">${destination.name}</h3>
+                    </div>
+                    <div class="absolute top-3 right-3 bg-azure/90 text-liver px-2 py-1 rounded-full text-xs font-semibold">
+                        ${getCategoryName(destination.category)}
+                    </div>
+                </div>
+                <div class="p-5">
+                    <div class="location-container mb-3">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-teal mr-2"></i>
+                            <span class="text-liver">${destination.location}</span>
+                        </div>
+                        <i class="fas fa-heart heart-icon text-xl ${destination.liked ? 'text-red-500 liked' : 'far text-gray-400'}" data-id="${destination.id}"></i>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <div class="flex">
+                            ${renderStars(destination.rating)}
+                        </div>
+                        <span class="text-liver text-sm ml-2">(${destination.reviews} ulasan)</span>
+                    </div>
+                    <p class="text-liver/80 text-sm mb-4 line-clamp-2">${destination.description}</p>
+                    <button class="w-full py-2 bg-teal text-azure rounded-lg font-medium hover:bg-midnight-green transition view-detail" 
+                            data-id="${destination.id}">
+                        Lihat Detail
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+        
+        function renderStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    stars += '<i class="fas fa-star text-persian-orange"></i>';
+                } else if (i === fullStars + 1 && hasHalfStar) {
+                    stars += '<i class="fas fa-star-half-alt text-persian-orange"></i>';
+                } else {
+                    stars += '<i class="far fa-star text-persian-orange"></i>';
+                }
+            }
+            
+            return stars;
+        }
+        
+        function showDestinationModal(id) {
+            const destination = destinations.find(dest => dest.id === id);
+            if (!destination) return;
+            
+            currentDestinationId = id;
+            selectedRating = 0;
+            
+            document.getElementById('modalTitle').textContent = destination.name;
+            document.getElementById('modalLocation').textContent = destination.location;
+            document.getElementById('modalImage').src = destination.image;
+            document.getElementById('modalImage').alt = destination.name;
+            document.getElementById('modalRating').innerHTML = renderStars(destination.rating);
+            document.getElementById('modalReviews').textContent = `(${destination.reviews} ulasan)`;
+            document.getElementById('modalDescription').textContent = destination.description;
+            document.getElementById('historyButton').setAttribute('data-id', id);
+            document.getElementById('mapsButton').setAttribute('data-id', id);
+            
+            const stars = document.querySelectorAll('#ratingStars i');
+            stars.forEach(star => {
+                star.classList.remove('fas', 'text-persian-orange');
+                star.classList.add('far', 'text-gray-400');
+            });
+            
+            document.getElementById('submitRating').classList.add('hidden');
+            document.getElementById('ratingMessage').textContent = '';
+            
+            document.getElementById('destinationModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        document.getElementById('ratingStars').addEventListener('click', function(e) {
+            if (e.target.tagName === 'I') {
+                const value = parseInt(e.target.getAttribute('data-value'));
+                selectedRating = value;
+                
+                const stars = document.querySelectorAll('#ratingStars i');
+                stars.forEach((star, index) => {
+                    if (index < value) {
+                        star.classList.remove('far', 'text-gray-400');
+                        star.classList.add('fas', 'text-persian-orange');
+                    } else {
+                        star.classList.remove('fas', 'text-persian-orange');
+                        star.classList.add('far', 'text-gray-400');
+                    }
+                });
+                
+                document.getElementById('submitRating').classList.remove('hidden');
+            }
+        });
+        
+        document.getElementById('submitRating').addEventListener('click', function() {
+            if (selectedRating > 0) {
+                const destination = destinations.find(dest => dest.id === currentDestinationId);
+                if (destination) {
+                    const newRating = ((destination.rating * destination.reviews) + selectedRating) / (destination.reviews + 1);
+                    destination.rating = parseFloat(newRating.toFixed(1));
+                    destination.reviews += 1;
+                    document.getElementById('modalRating').innerHTML = renderStars(destination.rating);
+                    document.getElementById('modalReviews').textContent = `(${destination.reviews} ulasan)`;
+                    document.getElementById('ratingMessage').textContent = 'Terima kasih atas rating Anda!';
+                    document.getElementById('submitRating').classList.add('hidden');
+                    const card = document.querySelector(`.destination-card button[data-id="${currentDestinationId}"]`).closest('.destination-card');
+                    if (card) {
+                        const ratingElement = card.querySelector('.flex.items-center.mb-4 .flex');
+                        ratingElement.innerHTML = renderStars(destination.rating);
+                        const reviewsElement = card.querySelector('.flex.items-center.mb-4 span');
+                        reviewsElement.textContent = `(${destination.reviews} ulasan)`;
+                    }
+                }
+            }
+        });
+        
+        function showHistoryPage(id) {
+            const destination = destinations.find(dest => dest.id === id);
+            if (!destination) return;
+            
+            document.getElementById('historyTitle').textContent = destination.name;
+            document.getElementById('historyLocation').textContent = destination.location;
+            document.getElementById('historyImage').src = destination.image;
+            document.getElementById('historyImage').alt = destination.name;
+            document.getElementById('historyContent').innerHTML = destination.history;
+            
+            document.getElementById('destinationModal').classList.add('hidden');
+            document.getElementById('historyPage').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('destinationModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+        
+        document.getElementById('historyButton').addEventListener('click', function() {
+            const destinationId = parseInt(this.getAttribute('data-id'));
+            showHistoryPage(destinationId);
+        });
+        
+        document.getElementById('mapsButton').addEventListener('click', function() {
+            const destinationId = parseInt(this.getAttribute('data-id'));
+            const destination = destinations.find(dest => dest.id === destinationId);
+            if (destination && destination.mapsLink) {
+                window.open(destination.mapsLink, '_blank');
+            }
+        });
+        
+        document.getElementById('backBtn').addEventListener('click', function() {
+            document.getElementById('historyPage').classList.add('hidden');
+            document.getElementById('destinationModal').classList.remove('hidden');
+        });
+        
+        document.getElementById('destinationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+
+    <footer class="bg-midnight-green text-azure py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">EafTrip</h3>
+                    <p class="mb-4 text-azure/80">Portal rekomendasi wisata terbaik di Sulawesi Selatan untuk pengalaman tak terlupakan.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-azure hover:text-teal"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-azure hover:text-teal"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-azure hover:text-teal"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-azure hover:text-teal"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Tautan Cepat</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Beranda</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Tentang Kami</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Destinasi</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Pencarian</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Kategori Wisata</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Alam</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Budaya</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Pantai</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Kuliner</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Sejarah</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Kontak Kami</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-teal"></i>
+                            <span class="text-azure/80">Jl. Sangir No. 94, Makassar, Sulawesi Selatan</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-teal"></i>
+                            <span class="text-azure/80">+62 812 4414 2632</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-teal"></i>
+                            <span class="text-azure/80">info@wisatasulsel.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-azure/20 mt-12 pt-8 text-center text-azure/80">
+                <p>&copy; 2025 EafTrip. Hak Cipta Dilindungi.(not real)</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
