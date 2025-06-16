@@ -341,8 +341,7 @@ const destinations = [
     reviews: 430,
     userRating: 0,
     category: "Budaya/Edukasi/Sejarah"
-  }
-];
+  }.category,
   {
     id: 15,
     title: "Buttu Macca",
@@ -406,11 +405,6 @@ const historyData = {
     location: "Makassar, Sulawesi Selatan",
     image: "https://images.unsplash.com/photo-1589394815804-9648adb3d470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
-  1: {
-    title: "Pantai Losari",
-    location: "Makassar, Sulawesi Selatan",
-    image: "https://images.unsplash.com/photo-1589394815804-9648adb3d470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    content: `
       <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Pantai Losari</h3>
       <p class="text-liver mb-6">
         Pantai Losari memiliki sejarah panjang sebagai pusat kehidupan masyarakat Makassar sejak abad ke-16. 
@@ -432,12 +426,6 @@ const historyData = {
     location: "Maros, Sulawesi Selatan",
     image: "https://images.unsplash.com/photo-1586861203732-3625dcf8d763?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
-  },
-  2: {
-    title: "Rammang-Rammang",
-    location: "Maros, Sulawesi Selatan",
-    image: "https://images.unsplash.com/photo-1586861203732-3625dcf8d763?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    content: `
       <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Geologis</h3>
       <p class="text-liver mb-6">
         Rammang-Rammang adalah kawasan karst terbesar kedua di dunia setelah Cina. 
@@ -453,12 +441,6 @@ const historyData = {
     location: "Makassar, Sulawesi Selatan",
     image: "https://images.unsplash.com/photo-1499591934245-40b55745b0dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
-  },
-  3: {
-    title: "Fort Rotterdam",
-    location: "Makassar, Sulawesi Selatan",
-    image: "https://images.unsplash.com/photo-1499591934245-40b55745b0dd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    content: `
       <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Benteng</h3>
       <p class="text-liver mb-6">
         Fort Rotterdam dibangun pada tahun 1545 oleh Raja Gowa ke-9, I Manrigau Daeng Bonto Karaeng Lakiung Tumapa'risi' Kallonna. 
@@ -466,12 +448,6 @@ const historyData = {
         Setelah Perjanjian Bongaya tahun 1667, benteng beralih ke tangan Belanda dan berganti nama menjadi Fort Rotterdam.
       </p>
     `
-  },
-  4: {
-    title: "Malino",
-    location: "Gowa, Sulawesi Selatan",
-    image: "https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    content: `
   },
   4: {
     title: "Malino",
@@ -492,12 +468,6 @@ const historyData = {
     location: "Toraja Utara, Sulawesi Selatan",
     image: "https://images.unsplash.com/photo-1518544866330-95b5af6d2367?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
-  },
-  5: {
-    title: "Tana Toraja",
-    location: "Toraja Utara, Sulawesi Selatan",
-    image: "https://images.unsplash.com/photo-1518544866330-95b5af6d2367?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    content: `
       <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Tana Toraja</h3>
       <p class="text-liver mb-6">
         Masyarakat Toraja dipercaya berasal dari migran yang datang dari Kamboja 
@@ -512,12 +482,6 @@ const historyData = {
     location: "Makassar, Sulawesi Selatan",
     image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
     content: `
-  },
-  6: {
-    title: "Pulau Samalona",
-    location: "Makassar, Sulawesi Selatan",
-    image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    content: `
       <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Pulau Samalona</h3>
       <p class="text-liver mb-6">
         Pulau Samalona telah menjadi bagian penting dalam sejarah maritim Makassar. 
@@ -526,12 +490,6 @@ const historyData = {
         tahun 1903 dan masih berfungsi hingga kini.
       </p>
     `
-  },
-  7: {
-    title: "Pulau Gladys",
-    location: "Makassar, Sulawesi Selatan",
-    image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    content: `
   },
   7: {
     title: "Pulau Gladys",
@@ -713,10 +671,7 @@ const historyData = {
           </p>
         `
   }
-  }
-
-};
-};
+  };
 if (!localStorage.getItem('userRatings')) {
   localStorage.setItem('userRatings', JSON.stringify({}));
   localStorage.setItem('userRatings', JSON.stringify({}));
