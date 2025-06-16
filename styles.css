@@ -134,22 +134,28 @@ body {
     color: #60463b;
 }
 
-.history-navbar {
-    background: linear-gradient(90deg, #084c61 0%, #008080 100%);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.border-teal {
+    border-color: #177e89;
 }
 
-.prose h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
-    color: #084c61;
+.border-midnight-green {
+    border-color: #084c61;
 }
 
-.prose p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
+.border-persian-orange {
+    border-color: #ce8950;
+}
+
+.border-liver {
+    border-color: #60463b;
+}
+
+.hover-bg-teal:hover {
+    background-color: #177e89;
+}
+
+.hover-bg-midnight-green:hover {
+    background-color: #084c61;
 }
 
 .hover-bg-persian-orange:hover {
@@ -161,9 +167,8 @@ body {
     background: linear-gradient(90deg, #177e89, #084c61);
 }
 
-.destination-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+.gradient-bg-reverse {
+    background: linear-gradient(90deg, #084c61, #177e89);
 }
 
 /* Feature Cards */
@@ -173,13 +178,12 @@ body {
     transition: all 0.3s ease;
 }
 
-.rating-widget {
-    background-color: rgba(237, 247, 246, 0.7);
-    padding: 15px;
-    border-radius: 12px;
-    border: 1px solid rgba(206, 137, 80, 0.2);
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(96, 70, 59, 0.15);
 }
 
+/* Modal Styles */
 .modal {
     position: fixed;
     top: 0;
@@ -326,10 +330,19 @@ body {
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 2% auto;
+    }
+
+    .modal-image {
+        height: 250px;
+    }
+
     .history-content {
         padding: 15px;
     }
-    
+
     .history-image {
         height: 250px;
     }

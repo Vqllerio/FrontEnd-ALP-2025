@@ -73,24 +73,6 @@
             max-height: 60vh;
             overflow-y: auto;
         }
-        
-        .history-navbar {
-            background: linear-gradient(90deg, #084c61 0%, #008080 100%);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .prose h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: #084c61;
-        }
-        
-        .prose p {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
     </style>
 </head>
 
@@ -271,20 +253,15 @@
                     id="backBtn">
                     <i class="fas fa-arrow-left mr-2"></i> Kembali
                 </button>
-            </div>
-            <div class="text-center">
-                <h2 id="historyTitle" class="text-xl font-bold"></h2>
-                <div class="text-sm mt-1">
-                    <i class="fas fa-map-marker-alt mr-1"></i>
-                    <span id="historyLocation"></span>
+                <h2 id="historyTitle" class="text-3xl font-bold text-center mt-8 text-liver"></h2>
+                <div class="text-center mt-2">
+                    <i class="fas fa-map-marker-alt mr-2 text-teal"></i>
+                    <span id="historyLocation" class="text-liver"></span>
                 </div>
             </div>
-            <div class="w-10"></div> <!-- Spacer untuk balance flex -->
-        </nav>
 
-        <div class="max-w-4xl mx-auto p-6 pt-12">
             <div class="history-content">
-                <img id="historyImage" src="" alt="History Image" class="w-full h-96 object-cover rounded-lg mb-8 shadow-md">
+                <img id="historyImage" src="" alt="History Image" class="w-full h-96 object-cover rounded-lg mb-8">
 
                 <div id="historyContent" class="prose max-w-none text-liver">
                 </div>
