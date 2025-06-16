@@ -104,6 +104,17 @@ function showDestinationModal(destination) {
     document.body.style.overflow = 'hidden';
 }
 
+// Filter destinations by category
+function filterDestinations(category) {
+    if (category === 'all') {
+        return destinations;
+    }
+
+    return destinations.filter(destination =>
+        destination.category.toLowerCase().includes(category.toLowerCase())
+    );
+}
+
 // Search page functionality
 function getCategoryName(category) {
     const categories = {
@@ -326,6 +337,23 @@ document.addEventListener('DOMContentLoaded', () => {
         renderDestinations(destinations);
         setupModalEvents();
         setupRatingWidget();
+
+        // Add event listeners to filter buttons
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                // Filter destinations
+                const category = this.getAttribute('data-category');
+                const filteredDestinations = filterDestinations(category);
+                renderDestinations(filteredDestinations);
+            });
+        });
     }
 
     // Search page initialization

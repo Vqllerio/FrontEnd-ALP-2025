@@ -254,24 +254,6 @@ body {
     margin-bottom: 25px;
 }
 
-/* History Button */
-.history-btn {
-    background: linear-gradient(90deg, #ce8950, #b37444);
-    color: white;
-    padding: 12px 25px;
-    border-radius: 50px;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    transition: all 0.3s;
-    margin-top: 20px;
-}
-
-.history-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(206, 137, 80, 0.4);
-}
-
 /* Sejarah & Budaya Page */
 .history-page {
     background-color: var(--light-bg);

@@ -27,6 +27,48 @@
             z-index: 2000;
             overflow-y: auto;
         }
+
+        /* New button styles */
+        .filter-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.15);
+            background: linear-gradient(to right,
+                    rgba(255, 255, 255, 0.15) 0%,
+                    rgba(255, 255, 255, 0.15) 77%,
+                    rgba(255, 255, 255, 0.4) 92%,
+                    rgba(255, 255, 255, 0.0) 100%);
+            transform: rotate(30deg);
+            transition: all 0.7s ease-out;
+        }
+
+        .filter-btn:hover::after {
+            left: 100%;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(90deg, #177e89, #084c61);
+            color: #edf7f6;
+            border: none;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
     </style>
 </head>
 
@@ -138,24 +180,24 @@
 
         <!-- Filter Kategori -->
         <div class="flex flex-wrap justify-center gap-3 mb-12">
-            <button
-                class="px-6 py-2 bg-teal text-azure rounded-full font-medium hover:bg-12636c transition-all active:scale-95">
+            <button data-category="all"
+                class="filter-btn px-6 py-2 gradient-bg text-azure rounded-full font-medium transition-all active:scale-95 active">
                 Semua
             </button>
-            <button
-                class="px-6 py-2 bg-azure text-liver rounded-full font-medium hover:bg-gray-100 transition-all active:scale-95 border border-gray-200">
+            <button data-category="pegunungan"
+                class="filter-btn px-6 py-2 bg-azure text-liver rounded-full font-medium transition-all active:scale-95 border border-gray-200">
                 <i class="fas fa-mountain mr-2"></i> Pegunungan
             </button>
-            <button
-                class="px-6 py-2 bg-azure text-liver rounded-full font-medium hover:bg-gray-100 transition-all active:scale-95 border border-gray-200">
+            <button data-category="pantai"
+                class="filter-btn px-6 py-2 bg-azure text-liver rounded-full font-medium transition-all active:scale-95 border border-gray-200">
                 <i class="fas fa-umbrella-beach mr-2"></i> Pantai
             </button>
-            <button
-                class="px-6 py-2 bg-azure text-liver rounded-full font-medium hover:bg-gray-100 transition-all active:scale-95 border border-gray-200">
+            <button data-category="budaya"
+                class="filter-btn px-6 py-2 bg-azure text-liver rounded-full font-medium transition-all active:scale-95 border border-gray-200">
                 <i class="fas fa-landmark mr-2"></i> Budaya
             </button>
-            <button
-                class="px-6 py-2 bg-azure text-liver rounded-full font-medium hover:bg-gray-100 transition-all active:scale-95 border border-gray-200">
+            <button data-category="kuliner"
+                class="filter-btn px-6 py-2 bg-azure text-liver rounded-full font-medium transition-all active:scale-95 border border-gray-200">
                 <i class="fas fa-utensils mr-2"></i> Kuliner
             </button>
         </div>
@@ -214,8 +256,9 @@
                     </button>
                 </div>
 
-                <div class="text-center">
-                    <button id="historyButton" class="history-btn">
+                <div class="flex justify-center space-x-4">
+                    <button id="historyButton"
+                        class="px-6 py-2 bg-teal text-azure rounded-lg font-medium hover:bg-midnight-green transition">
                         <i class="fas fa-landmark mr-2"></i> Sejarah & Budaya
                     </button>
                     <button id="mapsButton"
@@ -318,3 +361,4 @@
 </body>
 
 </html>
+[file content end]
