@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -62,9 +63,15 @@
         .bg-c3f0f5 {
             background-color: #d0ece5;
         }
-        
-        .hover\:bg-pale-green-hover:hover { 
-            background-color: #d0ece5; 
+
+        .hover\:bg-pale-green-hover:hover {
+            background-color: #d0ece5;
+        }
+
+        /* Scrollable modal */
+        .modal-body {
+            max-height: 60vh;
+            overflow-y: auto;
         }
         
         .history-navbar {
@@ -126,6 +133,7 @@
             <span class="font-bold text-xl">EafTrip</span>
         </div>
         <div class="hidden md:flex space-x-6 font-medium">
+<<<<<<< HEAD
              <div class="hidden md:flex space-x-6 font-medium">
                 <a href="welcome page.html" class="hover:underline text-white">Beranda</a>
                 <a href="#" class="hover:underline text-white">Kota</a>
@@ -133,6 +141,12 @@
                 <a href="favorit.html" class="hover:underline text-white">Favorit</a>
                 <a href="profil.html" class="hover:underline text-white">Profil</a>
             </div>
+=======
+            <a href="index.html" class="hover:underline hover:text-c3f0f5">Beranda</a>
+            <a href="#" class="hover:underline hover:text-c3f0f5">Provinsi</a>
+            <a href="#" class="hover:underline hover:text-c3f0f5">Kota</a>
+            <a href="#" class="hover:underline hover:text-c3f0f5">Destinasi</a>
+>>>>>>> 8e3bb919004f25d4579c0d2d9f743f7959d823ab
         </div>
     </nav>
     <section class="py-28 bg-gradient-to-b from-white to-azure">
@@ -153,7 +167,8 @@
                                 <i class="fas fa-map-marker-alt mr-2 text-teal"></i>
                                 Pilih Kota/Kabupaten
                             </label>
-                            <select id="searchLocation" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal text-liver">
+                            <select id="searchLocation"
+                                class="w-full p-4 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal text-liver">
                                 <option value="" selected disabled>-- Pilih Lokasi --</option>
                                 <option value="Makassar">Makassar</option>
                                 <option value="Maros">Maros</option>
@@ -183,20 +198,22 @@
                                 <i class="fas fa-tags mr-2 text-teal"></i>
                                 Pilih Kategori Wisata
                             </label>
-                            <select id="searchCategory" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal text-liver">
+                            <select id="searchCategory"
+                                class="w-full p-4 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal text-liver">
                                 <option value="" selected disabled>-- Pilih Kategori --</option>
                                 <option value="all">Semua Kategori</option>
                                 <option value="pantai">Pantai/Danau</option>
                                 <option value="alam">Pegunungan</option>
                                 <option value="budaya">Budaya/Edukasi/Sejarah</option>
-                                <option value="pegunungan">Kota</option>
-                                <option value="pegunungan">Kuliner</option>
-                                <option value="pegunungan">Air Terjun</option>
+                                <option value="kota">Kota</option>
+                                <option value="kuliner">Kuliner</option>
+                                <option value="air terjun">Air Terjun</option>
                             </select>
                         </div>
                     </div>
                     <div class="pt-2">
-                        <button type="submit" class="w-full md:w-auto px-8 py-4 gradient-bg text-azure font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center mx-auto">
+                        <button type="submit"
+                            class="w-full md:w-auto px-8 py-4 gradient-bg text-azure font-semibold rounded-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center justify-center mx-auto">
                             <i class="fas fa-search mr-3"></i>
                             Cari Destinasi
                         </button>
@@ -205,21 +222,24 @@
             </div>
         </div>
     </section>
-    <section id="searchResults" class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto hidden">
+    <section id="searchResults" class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div class="flex justify-between items-center mb-8">
             <h3 class="text-2xl font-bold text-liver">
-                Hasil Pencarian: 
-                <span id="searchLocationLabel" class="text-teal"></span>
-                <span id="searchCategoryLabel" class="text-teal"></span>
+                Semua Destinasi Wisata
             </h3>
-            <span id="resultCount" class="bg-teal text-azure px-3 py-1 rounded-full text-sm font-medium"></span>
+            <span id="resultCount" class="bg-teal text-azure px-3 py-1 rounded-full text-sm font-medium">
+                <!-- Result count will be populated by JavaScript -->
+            </span>
         </div>
         <div id="searchResultsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Results will be populated by JavaScript -->
         </div>
         <div id="noResults" class="text-center py-12 hidden">
-            <img src="https://cdn-icons-png.flaticon.com/512/4076/4076478.png" alt="No results" class="w-32 h-32 mx-auto mb-6 opacity-70">
+            <img src="https://cdn-icons-png.flaticon.com/512/4076/4076478.png" alt="No results"
+                class="w-32 h-32 mx-auto mb-6 opacity-70">
             <h4 class="text-xl font-bold text-liver mb-2">Tidak ada destinasi yang ditemukan</h4>
-            <p class="text-liver/80 max-w-md mx-auto">Maaf, kami tidak menemukan destinasi yang sesuai dengan kriteria pencarian Anda. Coba ubah filter pencarian Anda.</p>
+            <p class="text-liver/80 max-w-md mx-auto">Maaf, kami tidak menemukan destinasi yang sesuai dengan kriteria
+                pencarian Anda. Coba ubah filter pencarian Anda.</p>
         </div>
     </section>
     <div id="destinationModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
@@ -260,14 +280,17 @@
                             data-value="5"></i>
                     </div>
                     <p id="ratingMessage" class="text-teal mt-2 text-sm"></p>
-                    <button id="submitRating" class="mt-2 px-4 py-2 bg-teal text-white rounded-md text-sm hidden">Kirim Rating</button>
+                    <button id="submitRating" class="mt-2 px-4 py-2 bg-teal text-white rounded-md text-sm hidden">Kirim
+                        Rating</button>
                 </div>
 
                 <div class="flex justify-center space-x-4">
-                    <button id="historyButton" class="px-6 py-2 bg-teal text-azure rounded-lg font-medium hover:bg-midnight-green transition">
+                    <button id="historyButton"
+                        class="px-6 py-2 bg-teal text-azure rounded-lg font-medium hover:bg-midnight-green transition">
                         <i class="fas fa-landmark mr-2"></i> Sejarah & Budaya
                     </button>
-                    <button id="mapsButton" class="px-6 py-2 bg-white border border-teal text-teal rounded-lg font-medium hover:bg-teal hover:text-azure transition">
+                    <button id="mapsButton"
+                        class="px-6 py-2 bg-white border border-teal text-teal rounded-lg font-medium hover:bg-teal hover:text-azure transition">
                         <i class="fas fa-map-marked-alt mr-2"></i> Lihat Peta
                     </button>
                 </div>
@@ -275,9 +298,10 @@
         </div>
     </div>
     <div id="historyPage" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto">
-        <nav class="history-navbar py-4 px-6 flex items-center justify-between text-azure sticky top-0 z-10">
-            <div class="flex items-center space-x-3">
-                <button class="back-btn px-4 py-2 bg-azure/20 rounded-lg hover:bg-azure/30 transition" id="backBtn">
+        <div class="max-w-4xl mx-auto p-6">
+            <div class="history-header mb-8">
+                <button class="back-btn px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition mb-4"
+                    id="backBtn">
                     <i class="fas fa-arrow-left mr-2"></i> Kembali
                 </button>
             </div>
@@ -301,6 +325,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <script>
         const destinations = [
             {
@@ -708,5 +733,10 @@
             </div>
         </div>
     </footer>
+=======
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+>>>>>>> 8e3bb919004f25d4579c0d2d9f743f7959d823ab
 </body>
+
 </html>
