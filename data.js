@@ -674,4 +674,5 @@ const historyData = {
   };
 if (!localStorage.getItem('userRatings')) {
   localStorage.setItem('userRatings', JSON.stringify({}));
+  localStorage.setItem('userRatings', JSON.stringify({}));
 }

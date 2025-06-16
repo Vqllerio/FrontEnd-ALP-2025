@@ -9,15 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Add scrollable modal */
-        .modal-body {
-            max-height: 60vh;
-            overflow-y: auto;
+        :root {
+            --midnight-green: #084c61;
+            --teal: #008080;
+            --persian-orange: #e29578;
+            --azure: #e7f6f3;
+            --liver: #130e0c;
+            --c3f0f5: #d0ece5;
         }
 
-<<<<<<< HEAD
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--azure);
@@ -149,59 +150,76 @@
         .rating-stars {
             color: var(--persian-orange);
         }
-=======
-        /* Fixed positioning for history page */
->>>>>>> 8e3bb919004f25d4579c0d2d9f743f7959d823ab
         .history-page {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2000;
+            right: 0;
+            bottom: 0;
+            background-color: white;
+            z-index: 50;
             overflow-y: auto;
+            display: none;
         }
 
-        /* New button styles */
-        .filter-btn {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .history-navbar {
+            background: linear-gradient(90deg, var(--midnight-green) 0%, var(--teal) 100%);
+            padding: 1rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .filter-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.15);
-            background: linear-gradient(to right,
-                    rgba(255, 255, 255, 0.15) 0%,
-                    rgba(255, 255, 255, 0.15) 77%,
-                    rgba(255, 255, 255, 0.4) 92%,
-                    rgba(255, 255, 255, 0.0) 100%);
-            transform: rotate(30deg);
-            transition: all 0.7s ease-out;
+        .history-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
-        .filter-btn:hover::after {
-            left: 100%;
+        .history-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 20px 0;
         }
 
-        .filter-btn.active {
-            background: linear-gradient(90deg, #177e89, #084c61);
-            color: #edf7f6;
+        .back-btn {
+            padding: 8px 16px;
+            background-color: var(--teal);
+            color: white;
             border: none;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .filter-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        .back-btn:hover {
+            background-color: var(--midnight-green);
+        }
+
+        .history-title {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .history-text {
+            line-height: 1.6;
+        }
+
+        .history-text h3 {
+            font-size: 1.5rem;
+            color: var(--midnight-green);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-text p {
+            margin-bottom: 1rem;
         }
         
         /* Animasi scroll arrow */
@@ -322,29 +340,55 @@
                 Berikut rekomendasi tempat wisata terbaik di Sulawesi Selatan yang wajib Anda kunjungi
             </p>
         </div>
-
-        <!-- Filter Kategori -->
-        <div class="flex flex-wrap justify-center gap-3 mb-12">
-            <button data-category="all"
-                class="filter-btn px-6 py-2 gradient-bg text-azure rounded-full font-medium transition-all active:scale-95 active">
-                Semua
-            </button>
-            <button data-category="pegunungan"
-                class="filter-btn px-6 py-2 bg-azure text-liver rounded-full font-medium transition-all active:scale-95 border border-gray-200">
-                <i class="fas fa-mountain mr-2"></i> Pegunungan
-            </button>
-            <button data-category="pantai"
-                class="filter-btn px-6 py-2 bg-azure text-liver rounded-full font-medium transition-all active:scale-95 border border-gray-200">
-                <i class="fas fa-umbrella-beach mr-2"></i> Pantai
-            </button>
-            <button data-category="budaya"
-                class="filter-btn px-6 py-2 bg-azure text-liver rounded-full font-medium transition-all active:scale-95 border border-gray-200">
-                <i class="fas fa-landmark mr-2"></i> Budaya
-            </button>
-            <button data-category="kuliner"
-                class="filter-btn px-6 py-2 bg-azure text-liver rounded-full font-medium transition-all active:scale-95 border border-gray-200">
-                <i class="fas fa-utensils mr-2"></i> Kuliner
-            </button>
+        <div class="mb-12 bg-white p-6 rounded-xl shadow-md">
+            <h3 class="text-xl font-bold text-liver mb-4">Filter Destinasi</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-liver font-medium mb-2">Kategori Wisata</label>
+                    <select id="categoryFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal">
+                        <option value="all">Semua Kategori</option>
+                        <option value="pantai">Pantai/Danau</option>
+                        <option value="alam">Pegunungan</option>
+                        <option value="budaya">Budaya/Edukasi/Sejarah</option>
+                        <option value="kota">Kota</option>
+                        <option value="kuliner">Kuliner</option>
+                        <option value="air">Air</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-liver font-medium mb-2">Lokasi (Kota/Kabupaten)</label>
+                    <select id="locationFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal">
+                        <option value="all">Semua Lokasi</option>
+                        <option value="Makassar">Makassar</option>
+                        <option value="Pangkep">Pangkep</option>
+                        <option value="Barru">Barru</option>
+                        <option value="Bone">Bone</option>
+                        <option value="Soppeng">Soppeng</option>
+                        <option value="Wajo">Wajo</option>
+                        <option value="Sidrap">Sidrap</option>
+                        <option value="Pinrang">Pinrang</option>
+                        <option value="Parepare">Parepare</option>
+                        <option value="Enrekang">Enrekang</option>
+                        <option value="Tana Toraja">Tana Toraja</option>
+                        <option value="Toraja Utara">Toraja Utara</option>
+                        <option value="Luwu Timur">Luwu Timur</option>
+                        <option value="Luwu Utara">Luwu Utara</option>
+                        <option value="Bantaeng">Bantaeng</option>
+                        <option value="Bulukumba">Bulukumba</option>
+                        <option value="Selayar">Selayar</option>
+                        <option value="Takalar">Takalar</option>
+                        <option value="Jeneponto">Jeneponto</option>
+                        <option value="Sinjai">Sinjai</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4 flex justify-end">
+                <button id="applyFilter" class="px-6 py-2 bg-teal text-azure rounded-lg font-medium hover:bg-midnight-green transition">
+                    Terapkan Filter
+                </button>
+            </div>
+        </div>
+        <div id="destinationsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         </div>
 
         <div class="text-center mt-16">
@@ -355,9 +399,7 @@
             </a>
         </div>
     </section>
-  
-    <!-- Modal Detail Wisata -->
-    <div id="destinationModal" class="modal hidden">
+    <div id="destinationModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modalTitle" class="text-3xl font-bold"></h2>
@@ -376,8 +418,6 @@
                 </div>
 
                 <p class="text-liver text-lg mb-6" id="modalDescription"></p>
-
-                <!-- Improved Rating Widget -->
                 <div class="rating-widget mb-6">
                     <h3 class="text-xl font-bold text-midnight-green mb-3">Beri Rating:</h3>
                     <div class="flex space-x-2" id="ratingStars">
@@ -393,36 +433,26 @@
                             data-value="5"></i>
                     </div>
                     <p id="ratingMessage" class="text-teal mt-2 text-sm"></p>
-                    <button id="submitRating" class="mt-2 px-4 py-2 bg-teal text-white rounded-md text-sm hidden">
-                        Kirim Rating
-                    </button>
                 </div>
 
-                <div class="flex justify-center space-x-4">
-                    <button id="historyButton"
-                        class="px-6 py-2 bg-teal text-azure rounded-lg font-medium hover:bg-midnight-green transition">
+                <div class="text-center">
+                    <button id="historyButton" class="history-btn">
                         <i class="fas fa-landmark mr-2"></i> Sejarah & Budaya
                     </button>
-                    <button id="mapsButton"
-                        class="px-6 py-2 bg-white border border-teal text-teal rounded-lg font-medium hover:bg-teal hover:text-azure transition">
+                    <button id="mapsButton" class="px-6 py-2 bg-white border border-teal text-teal rounded-lg font-medium hover:bg-teal hover:text-azure transition">
                         <i class="fas fa-map-marked-alt mr-2"></i> Lihat Peta
                     </button>
                 </div>
             </div>
         </div>
     </div>
-  
-    <!-- Sejarah & Budaya Page -->
-    <div id="historyPage" class="history-page hidden">
-        <div class="history-header">
-            <div class="back-btn" id="backBtn">
-                <i class="fas fa-arrow-left"></i>
-            </div>
-            <h2 id="historyTitle" class="text-3xl font-bold text-center mt-8"></h2>
-            <div class="text-center mt-2">
-                <i class="fas fa-map-marker-alt mr-2"></i>
-                <span id="historyLocation"></span>
-            </div>
+    <div id="historyPage" class="history-page">
+        <div class="history-navbar">
+            <button class="back-btn" id="backBtn">
+                <i class="fas fa-arrow-left mr-2"></i> Kembali
+            </button>
+            <h2 id="historyTitle" class="text-xl font-bold"></h2>
+            <div class="w-40"></div> 
         </div>
         
         <div class="history-content">
@@ -496,7 +526,6 @@
         </div>
     </footer>
 
-<<<<<<< HEAD
     <script>
         const destinations = [
             {
@@ -760,9 +789,6 @@
             });
         });
     </script>
-=======
-    <script>"script.js"</script>
->>>>>>> 8e3bb919004f25d4579c0d2d9f743f7959d823ab
 </body>
 
 </html>
