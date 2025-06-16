@@ -175,7 +175,7 @@
             position: sticky;
             top: 0;
             z-index: 10;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .history-content {
@@ -330,7 +330,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-liver font-medium mb-2">Kategori Wisata</label>
-                    <select id="categoryFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal">
+                    <select id="categoryFilter"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal">
                         <option value="all">Semua Kategori</option>
                         <option value="pantai">Pantai/Danau</option>
                         <option value="alam">Pegunungan</option>
@@ -342,7 +343,8 @@
                 </div>
                 <div>
                     <label class="block text-liver font-medium mb-2">Lokasi (Kota/Kabupaten)</label>
-                    <select id="locationFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal">
+                    <select id="locationFilter"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-teal focus:border-teal">
                         <option value="all">Semua Lokasi</option>
                         <option value="Makassar">Makassar</option>
                         <option value="Pangkep">Pangkep</option>
@@ -368,7 +370,8 @@
                 </div>
             </div>
             <div class="mt-4 flex justify-end">
-                <button id="applyFilter" class="px-6 py-2 bg-teal text-azure rounded-lg font-medium hover:bg-midnight-green transition">
+                <button id="applyFilter"
+                    class="px-6 py-2 bg-teal text-azure rounded-lg font-medium hover:bg-midnight-green transition">
                     Terapkan Filter
                 </button>
             </div>
@@ -424,7 +427,8 @@
                     <button id="historyButton" class="history-btn">
                         <i class="fas fa-landmark mr-2"></i> Sejarah & Budaya
                     </button>
-                    <button id="mapsButton" class="px-6 py-2 bg-white border border-teal text-teal rounded-lg font-medium hover:bg-teal hover:text-azure transition">
+                    <button id="mapsButton"
+                        class="px-6 py-2 bg-white border border-teal text-teal rounded-lg font-medium hover:bg-teal hover:text-azure transition">
                         <i class="fas fa-map-marked-alt mr-2"></i> Lihat Peta
                     </button>
                 </div>
@@ -439,7 +443,7 @@
             <h2 id="historyTitle" class="text-xl font-bold"></h2>
             <div class="w-40"></div> <!-- Spacer untuk balance flex -->
         </div>
-        
+
         <div class="history-content">
             <img id="historyImage" src="" alt="History Image" class="history-image">
 
@@ -603,7 +607,7 @@
 
             // Tambahkan event listener untuk tombol detail
             document.querySelectorAll('.view-detail-btn').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const id = parseInt(this.getAttribute('data-id'));
                     showDestinationModal(id);
                 });
@@ -641,9 +645,9 @@
             document.getElementById('modalImage').src = destination.image;
             document.getElementById('modalImage').alt = destination.title;
             document.getElementById('modalDescription').textContent = destination.description;
-            
+
             // Update rating display
-            document.getElementById('modalRating').innerHTML = renderStars(destination.rating) + 
+            document.getElementById('modalRating').innerHTML = renderStars(destination.rating) +
                 `<span class="ml-2">${destination.rating}</span>`;
             document.getElementById('modalReviews').textContent = `(${destination.reviews} ulasan)`;
 
@@ -669,21 +673,21 @@
 
             // Tambahkan rating baru
             currentDestination.ratings.push(ratingValue);
-            
+
             // Hitung rata-rata baru
             const sum = currentDestination.ratings.reduce((a, b) => a + b, 0);
             const avg = sum / currentDestination.ratings.length;
             currentDestination.rating = parseFloat(avg.toFixed(1));
             currentDestination.reviews = currentDestination.ratings.length;
-            
+
             // Update tampilan rating
-            document.getElementById('modalRating').innerHTML = renderStars(currentDestination.rating) + 
+            document.getElementById('modalRating').innerHTML = renderStars(currentDestination.rating) +
                 `<span class="ml-2">${currentDestination.rating}</span>`;
             document.getElementById('modalReviews').textContent = `(${currentDestination.reviews} ulasan)`;
-            
+
             // Tampilkan pesan sukses
             document.getElementById('ratingMessage').textContent = 'Terima kasih atas rating Anda!';
-            
+
             // Update stars display
             const stars = document.querySelectorAll('#ratingStars i');
             stars.forEach((star, index) => {
@@ -693,7 +697,7 @@
                     star.className = 'far fa-star text-2xl text-gray-400';
                 }
             });
-            
+
             // Perbarui tampilan grid destinasi
             renderFilteredDestinations();
         }
@@ -702,17 +706,17 @@
         function renderFilteredDestinations() {
             const category = document.getElementById('categoryFilter').value;
             const location = document.getElementById('locationFilter').value;
-            
+
             let filteredDestinations = destinations;
-            
+
             if (category !== 'all') {
                 filteredDestinations = filteredDestinations.filter(dest => dest.category === category);
             }
-            
+
             if (location !== 'all') {
                 filteredDestinations = filteredDestinations.filter(dest => dest.location === location);
             }
-            
+
             renderDestinations(filteredDestinations);
         }
 
@@ -732,14 +736,14 @@
         // Fungsi untuk membuka Google Maps
         function openGoogleMaps() {
             if (!currentDestination) return;
-            
+
             const coordinates = currentDestination.coordinates;
             const url = `https://www.google.com/maps/search/?api=1&query=${coordinates}`;
             window.open(url, '_blank');
         }
 
         // Event listeners saat DOM selesai dimuat
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Render semua destinasi awal
             renderDestinations(destinations);
 
@@ -747,21 +751,21 @@
             document.getElementById('applyFilter').addEventListener('click', renderFilteredDestinations);
 
             // Modal close button
-            document.querySelector('.close-modal').addEventListener('click', function() {
+            document.querySelector('.close-modal').addEventListener('click', function () {
                 document.getElementById('destinationModal').style.display = 'none';
             });
 
             // Rating stars
             document.querySelectorAll('#ratingStars i').forEach(star => {
-                star.addEventListener('click', function() {
+                star.addEventListener('click', function () {
                     const ratingValue = parseInt(this.getAttribute('data-value'));
                     handleRating(ratingValue);
                 });
-                
-                star.addEventListener('mouseover', function() {
+
+                star.addEventListener('mouseover', function () {
                     const ratingValue = parseInt(this.getAttribute('data-value'));
                     const stars = document.querySelectorAll('#ratingStars i');
-                    
+
                     stars.forEach((s, index) => {
                         if (index < ratingValue) {
                             s.className = 'fas fa-star text-2xl text-persian-orange';
@@ -770,12 +774,12 @@
                         }
                     });
                 });
-                
-                star.addEventListener('mouseout', function() {
+
+                star.addEventListener('mouseout', function () {
                     const stars = document.querySelectorAll('#ratingStars i');
-                    const currentRating = document.getElementById('ratingMessage').textContent ? 
+                    const currentRating = document.getElementById('ratingMessage').textContent ?
                         currentDestination.ratings[currentDestination.ratings.length - 1] : 0;
-                    
+
                     if (!currentRating) {
                         stars.forEach(star => {
                             star.className = 'far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange';
@@ -791,18 +795,18 @@
             document.getElementById('mapsButton').addEventListener('click', openGoogleMaps);
 
             // Back button from history page
-            document.getElementById('backBtn').addEventListener('click', function() {
+            document.getElementById('backBtn').addEventListener('click', function () {
                 document.getElementById('historyPage').style.display = 'none';
                 document.getElementById('destinationModal').style.display = 'block';
             });
 
             // Close modal when clicking outside
-            window.addEventListener('click', function(event) {
+            window.addEventListener('click', function (event) {
                 const modal = document.getElementById('destinationModal');
                 if (event.target === modal) {
                     modal.style.display = 'none';
                 }
-                
+
                 const historyPage = document.getElementById('historyPage');
                 if (event.target === historyPage) {
                     historyPage.style.display = 'none';
