@@ -82,7 +82,6 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -151,8 +150,6 @@
         .rating-stars {
             color: var(--persian-orange);
         }
-
-        /* History page styles */
         .history-page {
             position: fixed;
             top: 0;
@@ -441,7 +438,7 @@
                 <i class="fas fa-arrow-left mr-2"></i> Kembali
             </button>
             <h2 id="historyTitle" class="text-xl font-bold"></h2>
-            <div class="w-40"></div> <!-- Spacer untuk balance flex -->
+            <div class="w-40"></div> 
         </div>
 
         <div class="history-content">
@@ -570,11 +567,7 @@
                 ratings: [5, 5, 5, 4, 5, 5, 5, 4, 5, 5, 5, 5, 4, 5, 5, 5, 4, 5]
             }
         ];
-
-        // Variabel global untuk menyimpan destinasi yang sedang dilihat
         let currentDestination = null;
-
-        // Fungsi untuk menampilkan destinasi
         function renderDestinations(destinationsToRender) {
             const grid = document.getElementById('destinationsGrid');
             grid.innerHTML = '';
@@ -604,8 +597,6 @@
                 `;
                 grid.appendChild(card);
             });
-
-            // Tambahkan event listener untuk tombol detail
             document.querySelectorAll('.view-detail-btn').forEach(button => {
                 button.addEventListener('click', function () {
                     const id = parseInt(this.getAttribute('data-id'));
@@ -613,8 +604,6 @@
                 });
             });
         }
-
-        // Fungsi untuk menampilkan bintang rating
         function renderStars(rating) {
             const fullStars = Math.floor(rating);
             const hasHalfStar = rating % 1 >= 0.5;
@@ -632,8 +621,6 @@
 
             return stars;
         }
-
-        // Fungsi untuk menampilkan modal destinasi
         function showDestinationModal(id) {
             const destination = destinations.find(dest => dest.id === id);
             if (!destination) return;
@@ -646,19 +633,17 @@
             document.getElementById('modalImage').alt = destination.title;
             document.getElementById('modalDescription').textContent = destination.description;
 
+<<<<<<< HEAD
             // Update rating display
             document.getElementById('modalRating').innerHTML = renderStars(destination.rating) +
+=======
+            document.getElementById('modalRating').innerHTML = renderStars(destination.rating) + 
+>>>>>>> 02a38ce641d36ba61d2384f3ad08cd2f116c02c8
                 `<span class="ml-2">${destination.rating}</span>`;
             document.getElementById('modalReviews').textContent = `(${destination.reviews} ulasan)`;
-
-            // Reset rating widget
             resetRatingWidget();
-
-            // Tampilkan modal
             document.getElementById('destinationModal').style.display = 'block';
         }
-
-        // Fungsi untuk reset rating widget
         function resetRatingWidget() {
             const stars = document.querySelectorAll('#ratingStars i');
             stars.forEach(star => {
@@ -666,19 +651,19 @@
             });
             document.getElementById('ratingMessage').textContent = '';
         }
-
-        // Fungsi untuk menangani rating
         function handleRating(ratingValue) {
             if (!currentDestination) return;
-
-            // Tambahkan rating baru
             currentDestination.ratings.push(ratingValue);
+<<<<<<< HEAD
 
             // Hitung rata-rata baru
+=======
+>>>>>>> 02a38ce641d36ba61d2384f3ad08cd2f116c02c8
             const sum = currentDestination.ratings.reduce((a, b) => a + b, 0);
             const avg = sum / currentDestination.ratings.length;
             currentDestination.rating = parseFloat(avg.toFixed(1));
             currentDestination.reviews = currentDestination.ratings.length;
+<<<<<<< HEAD
 
             // Update tampilan rating
             document.getElementById('modalRating').innerHTML = renderStars(currentDestination.rating) +
@@ -689,6 +674,12 @@
             document.getElementById('ratingMessage').textContent = 'Terima kasih atas rating Anda!';
 
             // Update stars display
+=======
+            document.getElementById('modalRating').innerHTML = renderStars(currentDestination.rating) + 
+                `<span class="ml-2">${currentDestination.rating}</span>`;
+            document.getElementById('modalReviews').textContent = `(${currentDestination.reviews} ulasan)`;
+            document.getElementById('ratingMessage').textContent = 'Terima kasih atas rating Anda!';
+>>>>>>> 02a38ce641d36ba61d2384f3ad08cd2f116c02c8
             const stars = document.querySelectorAll('#ratingStars i');
             stars.forEach((star, index) => {
                 if (index < ratingValue) {
@@ -697,12 +688,13 @@
                     star.className = 'far fa-star text-2xl text-gray-400';
                 }
             });
+<<<<<<< HEAD
 
             // Perbarui tampilan grid destinasi
+=======
+>>>>>>> 02a38ce641d36ba61d2384f3ad08cd2f116c02c8
             renderFilteredDestinations();
         }
-
-        // Fungsi untuk memfilter destinasi
         function renderFilteredDestinations() {
             const category = document.getElementById('categoryFilter').value;
             const location = document.getElementById('locationFilter').value;
@@ -719,8 +711,6 @@
 
             renderDestinations(filteredDestinations);
         }
-
-        // Fungsi untuk menampilkan halaman sejarah
         function showHistoryPage() {
             if (!currentDestination || !currentDestination.history) return;
 
@@ -732,8 +722,6 @@
             document.getElementById('historyPage').style.display = 'block';
             document.getElementById('destinationModal').style.display = 'none';
         }
-
-        // Fungsi untuk membuka Google Maps
         function openGoogleMaps() {
             if (!currentDestination) return;
 
@@ -741,21 +729,25 @@
             const url = `https://www.google.com/maps/search/?api=1&query=${coordinates}`;
             window.open(url, '_blank');
         }
+<<<<<<< HEAD
 
         // Event listeners saat DOM selesai dimuat
         document.addEventListener('DOMContentLoaded', function () {
             // Render semua destinasi awal
+=======
+        document.addEventListener('DOMContentLoaded', function() {
+>>>>>>> 02a38ce641d36ba61d2384f3ad08cd2f116c02c8
             renderDestinations(destinations);
-
-            // Filter destinasi
             document.getElementById('applyFilter').addEventListener('click', renderFilteredDestinations);
+<<<<<<< HEAD
 
             // Modal close button
             document.querySelector('.close-modal').addEventListener('click', function () {
+=======
+            document.querySelector('.close-modal').addEventListener('click', function() {
+>>>>>>> 02a38ce641d36ba61d2384f3ad08cd2f116c02c8
                 document.getElementById('destinationModal').style.display = 'none';
             });
-
-            // Rating stars
             document.querySelectorAll('#ratingStars i').forEach(star => {
                 star.addEventListener('click', function () {
                     const ratingValue = parseInt(this.getAttribute('data-value'));
@@ -787,9 +779,8 @@
                     }
                 });
             });
-
-            // History button
             document.getElementById('historyButton').addEventListener('click', showHistoryPage);
+<<<<<<< HEAD
 
             // Maps button
             document.getElementById('mapsButton').addEventListener('click', openGoogleMaps);
@@ -802,6 +793,13 @@
 
             // Close modal when clicking outside
             window.addEventListener('click', function (event) {
+=======
+            document.getElementById('backBtn').addEventListener('click', function() {
+                document.getElementById('historyPage').style.display = 'none';
+                document.getElementById('destinationModal').style.display = 'block';
+            });
+            window.addEventListener('click', function(event) {
+>>>>>>> 02a38ce641d36ba61d2384f3ad08cd2f116c02c8
                 const modal = document.getElementById('destinationModal');
                 if (event.target === modal) {
                     modal.style.display = 'none';

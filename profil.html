@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Pengguna - EafTrip</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e6f9f6 0%, #d9f2f0 100%);
+      color: #130e0c;
+      min-height: 100vh;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #084c61 0%, #008080 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .gradient-bg {
+      background: linear-gradient(90deg, #084c61 0%, #008080 100%);
+    }
+
+    .bg-azure {
+      background-color: #e7f6f3;
+    }
+
+    .text-azure {
+      color: #e7f6f3;
+    }
+
+    .bg-midnight-green {
+      background-color: #084c61;
+    }
+
+    .text-midnight-green {
+      color: #084c61;
+    }
+
+    .bg-teal {
+      background-color: #008080;
+    }
+
+    .text-teal {
+      color: #008080;
+    }
+
+    .text-liver {
+      color: #130e0c;
+    }
+
+    .profile-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(8, 76, 97, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(8, 76, 97, 0.2);
+    }
+
+    .input-field {
+      background-color: rgba(231, 246, 243, 0.7);
+      border: 2px solid #d0ece5;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      padding: 12px 16px;
+      width: 100%;
+    }
+
+    .input-field:focus {
+      border-color: #008080;
+      box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.2);
+      outline: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #084c61 0%, #008080 100%);
+      color: white;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      padding: 12px 24px;
+      font-weight: 500;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(8, 76, 97, 0.3);
+    }
+
+    .btn-danger {
+      background: linear-gradient(90deg, #e74c3c 0%, #c0392b 100%);
+      color: white;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      padding: 12px 24px;
+      font-weight: 500;
+    }
+
+    .btn-danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      box-shadow: 0 15px 35px rgba(8, 76, 97, 0.2);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+
+    .input-icon {
+      color: #008080;
+      margin-right: 10px;
+    }
+
+    .input-container {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-container label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #084c61;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #008080;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .toggle-password:hover {
+      color: #084c61;
+    }
+
+    .section-title {
+      position: relative;
+      display: inline-block;
+      padding-bottom: 15px;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      font-weight: 600;
+      background: linear-gradient(90deg, #084c61 0%, #008080 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #084c61 0%, #008080 100%);
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="flex flex-col">
+  <nav class="fixed top-0 left-0 right-0 flex items-center justify-between px-6 py-4 bg-midnight-green shadow-md z-20 text-azure">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 bg-azure rounded-full flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </div>
+      <span class="font-bold text-xl">EafTrip</span>
+    </div>
+    <div class="hidden md:flex space-x-6 font-medium">
+      <a href="#" class="hover:underline hover:text-c3f0f5">Beranda</a>
+      <a href="#" class="hover:underline hover:text-c3f0f5">Provinsi</a>
+      <a href="#" class="hover:underline hover:text-c3f0f5">Kota</a>
+      <a href="#" class="hover:underline hover:text-c3f0f5">Destinasi</a>
+    </div>
+  </nav>
+
+  <main class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+    <div class="profile-card p-8">
+      <!-- Header Profil yang sudah diperbaiki -->
+      <div class="text-center mb-8">
+        <h1 class="section-title">Profil Saya</h1>
+        <p class="text-teal mt-2">Kelola informasi profil Anda</p>
+      </div>
+      
+      <form class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="input-container">
+            <label for="username" class="flex items-center">
+              <i class="fas fa-user input-icon"></i>
+              Username
+            </label>
+            <input type="text" id="username" value="sarah_adventurer" class="input-field">
+          </div>
+          <div class="input-container">
+            <label for="email" class="flex items-center">
+              <i class="fas fa-envelope input-icon"></i>
+              Email
+            </label>
+            <input type="email" id="email" value="sarah.johnson@example.com" class="input-field">
+          </div>
+        </div>
+        <div class="input-container">
+          <label for="current-password" class="flex items-center">
+            <i class="fas fa-lock input-icon"></i>
+            Password Saat Ini
+          </label>
+          <div class="password-wrapper">
+            <input type="password" id="current-password" value="••••••••" class="input-field pr-10">
+            <button type="button" class="toggle-password">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row justify-center gap-4 pt-8">
+          <button type="button" id="logoutBtn" class="btn-danger flex items-center justify-center">
+            <i class="fas fa-sign-out-alt mr-2"></i>
+            Keluar
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <div id="logoutModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="text-center">
+        <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-4">
+          <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+        </div>
+        <h3 class="text-xl font-semibold text-midnight-green mb-3">Konfirmasi Keluar</h3>
+        <p class="text-liver mb-6 px-4">
+          Anda akan keluar dari akun EafTrip Anda. Yakin ingin melanjutkan?
+        </p>
+        <div class="flex justify-center gap-4">
+          <button id="cancelLogout" class="px-6 py-2 border border-midnight-green text-midnight-green rounded-lg font-medium hover:bg-midnight-green hover:text-white transition">
+            Batal
+          </button>
+          <button id="confirmLogout" class="px-6 py-2 btn-danger font-medium">
+            Ya, Keluar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-midnight-green text-azure py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">EafTrip</h3>
+          <p class="mb-4 text-azure/80">Portal rekomendasi wisata terbaik di Sulawesi Selatan untuk pengalaman tak terlupakan.</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-azure hover:text-teal"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="text-azure hover:text-teal"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-azure hover:text-teal"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-azure hover:text-teal"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-4">Tautan Cepat</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Beranda</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Tentang Kami</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Destinasi</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Pencarian</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Kontak</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-4">Kategori Wisata</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Alam</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Budaya</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Pantai</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Kuliner</a></li>
+            <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Sejarah</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold mb-4">Kontak Kami</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i class="fas fa-map-marker-alt mt-1 mr-3 text-teal"></i>
+              <span class="text-azure/80">Jl. Sangir No. 94, Makassar, Sulawesi Selatan</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-phone-alt mr-3 text-teal"></i>
+              <span class="text-azure/80">+62 812 4414 2632</span>
+            </li>
+            <li class="flex items-center">
+              <i class="fas fa-envelope mr-3 text-teal"></i>
+              <span class="text-azure/80">info@wisatasulsel.com</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-azure/20 mt-12 pt-8 text-center text-azure/80">
+        <p>&copy; 2025 EafTrip. Hak Cipta Dilindungi.(not real)</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.toggle-password').forEach(button => {
+      button.addEventListener('click', function() {
+        const input = this.parentElement.querySelector('input');
+        const icon = this.querySelector('i');
+        
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.classList.remove('fa-eye');
+          icon.classList.add('fa-eye-slash');
+        } else {
+          input.type = 'password';
+          icon.classList.remove('fa-eye-slash');
+          icon.classList.add('fa-eye');
+        }
+      });
+    });
+    
+    const logoutBtn = document.getElementById('logoutBtn');
+    const logoutModal = document.getElementById('logoutModal');
+    const cancelLogout = document.getElementById('cancelLogout');
+    const confirmLogout = document.getElementById('confirmLogout');
+
+    logoutBtn.addEventListener('click', () => {
+      logoutModal.classList.add('active');
+    });
+
+    cancelLogout.addEventListener('click', () => {
+      logoutModal.classList.remove('active');
+    });
+
+    confirmLogout.addEventListener('click', () => {
+      alert('Anda telah berhasil logout');
+      logoutModal.classList.remove('active');
+    });
+    
+    logoutModal.addEventListener('click', (e) => {
+      if (e.target === logoutModal) {
+        logoutModal.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
