@@ -1,170 +1,244 @@
+// Variabel untuk menyimpan rating yang dipilih
+let selectedRating = 0;
+let currentDestinationId = 0;
 
-function renderDestinations(destinationsToRender) {
-    const grid = document.getElementById('destinationsGrid');
-    grid.innerHTML = '';
+document.getElementById('searchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const location = document.getElementById('searchLocation').value;
+    const category = document.getElementById('searchCategory').value;
+    let filteredDestinations = destinations;
+    
+    if (location) {
+        filteredDestinations = filteredDestinations.filter(dest => dest.location === location);
+    }
+    
+    if (category && category !== 'all') {
+        filteredDestinations = filteredDestinations.filter(dest => dest.category === category);
+    }
+    displaySearchResults(filteredDestinations, location, category);
+});
 
-    destinationsToRender.forEach(destination => {
-        const card = document.createElement('div');
-        card.className = 'card group relative rounded-2xl overflow-hidden shadow-xl h-96 shine-effect';
-        card.innerHTML = `
-      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
-      <img src="${destination.image}" 
-           alt="${destination.title}" 
-           class="card-image absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-      
-      <div class="absolute bottom-0 left-0 right-0 z-20 p-6">
-        <div class="tag inline-block px-3 py-1 rounded-full text-sm text-azure mb-2">
-          <i class="fas fa-map-marker-alt mr-1"></i> ${destination.location}
-        </div>
-        <h3 class="text-2xl font-bold text-azure mb-2">${destination.title}</h3>
-        <div class="flex items-center text-persian-orange mb-3">
-          ${renderStars(destination.rating)}
-          <span class="text-azure text-sm ml-2">${destination.rating} (${destination.reviews.toLocaleString()} ulasan)</span>
-        </div>
-        <p class="text-azure/90 mb-4">${destination.description}</p>
-        <button class="detail-btn px-4 py-2 bg-azure text-teal rounded-full font-semibold text-sm hover:bg-gray-100 transition flex items-center"
-                data-id="${destination.id}">
-          <i class="fas fa-info-circle mr-2"></i> Detail Wisata
-        </button>
-      </div>
-    `;
-        grid.appendChild(card);
-    });
-    document.querySelectorAll('.detail-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const id = parseInt(this.getAttribute('data-id'));
-            const destination = destinations.find(dest => dest.id === id);
-            showDestinationModal(destination);
+function displaySearchResults(results, location, category) {
+    const resultsSection = document.getElementById('searchResults');
+    const resultsGrid = document.getElementById('searchResultsGrid');
+    const noResults = document.getElementById('noResults');
+    const locationLabel = document.getElementById('searchLocationLabel');
+    const categoryLabel = document.getElementById('searchCategoryLabel');
+    const resultCount = document.getElementById('resultCount');
+    
+    locationLabel.textContent = location ? `di ${location}` : '';
+    categoryLabel.textContent = category && category !== 'all' ? ` - ${getCategoryName(category)}` : '';
+    resultCount.textContent = `${results.length} Hasil`;
+    resultsGrid.innerHTML = '';
+    
+    if (results.length > 0) {
+        noResults.classList.add('hidden');
+        resultsSection.classList.remove('hidden');
+        results.forEach(destination => {
+            const card = createDestinationCard(destination);
+            resultsGrid.appendChild(card);
         });
-    });
+        
+        document.querySelectorAll('.view-detail').forEach(button => {
+            button.addEventListener('click', function() {
+                const destinationId = parseInt(this.getAttribute('data-id'));
+                showDestinationModal(destinationId);
+            });
+        });
+    } else {
+        resultsSection.classList.remove('hidden');
+        noResults.classList.remove('hidden');
+    }
+    resultsSection.scrollIntoView({ behavior: 'smooth' });
 }
+
+function getCategoryName(category) {
+    const categories = {
+        'pantai': 'Pantai',
+        'pegunungan': 'Pegunungan',
+        'budaya': 'Budaya',
+        'air terjun': 'Air Terjun',
+        'Danau': 'Danau',
+        'Edukasi & Sejarah': 'Edukasi & Sejarah'
+    };
+    return categories[category] || category;
+}
+
+function createDestinationCard(destination) {
+    const card = document.createElement('div');
+    card.className = 'destination-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300';
+    
+    card.innerHTML = `
+        <div class="relative h-48 overflow-hidden">
+            <img src="${destination.image}" alt="${destination.title}" class="w-full h-full object-cover">
+            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                <h3 class="text-xl font-bold text-azure">${destination.title}</h3>
+            </div>
+            <div class="absolute top-3 right-3 bg-azure/90 text-liver px-2 py-1 rounded-full text-xs font-semibold">
+                ${getCategoryName(destination.category)}
+            </div>
+        </div>
+        <div class="p-5">
+            <div class="flex items-center mb-3">
+                <i class="fas fa-map-marker-alt text-teal mr-2"></i>
+                <span class="text-liver">${destination.location}</span>
+            </div>
+            <div class="flex items-center mb-4">
+                <div class="flex">
+                    ${renderStars(destination.rating)}
+                </div>
+                <span class="text-liver text-sm ml-2">(${destination.reviews} ulasan)</span>
+            </div>
+            <p class="text-liver/80 text-sm mb-4 line-clamp-2">${destination.description}</p>
+            <button class="w-full py-2 bg-teal text-azure rounded-lg font-medium hover:bg-midnight-green transition view-detail" 
+                    data-id="${destination.id}">
+                Lihat Detail
+            </button>
+        </div>
+    `;
+    
+    return card;
+}
+
 function renderStars(rating) {
-    let starsHTML = '';
+    let stars = '';
     const fullStars = Math.floor(rating);
-    const halfStar = rating % 1 >= 0.5;
-
-    for (let i = 0; i < fullStars; i++) {
-        starsHTML += '<i class="fas fa-star"></i>';
+    const hasHalfStar = rating % 1 >= 0.5;
+    
+    for (let i = 1; i <= 5; i++) {
+        if (i <= fullStars) {
+            stars += '<i class="fas fa-star text-persian-orange"></i>';
+        } else if (i === fullStars + 1 && hasHalfStar) {
+            stars += '<i class="fas fa-star-half-alt text-persian-orange"></i>';
+        } else {
+            stars += '<i class="far fa-star text-persian-orange"></i>';
+        }
     }
-
-    if (halfStar) {
-        starsHTML += '<i class="fas fa-star-half-alt"></i>';
-    }
-
-    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-    for (let i = 0; i < emptyStars; i++) {
-        starsHTML += '<i class="far fa-star"></i>';
-    }
-
-    return starsHTML;
+    
+    return stars;
 }
-function showDestinationModal(destination) {
+
+function showDestinationModal(id) {
+    const destination = destinations.find(dest => dest.id === id);
+    if (!destination) return;
+    
+    currentDestinationId = id;
+    selectedRating = 0;
+    
     document.getElementById('modalTitle').textContent = destination.title;
     document.getElementById('modalLocation').textContent = destination.location;
-    document.getElementById('modalDescription').textContent = destination.description;
     document.getElementById('modalImage').src = destination.image;
-    const ratingContainer = document.getElementById('modalRating');
-    ratingContainer.innerHTML = renderStars(destination.rating);
+    document.getElementById('modalRating').innerHTML = renderStars(destination.rating);
     document.getElementById('modalReviews').textContent = `${destination.rating} (${destination.reviews.toLocaleString()} ulasan)`;
-    const historyButton = document.getElementById('historyButton');
-    historyButton.onclick = function () {
-        showHistoryPage(destination.id);
-    };
-    setupRatingWidget(destination);
-    document.getElementById('destinationModal').style.display = 'block';
+    document.getElementById('modalDescription').textContent = destination.description;
+    document.getElementById('historyButton').setAttribute('data-id', id);
+    
+    const stars = document.querySelectorAll('#ratingStars i');
+    stars.forEach(star => {
+        star.classList.remove('fas', 'text-persian-orange');
+        star.classList.add('far', 'text-gray-400');
+    });
+    
+    document.getElementById('submitRating').classList.add('hidden');
+    document.getElementById('ratingMessage').textContent = '';
+    
+    document.getElementById('destinationModal').classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
-function setupRatingWidget(destination) {
-    const stars = document.querySelectorAll('.rating-widget .fa-star');
-    const ratingMessage = document.getElementById('ratingMessage');
-    stars.forEach(star => {
-        star.className = 'far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange';
-        star.onclick = null;
-    });
-    ratingMessage.textContent = '';
-    stars.forEach(star => {
-        star.addEventListener('click', function () {
-            const value = parseInt(this.getAttribute('data-value'));
-            updateDestinationRating(destination.id, value);
-            stars.forEach((s, index) => {
-                if (index < value) {
-                    s.className = 'fas fa-star text-2xl text-persian-orange cursor-pointer';
-                } else {
-                    s.className = 'far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange';
+
+document.getElementById('ratingStars').addEventListener('click', function(e) {
+    if (e.target.tagName === 'I') {
+        const value = parseInt(e.target.getAttribute('data-value'));
+        selectedRating = value;
+        
+        const stars = document.querySelectorAll('#ratingStars i');
+        stars.forEach((star, index) => {
+            if (index < value) {
+                star.classList.remove('far', 'text-gray-400');
+                star.classList.add('fas', 'text-persian-orange');
+            } else {
+                star.classList.remove('fas', 'text-persian-orange');
+                star.classList.add('far', 'text-gray-400');
+            }
+        });
+        
+        document.getElementById('submitRating').classList.remove('hidden');
+    }
+});
+
+document.getElementById('submitRating').addEventListener('click', function() {
+    if (selectedRating > 0) {
+        const destination = destinations.find(dest => dest.id === currentDestinationId);
+        if (destination) {
+            const newRating = ((destination.rating * destination.reviews) + selectedRating) / (destination.reviews + 1);
+            destination.rating = parseFloat(newRating.toFixed(1));
+            destination.reviews += 1;
+            document.getElementById('modalRating').innerHTML = renderStars(destination.rating);
+            document.getElementById('modalReviews').textContent = `${destination.rating} (${destination.reviews.toLocaleString()} ulasan)`;
+            document.getElementById('ratingMessage').textContent = 'Terima kasih atas rating Anda!';
+            document.getElementById('submitRating').classList.add('hidden');
+            
+            // Update rating di card
+            const cards = document.querySelectorAll('.destination-card');
+            cards.forEach(card => {
+                const cardId = parseInt(card.querySelector('.view-detail').getAttribute('data-id'));
+                if (cardId === currentDestinationId) {
+                    const ratingElement = card.querySelector('.flex.items-center.mb-4 .flex');
+                    ratingElement.innerHTML = renderStars(destination.rating);
+                    const reviewsElement = card.querySelector('.flex.items-center.mb-4 span');
+                    reviewsElement.textContent = `(${destination.reviews} ulasan)`;
                 }
             });
-            
-            ratingMessage.textContent = `Terima kasih! Anda memberi rating ${value} bintang untuk ${destination.title}`;
-            ratingMessage.className = 'text-teal mt-2 text-sm';
-            saveUserRating(destination.id, value);
-        });
-    });
+        }
+    }
+});
+
+function showHistoryPage(id) {
+    const history = historyData[id];
+    if (!history) return;
+    
+    document.getElementById('historyTitle').textContent = "Sejarah & Budaya " + history.title;
+    document.getElementById('historyLocation').textContent = history.location;
+    document.getElementById('historyImage').src = history.image;
+    document.getElementById('historyContent').innerHTML = history.content;
+    
+    document.getElementById('destinationModal').classList.add('hidden');
+    document.getElementById('historyPage').classList.remove('hidden');
 }
-function updateDestinationRating(destinationId, userRating) {
+
+document.querySelector('.close-modal').addEventListener('click', function() {
+    document.getElementById('destinationModal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+});
+
+document.getElementById('historyButton').addEventListener('click', function() {
+    const destinationId = parseInt(this.getAttribute('data-id'));
+    showHistoryPage(destinationId);
+});
+
+document.getElementById('mapsButton').addEventListener('click', function() {
+    const destinationId = parseInt(this.getAttribute('data-id'));
     const destination = destinations.find(dest => dest.id === destinationId);
     if (destination) {
-        const newRating = (destination.rating * destination.reviews + userRating) / (destination.reviews + 1);
-        destination.rating = parseFloat(newRating.toFixed(1));
-        destination.reviews += 1;
-        destination.userRating = userRating;
-        document.getElementById('modalRating').innerHTML = renderStars(destination.rating);
-        document.getElementById('modalReviews').textContent = `${destination.rating} (${destination.reviews.toLocaleString()} ulasan)`;
-        renderDestinations(destinations);
+        // Ganti dengan link Google Maps yang sesuai
+        window.open(`https://www.google.com/maps/search/${encodeURIComponent(destination.title + ' ' + destination.location)}`, '_blank');
     }
-}
-function saveUserRating(destinationId, rating) {
-    const userRatings = JSON.parse(localStorage.getItem('userRatings')) || {};
-    userRatings[destinationId] = rating;
-    localStorage.setItem('userRatings', JSON.stringify(userRatings));
-}
-function showHistoryPage(destinationId) {
-    const history = historyData[destinationId];
+});
 
-    if (history) {
-        document.getElementById('historyTitle').textContent = "Sejarah & Budaya " + history.title;
-        document.getElementById('historyLocation').textContent = history.location;
-        document.getElementById('historyImage').src = history.image;
-        document.getElementById('historyContent').innerHTML = history.content;
-        document.getElementById('destinationModal').style.display = 'none';
-        document.getElementById('historyPage').style.display = 'block';
-    }
-}
-function backFromHistory() {
-    document.getElementById('historyPage').style.display = 'none';
-    document.getElementById('destinationModal').style.display = 'block';
-}
-function closeDestinationModal() {
-    document.getElementById('destinationModal').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-function addDestination(newDestination) {
-    const newId = Math.max(...destinations.map(d => d.id)) + 1;
-    newDestination.id = newId;
-    destinations.push(newDestination);
-    historyData[newId] = {
-        title: newDestination.title,
-        location: newDestination.location,
-        image: newDestination.image,
-        content: `<p class="text-liver mb-6">Sejarah dan budaya untuk ${newDestination.title} akan segera ditambahkan.</p>`
-    };
-    renderDestinations(destinations);
-}
-document.querySelector('.close-modal').addEventListener('click', closeDestinationModal);
-document.getElementById('backBtn').addEventListener('click', backFromHistory);
-document.getElementById('loadMoreBtn').addEventListener('click', () => {
-    alert('Fitur "Lihat Lebih Banyak" akan memuat lebih banyak destinasi. Dalam implementasi nyata, ini akan mengambil data dari database.');
+document.getElementById('backBtn').addEventListener('click', function() {
+    document.getElementById('historyPage').classList.add('hidden');
+    document.getElementById('destinationModal').classList.remove('hidden');
 });
-window.addEventListener('click', function (event) {
-    const modal = document.getElementById('destinationModal');
-    if (event.target === modal) {
-        closeDestinationModal();
+
+document.getElementById('destinationModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.classList.add('hidden');
+        document.body.style.overflow = 'auto';
     }
 });
-document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-        closeDestinationModal();
-    }
-});
+
+// Inisialisasi saat DOM siap
 document.addEventListener('DOMContentLoaded', () => {
-    renderDestinations(destinations);
+    // Anda bisa menambahkan inisialisasi lain di sini jika diperlukan
 });

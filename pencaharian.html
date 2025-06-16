@@ -66,6 +66,24 @@
         .hover\:bg-pale-green-hover:hover { 
             background-color: #d0ece5; 
         }
+        
+        .history-navbar {
+            background: linear-gradient(90deg, #084c61 0%, #008080 100%);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .prose h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #084c61;
+        }
+        
+        .prose p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
     </style>
 </head>
 
@@ -231,20 +249,25 @@
         </div>
     </div>
     <div id="historyPage" class="fixed inset-0 bg-white z-50 hidden overflow-y-auto">
-        <div class="max-w-4xl mx-auto p-6">
-            <div class="history-header mb-8">
-                <button class="back-btn px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition mb-4" id="backBtn">
+        <nav class="history-navbar py-4 px-6 flex items-center justify-between text-azure sticky top-0 z-10">
+            <div class="flex items-center space-x-3">
+                <button class="back-btn px-4 py-2 bg-azure/20 rounded-lg hover:bg-azure/30 transition" id="backBtn">
                     <i class="fas fa-arrow-left mr-2"></i> Kembali
                 </button>
-                <h2 id="historyTitle" class="text-3xl font-bold text-center mt-8 text-liver"></h2>
-                <div class="text-center mt-2">
-                    <i class="fas fa-map-marker-alt mr-2 text-teal"></i>
-                    <span id="historyLocation" class="text-liver"></span>
+            </div>
+            <div class="text-center">
+                <h2 id="historyTitle" class="text-xl font-bold"></h2>
+                <div class="text-sm mt-1">
+                    <i class="fas fa-map-marker-alt mr-1"></i>
+                    <span id="historyLocation"></span>
                 </div>
             </div>
+            <div class="w-10"></div> <!-- Spacer untuk balance flex -->
+        </nav>
 
+        <div class="max-w-4xl mx-auto p-6 pt-12">
             <div class="history-content">
-                <img id="historyImage" src="" alt="History Image" class="w-full h-96 object-cover rounded-lg mb-8">
+                <img id="historyImage" src="" alt="History Image" class="w-full h-96 object-cover rounded-lg mb-8 shadow-md">
 
                 <div id="historyContent" class="prose max-w-none text-liver">
                 </div>
@@ -263,7 +286,7 @@
                 rating: 4.5,
                 reviews: 1245,
                 description: "Pantai ikonik Makassar dengan pemandangan matahari terbenam yang spektakuler dan berbagai kuliner khas Makassar.",
-                history: "<h3>Sejarah Pantai Losari</h3><p>Pantai Losari telah menjadi pusat aktivitas masyarakat Makassar sejak zaman Kerajaan Gowa-Tallo. Nama 'Losari' berasal dari kata 'Lola Sarang' yang berarti tempat berkumpulnya para nelayan.</p><h3>Budaya</h3><p>Setiap sore, pantai ini menjadi tempat berkumpul masyarakat untuk menikmati matahari terbenam sambil menikmati hidangan khas seperti pisang epe dan coto Makassar.</p>",
+                history: "<h3>Sejarah Pantai Losari</h3><p>Pantai Losari telah menjadi pusat aktivitas masyarakat Makassar sejak zaman Kerajaan Gowa-Tallo. Nama 'Losari' berasal dari kata 'Lola Sarang' yang berarti tempat berkumpulnya para nelayan.</p><h3>Budaya</h3><p>Setiap sore, pantai ini menjadi tempat berkumpul masyarakat untuk menikmati matahari terbenam sambil menikmati hidangan khas seperti pisang epe dan coto Makassar.</p><p>Pantai Losari juga menjadi tempat penyelenggaraan berbagai festival budaya Makassar, seperti Festival Pesona Losari yang menampilkan tarian tradisional, musik, dan kuliner khas Sulawesi Selatan.</p>",
                 mapsLink: "https://www.google.com/maps/place/Pantai+Losari/@-5.134568,119.406229,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbee3236b0999a5:0x7270a7e43fcd0a5e!8m2!3d-5.134568!4d119.4149838!16zL20vMDJ4Z3Rj?entry=ttu"
             },
             {
@@ -275,7 +298,7 @@
                 rating: 4.7,
                 reviews: 892,
                 description: "Dikenal sebagai 'Kingdom of Butterfly' dengan air terjun yang indah dan berbagai spesies kupu-kupu yang cantik.",
-                history: "<h3>Sejarah Bantimurung</h3><p>Ditemukan pertama kali oleh naturalis Inggris Alfred Russel Wallace pada abad ke-19. Namanya berasal dari kata 'Benti' yang berarti air dan 'Murung' yang berarti deras.</p><h3>Budaya</h3><p>Kawasan ini menjadi pusat penelitian kupu-kupu dan tempat wisata alam yang menyajikan keindahan alam khas karst Maros.</p>",
+                history: "<h3>Sejarah Bantimurung</h3><p>Ditemukan pertama kali oleh naturalis Inggris Alfred Russel Wallace pada abad ke-19. Namanya berasal dari kata 'Benti' yang berarti air dan 'Murung' yang berarti deras.</p><h3>Budaya</h3><p>Kawasan ini menjadi pusat penelitian kupu-kupu dan tempat wisata alam yang menyajikan keindahan alam khas karst Maros.</p><p>Masyarakat sekitar memiliki tradisi tahunan menyambut musim kupu-kupu dengan berbagai ritual adat. Kawasan ini juga menjadi inspirasi bagi banyak seniman lokal dalam menciptakan karya seni.</p>",
                 mapsLink: "https://www.google.com/maps/place/Taman+Nasional+Bantimurung+Bulusaraung/@-4.997603,119.658046,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbea1c1f8f5e0a5:0x6c3e4b4b5d5a5d5!8m2!3d-4.997603!4d119.6668008!16zL20vMDJ4Z3Rj?entry=ttu"
             },
             {
@@ -287,7 +310,7 @@
                 rating: 4.9,
                 reviews: 1567,
                 description: "Destinasi budaya dengan rumah adat Tongkonan, upacara Rambu Solo, dan pemandangan alam pegunungan yang memesona.",
-                history: "<h3>Sejarah Tana Toraja</h3><p>Masyarakat Toraja telah mendiami wilayah ini sejak ribuan tahun lalu dengan sistem kepercayaan Aluk Todolo. Budaya mereka sangat kental dengan upacara kematian yang unik.</p><h3>Budaya</h3><p>Budaya Toraja terkenal dengan upacara pemakaman Rambu Solo yang megah, rumah adat Tongkonan, dan ukiran kayu tradisional yang khas.</p>",
+                history: "<h3>Sejarah Tana Toraja</h3><p>Masyarakat Toraja telah mendiami wilayah ini sejak ribuan tahun lalu dengan sistem kepercayaan Aluk Todolo. Budaya mereka sangat kental dengan upacara kematian yang unik.</p><h3>Budaya</h3><p>Budaya Toraja terkenal dengan upacara pemakaman Rambu Solo yang megah, rumah adat Tongkonan, dan ukiran kayu tradisional yang khas.</p><p>Masyarakat Toraja memiliki sistem sosial yang kompleks dengan stratifikasi sosial yang jelas. Mereka juga dikenal dengan tradisi Ma'Nene atau upacara pembersihan jenazah leluhur yang dilakukan setiap beberapa tahun sekali.</p>",
                 mapsLink: "https://www.google.com/maps/place/Tana+Toraja+Regency,+South+Sulawesi/@-3.083333,119.75,11z/data=!3m1!4b1!4m6!3m5!1s0x2d93b3d1b8c5e0a5:0x6c3e4b4b5d5a5d5!8m2!3d-3.083333!4d119.75!16zL20vMDJ4Z3Rj?entry=ttu"
             },
             {
@@ -299,7 +322,7 @@
                 rating: 4.3,
                 reviews: 765,
                 description: "Benteng peninggalan Kerajaan Gowa-Tallo yang menjadi saksi bisu sejarah panjang Makassar.",
-                history: "<h3>Sejarah Fort Rotterdam</h3><p>Dibangun pada tahun 1545 oleh Raja Gowa ke-9, awalnya bernama Benteng Ujung Pandang. Setelah Belanda menguasai Makassar, benteng ini diubah namanya menjadi Fort Rotterdam.</p><h3>Budaya</h3><p>Kini benteng ini menjadi museum yang menyimpan berbagai artefak sejarah Sulawesi Selatan dan pusat kegiatan budaya.</p>",
+                history: "<h3>Sejarah Fort Rotterdam</h3><p>Dibangun pada tahun 1545 oleh Raja Gowa ke-9, awalnya bernama Benteng Ujung Pandang. Setelah Belanda menguasai Makassar, benteng ini diubah namanya menjadi Fort Rotterdam.</p><h3>Budaya</h3><p>Kini benteng ini menjadi museum yang menyimpan berbagai artefak sejarah Sulawesi Selatan dan pusat kegiatan budaya.</p><p>Fort Rotterdam menjadi simbol perlawanan masyarakat Makassar terhadap penjajahan. Di tempat inilah Pangeran Diponegoro pernah ditahan selama pengasingannya. Benteng ini juga menjadi pusat penyebaran agama Kristen di Sulawesi Selatan pada masa kolonial.</p>",
                 mapsLink: "https://www.google.com/maps/place/Fort+Rotterdam/@-5.134568,119.406229,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbee3236b0999a5:0x7270a7e43fcd0a5e!8m2!3d-5.134568!4d119.4149838!16zL20vMDJ4Z3Rj?entry=ttu"
             },
             {
@@ -311,7 +334,7 @@
                 rating: 4.8,
                 reviews: 543,
                 description: "Gunung dengan pemandangan spektakuler yang menjadi favorit para pendaki dengan ketinggian 2.830 mdpl.",
-                history: "<h3>Sejarah Bawakaraeng</h3><p>Bawakaraeng dalam bahasa Makassar berarti 'Mulut Tuhan'. Gunung ini dianggap sakral oleh masyarakat setempat dan sering menjadi tempat ritual spiritual.</p><h3>Budaya</h3><p>Setiap tahun, banyak peziarah yang mendaki gunung ini untuk melakukan ritual tertentu, terutama pada bulan Safar dalam kalender Islam.</p>",
+                history: "<h3>Sejarah Bawakaraeng</h3><p>Bawakaraeng dalam bahasa Makassar berarti 'Mulut Tuhan'. Gunung ini dianggap sakral oleh masyarakat setempat dan sering menjadi tempat ritual spiritual.</p><h3>Budaya</h3><p>Setiap tahun, banyak peziarah yang mendaki gunung ini untuk melakukan ritual tertentu, terutama pada bulan Safar dalam kalender Islam.</p><p>Menurut kepercayaan lokal, gunung ini merupakan tempat bersemayamnya arwah leluhur. Banyak cerita mistis dan legenda yang berkembang seputar gunung ini, termasuk kisah tentang kerajaan gaib yang konon berdiri di puncaknya.</p>",
                 mapsLink: "https://www.google.com/maps/place/Gunung+Bawakaraeng/@-5.316667,119.916667,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbee3236b0999a5:0x7270a7e43fcd0a5e!8m2!3d-5.316667!4d119.9254218!16zL20vMDJ4Z3Rj?entry=ttu"
             },
             {
@@ -323,8 +346,7 @@
                 rating: 4.6,
                 reviews: 987,
                 description: "Pantai dengan pasir putih sehalus tepung dan air laut yang jernih kebiruan, sempurna untuk berenang dan snorkeling.",
-                history: "<h3>Sejarah Tanjung Bira</h3><p>Kawasan ini dikenal sebagai tempat pembuatan kapal tradisional Phinisi. Nama Bira berasal dari nama seorang putri kerajaan yang konon menghilang di kawasan ini.</p><h3>Budaya</h3><p>Masyarakat sekitar masih mempertahankan tradisi pembuatan kapal kayu dengan teknik turun-temurun.</p>",
-                mapsLink: "https://www.google.com/maps/place/Tanjung+Bira+Beach/@-5.666667,120.416667,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbee3236b0999a5:0x7270a7e43fcd0a5e!8m2!3d-5.666667!4d120.4254218!16zL20vMDJ4Z3Rj?entry=ttu"
+                history: "<h3>Sejarah Tanjung Bira</h3><p>Kawasan ini dikenal sebagai tempat pembuatan kapal tradisional Phinisi. Nama Bira berasal dari nama seorang putri kerajaan yang konon menghilang di kawasan ini.</p><h3>Budaya</h3><p>Masyarakat sekitar masih mempertahankan tradisi pembuatan kapal kayu dengan teknik turun-temurun.</p><p>Pantai Tanjung Bira juga menjadi pusat pelayaran tradisional sejak zaman kerajaan. Kapal Phinisi yang dibuat di sini telah berlayar hingga ke berbagai penjuru dunia. Teknik pembuatan kapal tanpa menggunakan paku ini telah diakui oleh UNESCO sebagai Warisan Budaya Dunia.</p>"
             }
         ];
         
@@ -479,6 +501,7 @@
             document.getElementById('destinationModal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
+        
         document.getElementById('ratingStars').addEventListener('click', function(e) {
             if (e.target.tagName === 'I') {
                 const value = parseInt(e.target.getAttribute('data-value'));
@@ -498,6 +521,7 @@
                 document.getElementById('submitRating').classList.remove('hidden');
             }
         });
+        
         document.getElementById('submitRating').addEventListener('click', function() {
             if (selectedRating > 0) {
                 const destination = destinations.find(dest => dest.id === currentDestinationId);
@@ -529,8 +553,10 @@
             document.getElementById('historyImage').src = destination.image;
             document.getElementById('historyImage').alt = destination.name;
             document.getElementById('historyContent').innerHTML = destination.history;
+            
             document.getElementById('destinationModal').classList.add('hidden');
             document.getElementById('historyPage').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
         }
         
         document.querySelector('.close-modal').addEventListener('click', function() {
