@@ -11,6 +11,7 @@
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(to bottom right, #e6f9f6, #d9f2f0);
       color: #130e0c;
+      scroll-behavior: smooth;
     }
 
     .slide, .fade {
@@ -45,6 +46,15 @@
     .bg-footer { background-color: #e7f6f3; }
     .bg-pale-green { background-color: #e7f6f3; }
     .hover\:bg-pale-green-hover:hover { background-color: #d0ece5; }
+    
+    /* Animation for scroll button */
+    @keyframes pulse {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .scroll-button {
+      animation: pulse 2s infinite;
+    }
   </style>
 </head>
 <body>
@@ -60,9 +70,10 @@
     </div>
     <div class="hidden md:flex space-x-6 font-medium">
       <a href="#" class="hover:underline text-white">Beranda</a>
-      <a href="#" class="hover:underline text-white">Kota</a>
-      <a href="recommended.html" class="hover:underline text-white">Rekomendasi</a>
-      <a href="#" class="hover:underline text-white">Profil</a>
+      <a href="pencarian.html" class="hover:underline text-white">Kota</a>
+      <a href="index.html" class="hover:underline text-white">Rekomendasi</a>
+      <a href="#" class="hover:underline text-white">favorit</a>
+      <a href="profil.html" class="hover:underline text-white">Profil</a>
     </div>
   </nav>
 
@@ -81,7 +92,7 @@
           <span class="font-semibold">Ayo jelajahi Sulawesi Selatan</span>, temukan keajaiban di tiap sudutnya.
         </p>
       </div>
-      <a href="opsi kota.html" class="mt-6 px-6 py-3 bg-pale-green hover:bg-pale-green-hover text-midnight-green font-bold rounded-full shadow-lg transition-all duration-300 animate-bounce">
+      <a href="#konten" class="mt-6 px-6 py-3 bg-pale-green hover:bg-pale-green-hover text-midnight-green font-bold rounded-full shadow-lg transition-all duration-300 scroll-button">
         Mulai Berjelajah
       </a>
     </div>
@@ -136,6 +147,12 @@
       images[currentImg].classList.remove("hidden-image");
       images[currentImg].classList.add("visible-image");
     }, 2000);
+    document.querySelector('a[href="#konten"]').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
   </script>
 </body>
 </html>

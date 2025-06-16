@@ -23,7 +23,7 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--azure);
             color: var(--liver);
-            scroll-behavior: smooth;
+            scroll-behavior: smooth; /* Tambahkan ini untuk scroll smooth */
         }
 
         .bg-midnight-green {
@@ -277,7 +277,7 @@
             <p class="text-xl text-azure/80 max-w-2xl mx-auto mb-8">
                 Temukan destinasi terbaik yang kami rekomendasikan untuk petualangan tak terlupakan
             </p>
-            <a href="#destinasi" id="jelajahiBtn"
+            <a href="#destinasi"
                 class="inline-flex items-center px-8 py-3 gradient-bg text-azure font-semibold rounded-full hover:shadow-lg transition-all duration-300 transform hover:scale-105">
                 Jelajahi Sekarang
                 <i class="fas fa-arrow-down ml-2"></i>
@@ -770,22 +770,11 @@
                 }
             });
             
-            document.getElementById('jelajahiBtn').addEventListener('click', function(e) {
+            // Tambahkan smooth scroll untuk tombol jelajahi sekarang
+            document.querySelector('a[href="#destinasi"]').addEventListener('click', function(e) {
                 e.preventDefault();
                 const destinasiSection = document.getElementById('destinasi');
-                destinasiSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            });
-            
-            document.querySelector('.bounce-arrow').addEventListener('click', function(e) {
-                e.preventDefault();
-                const destinasiSection = document.getElementById('destinasi');
-                destinasiSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                destinasiSection.scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>

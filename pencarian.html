@@ -84,6 +84,29 @@
             margin-bottom: 1rem;
             line-height: 1.6;
         }
+
+        /* Style for heart icon */
+        .heart-icon {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .heart-icon.liked {
+            color: #ff0000;
+        }
+
+        /* Custom style for location with heart */
+        .location-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .no-favorites {
+            text-align: center;
+            padding: 50px 0;
+        }
     </style>
 </head>
 
@@ -103,10 +126,13 @@
             <span class="font-bold text-xl">EafTrip</span>
         </div>
         <div class="hidden md:flex space-x-6 font-medium">
-            <a href="#" class="hover:underline hover:text-c3f0f5">Beranda</a>
-            <a href="#" class="hover:underline hover:text-c3f0f5">Provinsi</a>
-            <a href="#" class="hover:underline hover:text-c3f0f5">Kota</a>
-            <a href="#" class="hover:underline hover:text-c3f0f5">Destinasi</a>
+             <div class="hidden md:flex space-x-6 font-medium">
+                <a href="welcome page.html" class="hover:underline text-white">Beranda</a>
+                <a href="#" class="hover:underline text-white">Kota</a>
+                <a href="index.html" class="hover:underline text-white">Rekomendasi</a>
+                <a href="favorit.html" class="hover:underline text-white">Favorit</a>
+                <a href="profil.html" class="hover:underline text-white">Profil</a>
+            </div>
         </div>
     </nav>
     <section class="py-28 bg-gradient-to-b from-white to-azure">
@@ -262,7 +288,7 @@
                     <span id="historyLocation"></span>
                 </div>
             </div>
-            <div class="w-10"></div> <!-- Spacer untuk balance flex -->
+            <div class="w-10"></div> 
         </nav>
 
         <div class="max-w-4xl mx-auto p-6 pt-12">
@@ -285,6 +311,7 @@
                 image: "https://images.unsplash.com/photo-1589394815804-9648adb3d470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 rating: 4.5,
                 reviews: 1245,
+                liked: false,
                 description: "Pantai ikonik Makassar dengan pemandangan matahari terbenam yang spektakuler dan berbagai kuliner khas Makassar.",
                 history: "<h3>Sejarah Pantai Losari</h3><p>Pantai Losari telah menjadi pusat aktivitas masyarakat Makassar sejak zaman Kerajaan Gowa-Tallo. Nama 'Losari' berasal dari kata 'Lola Sarang' yang berarti tempat berkumpulnya para nelayan.</p><h3>Budaya</h3><p>Setiap sore, pantai ini menjadi tempat berkumpul masyarakat untuk menikmati matahari terbenam sambil menikmati hidangan khas seperti pisang epe dan coto Makassar.</p><p>Pantai Losari juga menjadi tempat penyelenggaraan berbagai festival budaya Makassar, seperti Festival Pesona Losari yang menampilkan tarian tradisional, musik, dan kuliner khas Sulawesi Selatan.</p>",
                 mapsLink: "https://www.google.com/maps/place/Pantai+Losari/@-5.134568,119.406229,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbee3236b0999a5:0x7270a7e43fcd0a5e!8m2!3d-5.134568!4d119.4149838!16zL20vMDJ4Z3Rj?entry=ttu"
@@ -297,6 +324,7 @@
                 image: "https://images.unsplash.com/photo-1605540436563-5bca919ae766?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 rating: 4.7,
                 reviews: 892,
+                liked: false,
                 description: "Dikenal sebagai 'Kingdom of Butterfly' dengan air terjun yang indah dan berbagai spesies kupu-kupu yang cantik.",
                 history: "<h3>Sejarah Bantimurung</h3><p>Ditemukan pertama kali oleh naturalis Inggris Alfred Russel Wallace pada abad ke-19. Namanya berasal dari kata 'Benti' yang berarti air dan 'Murung' yang berarti deras.</p><h3>Budaya</h3><p>Kawasan ini menjadi pusat penelitian kupu-kupu dan tempat wisata alam yang menyajikan keindahan alam khas karst Maros.</p><p>Masyarakat sekitar memiliki tradisi tahunan menyambut musim kupu-kupu dengan berbagai ritual adat. Kawasan ini juga menjadi inspirasi bagi banyak seniman lokal dalam menciptakan karya seni.</p>",
                 mapsLink: "https://www.google.com/maps/place/Taman+Nasional+Bantimurung+Bulusaraung/@-4.997603,119.658046,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbea1c1f8f5e0a5:0x6c3e4b4b5d5a5d5!8m2!3d-4.997603!4d119.6668008!16zL20vMDJ4Z3Rj?entry=ttu"
@@ -309,6 +337,7 @@
                 image: "https://images.unsplash.com/photo-1566438480900-0609be27a4be?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 rating: 4.9,
                 reviews: 1567,
+                liked: false,
                 description: "Destinasi budaya dengan rumah adat Tongkonan, upacara Rambu Solo, dan pemandangan alam pegunungan yang memesona.",
                 history: "<h3>Sejarah Tana Toraja</h3><p>Masyarakat Toraja telah mendiami wilayah ini sejak ribuan tahun lalu dengan sistem kepercayaan Aluk Todolo. Budaya mereka sangat kental dengan upacara kematian yang unik.</p><h3>Budaya</h3><p>Budaya Toraja terkenal dengan upacara pemakaman Rambu Solo yang megah, rumah adat Tongkonan, dan ukiran kayu tradisional yang khas.</p><p>Masyarakat Toraja memiliki sistem sosial yang kompleks dengan stratifikasi sosial yang jelas. Mereka juga dikenal dengan tradisi Ma'Nene atau upacara pembersihan jenazah leluhur yang dilakukan setiap beberapa tahun sekali.</p>",
                 mapsLink: "https://www.google.com/maps/place/Tana+Toraja+Regency,+South+Sulawesi/@-3.083333,119.75,11z/data=!3m1!4b1!4m6!3m5!1s0x2d93b3d1b8c5e0a5:0x6c3e4b4b5d5a5d5!8m2!3d-3.083333!4d119.75!16zL20vMDJ4Z3Rj?entry=ttu"
@@ -321,6 +350,7 @@
                 image: "https://images.unsplash.com/photo-1584466977773-e625c37cdd50?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 rating: 4.3,
                 reviews: 765,
+                liked: false,
                 description: "Benteng peninggalan Kerajaan Gowa-Tallo yang menjadi saksi bisu sejarah panjang Makassar.",
                 history: "<h3>Sejarah Fort Rotterdam</h3><p>Dibangun pada tahun 1545 oleh Raja Gowa ke-9, awalnya bernama Benteng Ujung Pandang. Setelah Belanda menguasai Makassar, benteng ini diubah namanya menjadi Fort Rotterdam.</p><h3>Budaya</h3><p>Kini benteng ini menjadi museum yang menyimpan berbagai artefak sejarah Sulawesi Selatan dan pusat kegiatan budaya.</p><p>Fort Rotterdam menjadi simbol perlawanan masyarakat Makassar terhadap penjajahan. Di tempat inilah Pangeran Diponegoro pernah ditahan selama pengasingannya. Benteng ini juga menjadi pusat penyebaran agama Kristen di Sulawesi Selatan pada masa kolonial.</p>",
                 mapsLink: "https://www.google.com/maps/place/Fort+Rotterdam/@-5.134568,119.406229,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbee3236b0999a5:0x7270a7e43fcd0a5e!8m2!3d-5.134568!4d119.4149838!16zL20vMDJ4Z3Rj?entry=ttu"
@@ -333,6 +363,7 @@
                 image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 rating: 4.8,
                 reviews: 543,
+                liked: false,
                 description: "Gunung dengan pemandangan spektakuler yang menjadi favorit para pendaki dengan ketinggian 2.830 mdpl.",
                 history: "<h3>Sejarah Bawakaraeng</h3><p>Bawakaraeng dalam bahasa Makassar berarti 'Mulut Tuhan'. Gunung ini dianggap sakral oleh masyarakat setempat dan sering menjadi tempat ritual spiritual.</p><h3>Budaya</h3><p>Setiap tahun, banyak peziarah yang mendaki gunung ini untuk melakukan ritual tertentu, terutama pada bulan Safar dalam kalender Islam.</p><p>Menurut kepercayaan lokal, gunung ini merupakan tempat bersemayamnya arwah leluhur. Banyak cerita mistis dan legenda yang berkembang seputar gunung ini, termasuk kisah tentang kerajaan gaib yang konon berdiri di puncaknya.</p>",
                 mapsLink: "https://www.google.com/maps/place/Gunung+Bawakaraeng/@-5.316667,119.916667,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbee3236b0999a5:0x7270a7e43fcd0a5e!8m2!3d-5.316667!4d119.9254218!16zL20vMDJ4Z3Rj?entry=ttu"
@@ -345,12 +376,12 @@
                 image: "https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
                 rating: 4.6,
                 reviews: 987,
+                liked: false,
                 description: "Pantai dengan pasir putih sehalus tepung dan air laut yang jernih kebiruan, sempurna untuk berenang dan snorkeling.",
-                history: "<h3>Sejarah Tanjung Bira</h3><p>Kawasan ini dikenal sebagai tempat pembuatan kapal tradisional Phinisi. Nama Bira berasal dari nama seorang putri kerajaan yang konon menghilang di kawasan ini.</p><h3>Budaya</h3><p>Masyarakat sekitar masih mempertahankan tradisi pembuatan kapal kayu dengan teknik turun-temurun.</p><p>Pantai Tanjung Bira juga menjadi pusat pelayaran tradisional sejak zaman kerajaan. Kapal Phinisi yang dibuat di sini telah berlayar hingga ke berbagai penjuru dunia. Teknik pembuatan kapal tanpa menggunakan paku ini telah diakui oleh UNESCO sebagai Warisan Budaya Dunia.</p>"
+                history: "<h3>Sejarah Tanjung Bira</h3><p>Kawasan ini dikenal sebagai tempat pembuatan kapal tradisional Phinisi. Nama Bira berasal dari nama seorang putri kerajaan yang konon menghilang di kawasan ini.</p><h3>Budaya</h3><p>Masyarakat sekitar masih mempertahankan tradisi pembuatan kapal kayu dengan teknik turun-temurun.</p><p>Pantai Tanjung Bira juga menjadi pusat pelayaran tradisional sejak zaman kerajaan. Kapal Phinisi yang dibuat di sini telah berlayar hingga ke berbagai penjuru dunia. Teknik pembuatan kapal tanpa menggunakan paku ini telah diakui oleh UNESCO sebagai Warisan Budaya Dunia.</p>",
+                mapsLink: "https://www.google.com/maps/place/Tanjung+Bira+Beach/@-5.666667,120.433333,15z/data=!3m1!4b1!4m6!3m5!1s0x2dbea1c1f8f5e0a5:0x6c3e4b4b5d5a5d5!8m2!3d-5.666667!4d120.4420878!16zL20vMDJ4Z3Rj?entry=ttu"
             }
         ];
-        
-        // Variabel untuk menyimpan rating yang dipilih
         let selectedRating = 0;
         let currentDestinationId = 0;
         
@@ -397,11 +428,35 @@
                         showDestinationModal(destinationId);
                     });
                 });
+
+                // Add event listeners for heart icons
+                document.querySelectorAll('.heart-icon').forEach(heart => {
+                    heart.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const destinationId = parseInt(this.getAttribute('data-id'));
+                        toggleLike(destinationId, this);
+                    });
+                });
             } else {
                 resultsSection.classList.remove('hidden');
                 noResults.classList.remove('hidden');
             }
             resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function toggleLike(destinationId, heartElement) {
+            const destination = destinations.find(dest => dest.id === destinationId);
+            if (destination) {
+                destination.liked = !destination.liked;
+                
+                if (destination.liked) {
+                    heartElement.classList.remove('far');
+                    heartElement.classList.add('fas', 'liked');
+                } else {
+                    heartElement.classList.remove('fas', 'liked');
+                    heartElement.classList.add('far');
+                }
+            }
         }
         
         function getCategoryName(category) {
@@ -433,9 +488,12 @@
                     </div>
                 </div>
                 <div class="p-5">
-                    <div class="flex items-center mb-3">
-                        <i class="fas fa-map-marker-alt text-teal mr-2"></i>
-                        <span class="text-liver">${destination.location}</span>
+                    <div class="location-container mb-3">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-teal mr-2"></i>
+                            <span class="text-liver">${destination.location}</span>
+                        </div>
+                        <i class="fas fa-heart heart-icon text-xl ${destination.liked ? 'text-red-500 liked' : 'far text-gray-400'}" data-id="${destination.id}"></i>
                     </div>
                     <div class="flex items-center mb-4">
                         <div class="flex">
@@ -589,5 +647,66 @@
             }
         });
     </script>
+
+    <footer class="bg-midnight-green text-azure py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">EafTrip</h3>
+                    <p class="mb-4 text-azure/80">Portal rekomendasi wisata terbaik di Sulawesi Selatan untuk pengalaman tak terlupakan.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-azure hover:text-teal"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-azure hover:text-teal"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-azure hover:text-teal"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-azure hover:text-teal"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Tautan Cepat</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Beranda</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Tentang Kami</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Destinasi</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Pencarian</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Kategori Wisata</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Alam</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Budaya</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Pantai</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Kuliner</a></li>
+                        <li><a href="#" class="text-azure/80 hover:text-teal transition">Wisata Sejarah</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Kontak Kami</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-teal"></i>
+                            <span class="text-azure/80">Jl. Sangir No. 94, Makassar, Sulawesi Selatan</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-teal"></i>
+                            <span class="text-azure/80">+62 812 4414 2632</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-teal"></i>
+                            <span class="text-azure/80">info@wisatasulsel.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-azure/20 mt-12 pt-8 text-center text-azure/80">
+                <p>&copy; 2025 EafTrip. Hak Cipta Dilindungi.(not real)</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
