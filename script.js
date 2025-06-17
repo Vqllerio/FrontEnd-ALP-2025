@@ -5,16 +5,16 @@ function renderStars(rating) {
     const halfStar = rating % 1 >= 0.5;
 
     for (let i = 0; i < fullStars; i++) {
-        starsHTML += '<i class="fas fa-star"></i>';
+        starsHTML += '<i class="fas fa-star text-persian-orange"></i>';
     }
 
     if (halfStar) {
-        starsHTML += '<i class="fas fa-star-half-alt"></i>';
+        starsHTML += '<i class="fas fa-star-half-alt text-persian-orange"></i>';
     }
 
     const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
     for (let i = 0; i < emptyStars; i++) {
-        starsHTML += '<i class="far fa-star"></i>';
+        starsHTML += '<i class="far fa-star text-persian-orange"></i>';
     }
 
     return starsHTML;
