@@ -221,6 +221,14 @@ function showHistoryPage(destinationId) {
 
 // Initialize pages
 document.addEventListener('DOMContentLoaded', () => {
+    // Check login status
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    if (!isLoggedIn && !window.location.pathname.includes('login.html') &&
+        !window.location.pathname.includes('buat akun.html') &&
+        !window.location.pathname.includes('welcome page.html')) {
+        window.location.href = 'login.html';
+    }
+
     // Common modal events
     function setupModalEvents() {
         // Close modal
@@ -384,6 +392,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             displaySearchResults(filteredDestinations);
+        });
+    }
+
+    // Logout functionality
+    const logoutButton = document.getElementById('logoutButton');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', function () {
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
         });
     }
 });

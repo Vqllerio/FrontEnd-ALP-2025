@@ -50,7 +50,7 @@ const users = [
     {
         userid: 9,
         username: "blitzhawk",
-        email: "blitzhawk@mailcom",
+        email: "blitzhawk@mail.com",
         password: "hawkBltz99"
     },
     {
@@ -118,5 +118,11 @@ const users = [
         username: "hyperbolt",
         email: "hyperbolt@mail.com",
         password: "Hyp3rB0lt!!"
+    },
+    {
+        userid: 21,
+        username: "guest",
+        email: "guest@mail.com",
+        password: "guest"
     }
 ];
