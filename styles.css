@@ -1,0 +1,140 @@
+:root {
+    --primary: #177e89;
+    --secondary: #084c61;
+    --light-bg: #edf7f6;
+    --accent: #ce8950;
+    --dark: #60463b;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-bg);
+    color: var(--dark);
+    overflow-x: hidden;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.gradient-bg {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.bg-teal {
+    background-color: #177e89;
+}
+
+.bg-midnight-green {
+    background-color: #084c61;
+}
+
+.bg-azure {
+    background-color: #edf7f6;
+}
+
+.bg-persian-orange {
+    background-color: #ce8950;
+}
+
+.bg-liver {
+    background-color: #60463b;
+}
+
+.text-teal {
+    color: #177e89;
+}
+
+.text-midnight-green {
+    color: #084c61;
+}
+
+.text-azure {
+    color: #edf7f6;
+}
+
+.text-persian-orange {
+    color: #ce8950;
+}
+
+.text-liver {
+    color: #60463b;
+}
+
+.history-navbar {
+    background: linear-gradient(90deg, #084c61 0%, #008080 100%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.prose h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: #084c61;
+}
+
+.prose p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.destination-card {
+    transition: all 0.3s ease;
+}
+
+.destination-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.rating-widget {
+    background-color: rgba(237, 247, 246, 0.7);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(206, 137, 80, 0.2);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+    overflow-y: auto;
+}
+
+.history-page {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--light-bg);
+    z-index: 200;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    .history-content {
+        padding: 15px;
+    }
+    
+    .history-image {
+        height: 250px;
+    }
+}
