@@ -85,7 +85,6 @@
             line-height: 1.6;
         }
 
-        /* Style for heart icon */
         .heart-icon {
             transition: all 0.3s ease;
             cursor: pointer;
@@ -95,7 +94,6 @@
             color: #ff0000;
         }
 
-        /* Custom style for location with heart */
         .location-container {
             display: flex;
             justify-content: space-between;
@@ -429,7 +427,6 @@
                     });
                 });
 
-                // Add event listeners for heart icons
                 document.querySelectorAll('.heart-icon').forEach(heart => {
                     heart.addEventListener('click', function(e) {
                         e.stopPropagation();
