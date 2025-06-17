@@ -23,7 +23,7 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--azure);
             color: var(--liver);
-            scroll-behavior: smooth; /* Tambahkan ini untuk scroll smooth */
+            scroll-behavior: smooth; 
         }
 
         .bg-midnight-green {
@@ -259,7 +259,7 @@
         <div class="hidden md:flex space-x-6 font-medium">
            <a href="welcome page.html" class="hover:underline text-white">Beranda</a>
             <a href="pencarian.html" class="hover:underline text-white">Kota</a>
-            <a href="#" class="hover:underline text-white">Rekomendasi</a>
+            <a href="index.html" class="hover:underline text-white">Rekomendasi</a>
             <a href="#" class="hover:underline text-white">favorit</a>
             <a href="profil.html" class="hover:underline text-white">Profil</a>
         </div>
@@ -769,8 +769,7 @@
                     document.getElementById('destinationModal').style.display = 'block';
                 }
             });
-            
-            // Tambahkan smooth scroll untuk tombol jelajahi sekarang
+
             document.querySelector('a[href="#destinasi"]').addEventListener('click', function(e) {
                 e.preventDefault();
                 const destinasiSection = document.getElementById('destinasi');

@@ -238,6 +238,21 @@
         .bounce-arrow {
             animation: bounce 2s infinite;
         }
+        
+        /* Like button styles */
+        .like-btn {
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-left: 8px;
+        }
+        
+        .like-btn:hover {
+            transform: scale(1.2);
+        }
+        
+        .liked {
+            color: #ff0000;
+        }
     </style>
 </head>
 
@@ -260,7 +275,7 @@
            <a href="welcome page.html" class="hover:underline text-white">Beranda</a>
             <a href="pencarian.html" class="hover:underline text-white">Kota</a>
             <a href="#" class="hover:underline text-white">Rekomendasi</a>
-            <a href="#" class="hover:underline text-white">favorit</a>
+            <a href="Favorit.html" class="hover:underline text-white">favorit</a>
             <a href="profil.html" class="hover:underline text-white">Profil</a>
         </div>
     </nav>
@@ -538,6 +553,7 @@
                 rating: 4.5,
                 reviews: 1280,
                 coordinates: "-5.135399,119.409179",
+                liked: false,
                 history: {
                     title: "Sejarah Pantai Losari",
                     image: "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -555,6 +571,7 @@
                 rating: 4.7,
                 reviews: 890,
                 coordinates: "-4.999167,119.6725",
+                liked: false,
                 history: {
                     title: "Sejarah Bantimurung",
                     image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -572,6 +589,7 @@
                 rating: 4.9,
                 reviews: 2150,
                 coordinates: "-2.996608,119.853363",
+                liked: false,
                 history: {
                     title: "Sejarah Tana Toraja",
                     image: "https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
@@ -580,7 +598,9 @@
                 ratings: [5, 5, 5, 4, 5, 5, 5, 4, 5, 5, 5, 5, 4, 5, 5, 5, 4, 5]
             }
         ];
+        
         let currentDestination = null;
+        
         function renderDestinations(destinationsToRender) {
             const grid = document.getElementById('destinationsGrid');
             grid.innerHTML = '';
@@ -592,7 +612,12 @@
                     <img src="${destination.image}" alt="${destination.title}" class="w-full h-48 object-cover">
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold text-liver">${destination.title}</h3>
+                            <div class="flex items-center">
+                                <h3 class="text-xl font-bold text-liver">${destination.title}</h3>
+                                <i class="like-btn ${destination.liked ? 'fas fa-heart liked' : 'far fa-heart'}" 
+                                   data-id="${destination.id}" 
+                                   title="${destination.liked ? 'Hapus dari favorit' : 'Tambahkan ke favorit'}"></i>
+                            </div>
                             <span class="bg-teal text-azure text-sm px-2 py-1 rounded-full">${destination.category}</span>
                         </div>
                         <div class="flex items-center text-persian-orange mb-3">
@@ -610,13 +635,61 @@
                 `;
                 grid.appendChild(card);
             });
+            
+            // Add event listeners for detail buttons
             document.querySelectorAll('.view-detail-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     const id = parseInt(this.getAttribute('data-id'));
                     showDestinationModal(id);
                 });
             });
+            
+            // Add event listeners for like buttons
+            document.querySelectorAll('.like-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = parseInt(this.getAttribute('data-id'));
+                    toggleLike(id);
+                });
+            });
         }
+        
+        function toggleLike(id) {
+            const destination = destinations.find(dest => dest.id === id);
+            if (!destination) return;
+            
+            destination.liked = !destination.liked;
+            
+            // Update the like button in the grid
+            const likeButton = document.querySelector(`.like-btn[data-id="${id}"]`);
+            if (likeButton) {
+                if (destination.liked) {
+                    likeButton.className = 'fas fa-heart liked like-btn';
+                    likeButton.setAttribute('title', 'Hapus dari favorit');
+                } else {
+                    likeButton.className = 'far fa-heart like-btn';
+                    likeButton.setAttribute('title', 'Tambahkan ke favorit');
+                }
+            }
+            
+            // Update the like button in the modal if it's currently open for this destination
+            if (currentDestination && currentDestination.id === id) {
+                const modalLikeButton = document.getElementById('modalLikeButton');
+                if (modalLikeButton) {
+                    if (destination.liked) {
+                        modalLikeButton.className = 'fas fa-heart liked like-btn';
+                        modalLikeButton.setAttribute('title', 'Hapus dari favorit');
+                    } else {
+                        modalLikeButton.className = 'far fa-heart like-btn';
+                        modalLikeButton.setAttribute('title', 'Tambahkan ke favorit');
+                    }
+                }
+            }
+            
+            // Here you could also save the liked state to localStorage or send to a server
+            console.log(`Destination ${id} ${destination.liked ? 'liked' : 'unliked'}`);
+        }
+        
         function renderStars(rating) {
             const fullStars = Math.floor(rating);
             const hasHalfStar = rating % 1 >= 0.5;
@@ -634,6 +707,7 @@
 
             return stars;
         }
+        
         function showDestinationModal(id) {
             const destination = destinations.find(dest => dest.id === id);
             if (!destination) return;
@@ -649,9 +723,11 @@
             document.getElementById('modalRating').innerHTML = renderStars(destination.rating) + 
                 `<span class="ml-2">${destination.rating}</span>`;
             document.getElementById('modalReviews').textContent = `(${destination.reviews} ulasan)`;
+            
             resetRatingWidget();
             document.getElementById('destinationModal').style.display = 'block';
         }
+        
         function resetRatingWidget() {
             const stars = document.querySelectorAll('#ratingStars i');
             stars.forEach(star => {
@@ -659,17 +735,21 @@
             });
             document.getElementById('ratingMessage').textContent = '';
         }
+        
         function handleRating(ratingValue) {
             if (!currentDestination) return;
+            
             currentDestination.ratings.push(ratingValue);
             const sum = currentDestination.ratings.reduce((a, b) => a + b, 0);
             const avg = sum / currentDestination.ratings.length;
             currentDestination.rating = parseFloat(avg.toFixed(1));
             currentDestination.reviews = currentDestination.ratings.length;
+            
             document.getElementById('modalRating').innerHTML = renderStars(currentDestination.rating) + 
                 `<span class="ml-2">${currentDestination.rating}</span>`;
             document.getElementById('modalReviews').textContent = `(${currentDestination.reviews} ulasan)`;
             document.getElementById('ratingMessage').textContent = 'Terima kasih atas rating Anda!';
+            
             const stars = document.querySelectorAll('#ratingStars i');
             stars.forEach((star, index) => {
                 if (index < ratingValue) {
@@ -678,8 +758,10 @@
                     star.className = 'far fa-star text-2xl text-gray-400';
                 }
             });
+            
             renderFilteredDestinations();
         }
+        
         function renderFilteredDestinations() {
             const category = document.getElementById('categoryFilter').value;
             const location = document.getElementById('locationFilter').value;
@@ -696,6 +778,7 @@
             
             renderDestinations(filteredDestinations);
         }
+        
         function showHistoryPage() {
             if (!currentDestination || !currentDestination.history) return;
 
@@ -707,6 +790,7 @@
             document.getElementById('historyPage').style.display = 'block';
             document.getElementById('destinationModal').style.display = 'none';
         }
+        
         function openGoogleMaps() {
             if (!currentDestination) return;
             
@@ -714,12 +798,16 @@
             const url = `https://www.google.com/maps/search/?api=1&query=${coordinates}`;
             window.open(url, '_blank');
         }
+        
         document.addEventListener('DOMContentLoaded', function() {
             renderDestinations(destinations);
+            
             document.getElementById('applyFilter').addEventListener('click', renderFilteredDestinations);
+            
             document.querySelector('.close-modal').addEventListener('click', function() {
                 document.getElementById('destinationModal').style.display = 'none';
             });
+            
             document.querySelectorAll('#ratingStars i').forEach(star => {
                 star.addEventListener('click', function() {
                     const ratingValue = parseInt(this.getAttribute('data-value'));
@@ -751,12 +839,16 @@
                     }
                 });
             });
+            
             document.getElementById('historyButton').addEventListener('click', showHistoryPage);
+            
             document.getElementById('backBtn').addEventListener('click', function() {
                 document.getElementById('historyPage').style.display = 'none';
                 document.getElementById('destinationModal').style.display = 'block';
             });
+            
             document.getElementById('mapsButton').addEventListener('click', openGoogleMaps);
+            
             window.addEventListener('click', function(event) {
                 const modal = document.getElementById('destinationModal');
                 if (event.target === modal) {
