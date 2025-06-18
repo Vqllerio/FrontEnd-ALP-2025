@@ -10,7 +10,56 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Toast animation */
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+
+            10% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+
+            90% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+        }
+
+        /* Heart animation */
+        @keyframes heartPulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.3);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .heart-icon.animate {
+            animation: heartPulse 0.5s ease;
+        }
+    </style>
 </head>
+
+<div id="toast"
+    class="hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-midnight-green text-azure px-6 py-3 rounded-full shadow-lg z-50">
+    <span id="toastMessage"></span>
+</div>
+|
 
 <body class="min-h-screen">
     <nav
@@ -27,7 +76,7 @@
             </div>
             <span class="font-bold text-xl">EafTrip</span>
         </div>
-        <div class="hidden md:flex space-x-6 font-medium">
+        <div class="md:flex space-x-6 font-medium">
             <a href="welcome page.html" class="hover:underline text-white">Beranda</a>
             <a href="pencarian.html" class="hover:underline text-white">Kota</a>
             <a href="index.html" class="hover:underline text-white">Rekomendasi</a>
@@ -182,105 +231,143 @@
     <script src="dataUser.js"></script>
     <script src="dataDest.js"></script>
     <script src="script.js"></script>
+    <script src="Favorit.js"></script>
     <script>
-        // Favorite page specific functionality
-        document.addEventListener('DOMContentLoaded', () => {
-            // Get favorites from localStorage
-            const getFavorites = () => {
-                return JSON.parse(localStorage.getItem('favorites')) || [];
-            };
+        // Add this toggleFavorite function
+        function toggleFavorite(destinationID) {
+            const userID = getCurrentUserID();
+            if (!userID) {
+                alert('Silakan login untuk menambahkan favorit');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const wasFavorited = isFavorited(userID, destinationID);
 
             // Toggle favorite status
-            const toggleFavorite = (id) => {
-                const favorites = getFavorites();
-                const index = favorites.indexOf(id);
+            if (wasFavorited) {
+                removeFavorite(userID, destinationID);
+            } else {
+                addFavorite(userID, destinationID);
+            }
 
-                if (index === -1) {
-                    favorites.push(id);
-                } else {
-                    favorites.splice(index, 1);
-                }
+            return !wasFavorited;
+        }
 
-                localStorage.setItem('favorites', JSON.stringify(favorites));
-                renderFavoriteDestinations();
-            };
+        // Initialize favorites page
+        function initFavoritePage() {
+            const userID = getCurrentUserID();
+            if (!userID) {
+                alert('Silakan login untuk melihat favorit');
+                window.location.href = 'login.html';
+                return;
+            }
 
-            // Render favorite destinations
-            const renderFavoriteDestinations = () => {
-                const favorites = getFavorites();
-                const favDestinations = destinations.filter(dest => favorites.includes(dest.id));
-                const grid = document.getElementById('destinationsGrid');
+            const favoriteIDs = getUserFavorites(userID);
+            const favDestinations = destinations.filter(dest =>
+                favoriteIDs.includes(dest.id)
+            );
 
-                if (favDestinations.length === 0) {
-                    grid.innerHTML = `
-                        <div class="col-span-3 text-center py-12">
-                            <i class="fas fa-heart-broken text-5xl text-persian-orange mb-4"></i>
-                            <h3 class="text-xl font-semibold text-liver">Belum ada destinasi favorit</h3>
-                            <p class="text-liver/80 mt-2">Tambahkan destinasi favorit Anda dari halaman rekomendasi</p>
-                            <a href="index.html" class="mt-4 inline-block px-6 py-2 bg-teal text-white rounded-lg hover:bg-midnight-green transition">
-                                Temukan Destinasi
-                            </a>
+            renderFavoriteDestinations(favDestinations);
+        }
+
+        // Render favorite destinations
+        function renderFavoriteDestinations(favDestinations) {
+            const grid = document.getElementById('destinationsGrid');
+
+            if (favDestinations.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-3 text-center py-12">
+                        <div class="absolute top-3 right-3 z-30">
+  <i class="fas fa-heart text-xl ${isFavorite ? 'text-red-500' : 'text-gray-300'} heart-icon" 
+     data-id="${destination.id}"></i>
+</div>
+                        <i class="fas fa-heart-broken text-5xl text-persian-orange mb-4"></i>
+                        <h3 class="text-xl font-semibold text-liver">Belum ada destinasi favorit</h3>
+                        <p class="text-liver/80 mt-2">Tambahkan destinasi favorit Anda dari halaman rekomendasi</p>
+                        <a href="index.html" class="mt-4 inline-block px-6 py-2 bg-teal text-white rounded-lg hover:bg-midnight-green transition">
+                            Temukan Destinasi
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = '';
+
+            favDestinations.forEach(destination => {
+                const isFavorite = isFavorited(getCurrentUserID(), destination.id);
+                const card = document.createElement('div');
+                card.className = 'card group relative rounded-2xl overflow-hidden shadow-xl h-96 shine-effect';
+                card.innerHTML = `
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
+                    <img src="${destination.image}" 
+                        alt="${destination.title}" 
+                        class="card-image absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute bottom-0 left-0 right-0 z-20 p-6">
+                        <div class="tag inline-block px-3 py-1 rounded-full text-sm text-azure mb-2">
+                            <i class="fas fa-map-marker-alt mr-1"></i> ${destination.location}
                         </div>
-                    `;
-                    return;
-                }
-
-                grid.innerHTML = '';
-
-                favDestinations.forEach(destination => {
-                    const isFavorite = favorites.includes(destination.id);
-                    const card = document.createElement('div');
-                    card.className = 'card group relative rounded-2xl overflow-hidden shadow-xl h-96 shine-effect';
-                    card.innerHTML = `
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
-                        <img src="${destination.image}" 
-                            alt="${destination.title}" 
-                            class="card-image absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute bottom-0 left-0 right-0 z-20 p-6">
-                            <div class="tag inline-block px-3 py-1 rounded-full text-sm text-azure mb-2">
-                                <i class="fas fa-map-marker-alt mr-1"></i> ${destination.location}
-                            </div>
-                            <div class="flex justify-between items-start">
-                                <h3 class="text-2xl font-bold text-azure">${destination.title}</h3>
-                                <i class="fas fa-heart text-xl ${isFavorite ? 'text-red-500' : 'text-gray-300'} cursor-pointer ml-2 heart-icon" 
-                                   data-id="${destination.id}"></i>
-                            </div>
-                            <div class="flex items-center text-persian-orange my-3">
-                                ${renderStars(destination.rating)}
-                                <span class="text-azure text-sm ml-2">${destination.rating} (${destination.reviews} ulasan)</span>
-                            </div>
-                            <p class="text-azure/90 mb-4">${destination.description}</p>
-                            <button class="detail-btn px-4 py-2 bg-azure text-teal rounded-full font-semibold text-sm hover:bg-gray-100 transition flex items-center"
-                                    data-id="${destination.id}">
-                                <i class="fas fa-info-circle mr-2"></i> Detail Wisata
-                            </button>
+                        <div class="flex justify-between items-start">
+                            <h3 class="text-2xl font-bold text-azure">${destination.title}</h3>
+                            <i class="fas fa-heart text-xl ${isFavorite ? 'text-red-500' : 'text-gray-300'} cursor-pointer ml-2 heart-icon" 
+                               data-id="${destination.id}"></i>
                         </div>
-                    `;
-                    grid.appendChild(card);
-                });
+                        <div class="flex items-center text-persian-orange my-3">
+                            ${renderStars(destination.rating)}
+                            <span class="text-azure text-sm ml-2">${destination.rating} (${destination.reviews} ulasan)</span>
+                        </div>
+                        <p class="text-azure/90 mb-4">${destination.description}</p>
+                        <button class="detail-btn px-4 py-2 bg-azure text-teal rounded-full font-semibold text-sm hover:bg-gray-100 transition flex items-center"
+                                data-id="${destination.id}">
+                            <i class="fas fa-info-circle mr-2"></i> Detail Wisata
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
 
-                // Attach event listeners
-                document.querySelectorAll('.detail-btn').forEach(button => {
-                    button.addEventListener('click', function () {
-                        const id = parseInt(this.getAttribute('data-id'));
-                        const destination = destinations.find(dest => dest.id === id);
-                        showDestinationModal(destination);
-                    });
-                });
+            // Attach event listeners
+            attachFavoriteEvents();
+        }
 
-                document.querySelectorAll('.heart-icon').forEach(icon => {
-                    icon.addEventListener('click', function (e) {
-                        e.stopPropagation();
-                        const id = parseInt(this.getAttribute('data-id'));
-                        toggleFavorite(id);
-                    });
-                });
-            };
+        // Update the attachFavoriteEvents function
+        function attachFavoriteEvents() {
+            document.querySelectorAll('.heart-icon').forEach(icon => {
+                icon.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    const id = parseInt(this.getAttribute('data-id'));
+                    const wasFavorited = this.classList.contains('text-red-500');
 
-            // Initialize favorite page
-            renderFavoriteDestinations();
-        });
+                    // Add animation class
+                    this.classList.add('animate');
+                    setTimeout(() => this.classList.remove('animate'), 500);
+
+                    // Toggle favorite
+                    const isNowFavorited = toggleFavorite(id);
+
+                    // Update UI immediately
+                    if (isNowFavorited) {
+                        showToast('Ditambahkan ke favorit');
+                        this.classList.remove('text-gray-300');
+                        this.classList.add('text-red-500');
+                    } else {
+                        showToast('Dihapus dari favorit');
+                        this.classList.remove('text-red-500');
+                        this.classList.add('text-gray-300');
+                    }
+                });
+            });
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', initFavoritePage);
     </script>
+
+    <div id="toast"
+        class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-midnight-green text-azure px-6 py-3 rounded-full shadow-lg z-50 hidden">
+        <span id="toastMessage"></span>
+    </div>
 </body>
 
 </html>

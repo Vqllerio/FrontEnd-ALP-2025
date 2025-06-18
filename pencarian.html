@@ -49,6 +49,25 @@
             max-height: 60vh;
             overflow-y: auto;
         }
+
+        /* Adjust positioning for category badge and heart */
+        .destination-card .relative {
+            position: relative;
+        }
+
+        .destination-category {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 20;
+        }
+
+        .favorite-heart {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 30;
+        }
     </style>
 </head>
 
@@ -67,7 +86,7 @@
             </div>
             <span class="font-bold text-xl">EafTrip</span>
         </div>
-        <div class="hidden md:flex space-x-6 font-medium">
+        <div class="md:flex space-x-6 font-medium">
             <a href="index.html" class="hover:underline hover:text-c3f0f5">Beranda</a>
             <a href="#" class="hover:underline hover:text-c3f0f5">Provinsi</a>
             <a href="#" class="hover:underline hover:text-c3f0f5">Kota</a>
@@ -247,6 +266,7 @@
 
     <script src="dataDest.js"></script>
     <script src="script.js"></script>
+    <script src="Favorit.js"></script>
 </body>
 
 </html>

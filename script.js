@@ -405,3 +405,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Get current user ID
+function getCurrentUserID() {
+    const user = JSON.parse(sessionStorage.getItem('currentUser'));
+    return user ? user.userid : null;
+}
+
+// Toggle favorite for current user
+function toggleFavorite(destinationID) {
+    const userID = getCurrentUserID();
+    if (!userID) {
+        alert('Silakan login untuk menambahkan favorit');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    if (isFavorited(userID, destinationID)) {
+        removeFavorite(userID, destinationID);
+    } else {
+        addFavorite(userID, destinationID);
+    }
+
+    // Refresh UI
+    if (window.location.pathname.includes('index.html')) {
+        renderDestinations();
+    } else if (window.location.pathname.includes('pencarian.html')) {
+        displaySearchResults();
+    }
+}
+
+// Add heart icon to cards
+function addHeartIcon(cardElement, destinationID) {
+    const userID = getCurrentUserID();
+    const heartIcon = document.createElement('div');
+    heartIcon.className = 'absolute top-3 right-3 z-30';
+    heartIcon.innerHTML = `
+        <i class="fas fa-heart text-xl cursor-pointer 
+                  ${userID && isFavorited(userID, destinationID) ? 'text-red-500' : 'text-gray-300'}"
+           onclick="toggleFavorite(${destinationID})"></i>
+    `;
+    cardElement.insertBefore(heartIcon, cardElement.firstChild);
+}
