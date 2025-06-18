@@ -475,3 +475,38 @@ footer a:hover {
     background-color: #0d5d6d;
     color: white;
 }
+
+.heart-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 30;
+    font-size: 1.5rem;
+    color: rgba(237, 247, 246, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.heart-icon:hover {
+    transform: scale(1.2);
+}
+
+.heart-icon.favorited {
+    color: #f87171;
+    /* Red color for favorited items */
+    animation: pulse 0.5s ease;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

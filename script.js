@@ -20,6 +20,25 @@ function renderStars(rating) {
     return starsHTML;
 }
 
+// Favorite functions
+function getFavorites() {
+    return JSON.parse(localStorage.getItem('favorites')) || [];
+}
+
+function toggleFavorite(id) {
+    const favorites = getFavorites();
+    const index = favorites.indexOf(id);
+
+    if (index === -1) {
+        favorites.push(id);
+    } else {
+        favorites.splice(index, 1);
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    return favorites.includes(id);
+}
+
 // Index page functionality
 function renderDestinations(destinationsToRender) {
     const grid = document.getElementById('destinationsGrid');
@@ -28,9 +47,12 @@ function renderDestinations(destinationsToRender) {
     grid.innerHTML = '';
 
     destinationsToRender.forEach(destination => {
+        const isFavorite = getFavorites().includes(destination.id);
         const card = document.createElement('div');
         card.className = 'card group relative rounded-2xl overflow-hidden shadow-xl h-96 shine-effect';
         card.innerHTML = `
+            <i class="heart-icon ${isFavorite ? 'fas favorited' : 'far'} fa-heart" 
+               data-id="${destination.id}"></i>
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10"></div>
             <img src="${destination.image}" 
                 alt="${destination.title}" 
@@ -61,6 +83,24 @@ function renderDestinations(destinationsToRender) {
             const id = parseInt(this.getAttribute('data-id'));
             const destination = destinations.find(dest => dest.id === id);
             showDestinationModal(destination);
+        });
+    });
+
+    // Attach event listeners to heart icons
+    document.querySelectorAll('.heart-icon').forEach(icon => {
+        icon.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const id = parseInt(this.getAttribute('data-id'));
+            const isNowFavorite = toggleFavorite(id);
+
+            // Update icon appearance
+            if (isNowFavorite) {
+                this.classList.replace('far', 'fas');
+                this.classList.add('favorited');
+            } else {
+                this.classList.replace('fas', 'far');
+                this.classList.remove('favorited');
+            }
         });
     });
 }
@@ -221,6 +261,11 @@ function showHistoryPage(destinationId) {
 
 // Initialize pages
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize favorites
+    if (!localStorage.getItem('favorites')) {
+        localStorage.setItem('favorites', JSON.stringify([]));
+    }
+
     // Check login status
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
     if (!isLoggedIn && !window.location.pathname.includes('login.html') &&
