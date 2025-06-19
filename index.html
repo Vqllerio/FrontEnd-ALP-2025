@@ -222,7 +222,6 @@
             margin-bottom: 1rem;
         }
         
-        /* Animasi scroll arrow */
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
                 transform: translateY(0);
@@ -238,8 +237,7 @@
         .bounce-arrow {
             animation: bounce 2s infinite;
         }
-        
-        /* Like button styles */
+
         .like-btn {
             cursor: pointer;
             transition: all 0.3s;
@@ -255,7 +253,6 @@
             color: #ff0000;
         }
         
-        /* Modal title with like button */
         .modal-title-container {
             display: flex;
             align-items: center;
@@ -656,15 +653,13 @@
                 grid.appendChild(card);
             });
             
-            // Add event listeners for detail buttons
             document.querySelectorAll('.view-detail-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     const id = parseInt(this.getAttribute('data-id'));
                     showDestinationModal(id);
                 });
             });
-            
-            // Add event listeners for like buttons
+
             document.querySelectorAll('.like-btn').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.stopPropagation();
@@ -679,8 +674,7 @@
             if (!destination) return;
             
             destination.liked = !destination.liked;
-            
-            // Update the like button in the grid
+
             const likeButton = document.querySelector(`.like-btn[data-id="${id}"]`);
             if (likeButton) {
                 if (destination.liked) {
@@ -692,7 +686,6 @@
                 }
             }
             
-            // Update the like button in modal if it's the current destination
             if (currentDestination && currentDestination.id === id) {
                 const modalLikeBtn = document.getElementById('modalLikeBtn');
                 if (destination.liked) {
@@ -703,8 +696,7 @@
                     modalLikeBtn.setAttribute('title', 'Tambahkan ke favorit');
                 }
             }
-            
-            // Here you could also save the liked state to localStorage
+
             console.log(`Destination ${id} ${destination.liked ? 'liked' : 'unliked'}`);
         }
         
@@ -739,8 +731,7 @@
             document.getElementById('modalDescription').textContent = destination.description;
             document.getElementById('modalRating').innerHTML = renderStars(destination.rating);
             document.getElementById('modalReviews').textContent = `(${destination.reviews} ulasan)`;
-            
-            // Set like button in modal
+
             const modalLikeBtn = document.getElementById('modalLikeBtn');
             if (destination.liked) {
                 modalLikeBtn.className = 'modal-like-btn fas fa-heart liked';
@@ -749,35 +740,29 @@
                 modalLikeBtn.className = 'modal-like-btn far fa-heart';
                 modalLikeBtn.setAttribute('title', 'Tambahkan ke favorit');
             }
-            
-            // Show modal
+
             document.getElementById('destinationModal').style.display = 'block';
         }
-        
-        // Initialize the page
+
         document.addEventListener('DOMContentLoaded', function() {
             renderDestinations(destinations);
-            
-            // Modal close button
+
             document.querySelector('.close-modal').addEventListener('click', function() {
                 document.getElementById('destinationModal').style.display = 'none';
             });
             
-            // Close modal when clicking outside
             window.addEventListener('click', function(event) {
                 if (event.target === document.getElementById('destinationModal')) {
                     document.getElementById('destinationModal').style.display = 'none';
                 }
             });
-            
-            // Modal like button
+
             document.getElementById('modalLikeBtn').addEventListener('click', function() {
                 if (currentDestination) {
                     toggleLike(currentDestination.id);
                 }
             });
-            
-            // History button
+
             document.getElementById('historyButton').addEventListener('click', function() {
                 if (!currentDestination) return;
                 
@@ -789,27 +774,23 @@
                 document.getElementById('historyImage').alt = currentDestination.history.title;
                 document.getElementById('historyContent').innerHTML = currentDestination.history.content;
             });
-            
-            // Back button from history page
+
             document.getElementById('backBtn').addEventListener('click', function() {
                 document.getElementById('historyPage').style.display = 'none';
                 document.getElementById('destinationModal').style.display = 'block';
             });
-            
-            // Maps button
+
             document.getElementById('mapsButton').addEventListener('click', function() {
                 if (!currentDestination) return;
                 const url = `https://www.google.com/maps?q=${currentDestination.coordinates}`;
                 window.open(url, '_blank');
             });
-            
-            // Rating stars
+
             const ratingStars = document.querySelectorAll('#ratingStars i');
             ratingStars.forEach(star => {
                 star.addEventListener('click', function() {
                     const value = parseInt(this.getAttribute('data-value'));
                     
-                    // Highlight stars
                     ratingStars.forEach((s, index) => {
                         if (index < value) {
                             s.className = 'fas fa-star text-2xl text-persian-orange cursor-pointer';
@@ -817,15 +798,11 @@
                             s.className = 'far fa-star text-2xl text-gray-400 cursor-pointer hover:text-persian-orange';
                         }
                     });
-                    
-                    // Show message
+
                     document.getElementById('ratingMessage').textContent = `Terima kasih! Anda memberi rating ${value} bintang.`;
                     
-                    // Here you would normally save the rating to your backend
                 });
             });
-            
-            // Apply filter button
             document.getElementById('applyFilter').addEventListener('click', function() {
                 const category = document.getElementById('categoryFilter').value;
                 const location = document.getElementById('locationFilter').value;

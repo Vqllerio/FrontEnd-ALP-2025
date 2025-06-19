@@ -55,17 +55,18 @@ const destinations = [
     userRating: 0,
     category: "budaya"
   },
-  {
-    id: 6,
-    title: "Pulau Samalona",
-    location: "Makassar",
-    description: "Pulau kecil dengan pantai pasir putih dan terumbu karang indah",
-    image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-    rating: 4.9,
-    reviews: 876,
-    userRating: 0,
-    category: "pantai"
-  },
+ {
+  id: 6,
+  title: "Taman Nasional Taka Bonerate",
+  location: "Kepulauan Selayar, Sulawesi Selatan",
+  description: "Taman laut nasional dengan atol terbesar di Asia Tenggara, surga menyelam dengan kekayaan hayati dan budaya maritim masyarakat Bugis-Bajo.",
+  image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+  rating: 4.8,
+  reviews: 1700,
+  userRating: 0,
+  category: "Pantai/Danau"
+},
+
   {
     id: 7,
     title: "Pulau Gladys",

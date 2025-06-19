@@ -1,4 +1,3 @@
-// Variabel untuk menyimpan rating yang dipilih
 let selectedRating = 0;
 let currentDestinationId = 0;
 
@@ -190,7 +189,6 @@ document.getElementById('submitRating').addEventListener('click', function() {
                     reviewsElement.textContent = `(${destination.reviews} ulasan)`;
                 }
             });
-<<<<<<< HEAD
         }
     }
 });
@@ -206,14 +204,6 @@ function showHistoryPage(id) {
     
     document.getElementById('destinationModal').classList.add('hidden');
     document.getElementById('historyPage').classList.remove('hidden');
-=======
-
-            ratingMessage.textContent = `Terima kasih! Anda memberi rating ${value} bintang untuk ${destination.title}`;
-            ratingMessage.className = 'text-teal mt-2 text-sm';
-            saveUserRating(destination.id, value);
-        });
-    });
->>>>>>> 8ecadf6df8a86b27467c8df3b41f554c2ba1472c
 }
 
 document.querySelector('.close-modal').addEventListener('click', function() {
@@ -247,7 +237,5 @@ document.getElementById('destinationModal').addEventListener('click', function(e
     }
 });
 
-// Inisialisasi saat DOM siap
 document.addEventListener('DOMContentLoaded', () => {
-    // Anda bisa menambahkan inisialisasi lain di sini jika diperlukan
 });
