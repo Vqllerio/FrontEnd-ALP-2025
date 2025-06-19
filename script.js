@@ -49,7 +49,7 @@ function renderDestinations(destinationsToRender) {
     destinationsToRender.forEach(destination => {
         const isFavorite = getFavorites().includes(destination.id);
         const card = document.createElement('div');
-        card.className = 'card group relative rounded-2xl overflow-hidden shadow-xl h-96 shine-effect';
+        card.className = 'card group relative rounded-2xl overflow-hidden shadow-xl h-full shine-effect';
         card.innerHTML = `
             <i class="heart-icon ${isFavorite ? 'fas favorited' : 'far'} fa-heart" 
                data-id="${destination.id}"></i>
