@@ -420,8 +420,8 @@ id: 3,
 const historyData = {
   1: {
     title: "Pantai Punaga",
-    location: "Makassar, Sulawesi Selatan",
-    image: "wisata/Pantai dan danau/takalar/Pantai Punaga.jpg",
+    location: "Takalar, Sulawesi Selatan",
+    image: "wisata/pantaiOrDanau/takalar/Pantai Punaga.jpg",
     content: `
       <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Pantai Losari</h3>
       <p class="text-liver mb-6">
@@ -448,7 +448,7 @@ Namun, budaya lokal Punaga juga tengah menghadapi tantangan serius—abrasi pant
   2: {
     title: "Pulau Sanrobongi",
     location: "Takalar, Sulawesi Selatan",
-    image: "https://images.unsplash.com/photo-1545233273-3f10c2acb13c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80", 
+    image: "wisata/pantaiOrDanau/takalar/pulauSanrobengi.jpg", 
     content: `
       <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Pulau Sanrobongi</h3>
       <p class="text-liver mb-6">
@@ -468,7 +468,7 @@ Namun, budaya lokal Punaga juga tengah menghadapi tantangan serius—abrasi pant
   3: {
   title: "Waterboom Topejawa",
   location: "Topejawa, Takalar, Sulawesi Selatan",
-  image: "https://images.unsplash.com/photo-1562088287-bde35a8be6f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+  image: "wisata/kota/takalar/topejawa.jpg",
   content: `
     <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Waterboom</h3>
     <p class="text-liver mb-6">
@@ -496,7 +496,7 @@ Namun, budaya lokal Punaga juga tengah menghadapi tantangan serius—abrasi pant
  4: {
   title: "Padang Savana Ongkoa",
   location: "Takalar, Sulawesi Selatan",
-  image: "https://images.unsplash.com/photo-1587731346642-20d42c61f43a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+  image: "wisata/pantaiOrDanau/takalar/padangSavana.jpeg",
   content: `
     <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Padang Savana Ongkoa</h3>
     <p class="text-liver mb-6">
@@ -508,25 +508,25 @@ Namun, budaya lokal Punaga juga tengah menghadapi tantangan serius—abrasi pant
     </p>
   `
 },
-5: {
-  title: "Maudu Lompoa Cikoang",
-  location: "Takalar, Sulawesi Selatan",
-  image: "https://images.unsplash.com/photo-1596421544961-9c5c9de61b20?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-  content: `
-    <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Maudu Lompoa Cikoang</h3>
-    <p class="text-liver mb-6">
-      Maudu Lompoa Cikoang berasal dari abad ke-17, saat Islam masuk ke wilayah ini melalui Syekh Yusuf Tajul Khalwati. Tradisi ini berkembang melalui keluarga Karaeng Cikoang sebagai bentuk akulturasi antara ajaran Islam dan budaya lokal Bugis-Makassar. Sejak awal, perayaan ini dimaksudkan sebagai penghormatan kepada Nabi Muhammad SAW dalam bentuk upacara besar tahunan, yang menjadi unik dan khas dibandingkan perayaan Maulid di tempat lain di Indonesia.
-    </p>
-    <h3 class="text-2xl font-bold text-midnight-green mb-4">Budaya dalam Maudu Lompoa</h3>
-    <p class="text-liver mb-6">
-      Upacara ini memiliki nilai spiritual, sosial, dan budaya yang tinggi. Jolloro atau perahu hias dihias dengan makanan, hasil bumi, dan simbol keislaman sebagai representasi kehidupan maritim Bugis-Makassar. Acara diiringi dengan pembacaan barzanji, tabuhan rebana, dan doa bersama. Warga juga mengenakan pakaian adat dan memainkan musik tradisional sebagai bagian dari pelestarian budaya. Maudu Lompoa memperkuat solidaritas sosial dan menjadikan Cikoang sebagai pusat spiritual dan budaya terbuka yang menggambarkan harmoni antara Islam dan tradisi lokal.
-    </p>
-  `
-},
+// 5: {
+//   title: "Maudu Lompoa Cikoang",
+//   location: "Takalar, Sulawesi Selatan",
+//   image: "https://images.unsplash.com/photo-1596421544961-9c5c9de61b20?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+//   content: `
+//     <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Maudu Lompoa Cikoang</h3>
+//     <p class="text-liver mb-6">
+//       Maudu Lompoa Cikoang berasal dari abad ke-17, saat Islam masuk ke wilayah ini melalui Syekh Yusuf Tajul Khalwati. Tradisi ini berkembang melalui keluarga Karaeng Cikoang sebagai bentuk akulturasi antara ajaran Islam dan budaya lokal Bugis-Makassar. Sejak awal, perayaan ini dimaksudkan sebagai penghormatan kepada Nabi Muhammad SAW dalam bentuk upacara besar tahunan, yang menjadi unik dan khas dibandingkan perayaan Maulid di tempat lain di Indonesia.
+//     </p>
+//     <h3 class="text-2xl font-bold text-midnight-green mb-4">Budaya dalam Maudu Lompoa</h3>
+//     <p class="text-liver mb-6">
+//       Upacara ini memiliki nilai spiritual, sosial, dan budaya yang tinggi. Jolloro atau perahu hias dihias dengan makanan, hasil bumi, dan simbol keislaman sebagai representasi kehidupan maritim Bugis-Makassar. Acara diiringi dengan pembacaan barzanji, tabuhan rebana, dan doa bersama. Warga juga mengenakan pakaian adat dan memainkan musik tradisional sebagai bagian dari pelestarian budaya. Maudu Lompoa memperkuat solidaritas sosial dan menjadikan Cikoang sebagai pusat spiritual dan budaya terbuka yang menggambarkan harmoni antara Islam dan tradisi lokal.
+//     </p>
+//   `
+// },
 6: {
   title: "Taman Nasional Taka Bonerate",
   location: "Kepulauan Selayar, Sulawesi Selatan",
-  image: "https://images.unsplash.com/photo-1586086081785-b5cf0b63743d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+  image: "wisata/pantaiOrDanau/selayar/taman nasional taka bonerate.jpg",
   content: `
     <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Taman Nasional Taka Bonerate</h3>
     <p class="text-liver mb-6">
@@ -541,7 +541,7 @@ Namun, budaya lokal Punaga juga tengah menghadapi tantangan serius—abrasi pant
   7: {
     title: "Pantai Sunari",
     location: "Dusun Tile-tile, Desa Patikarya, Bontosikuyu, Kepulauan Selayar",
-    image: "https://images.unsplash.com/photo-1590490360182-03d88910e013?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    image: "wisata/pantaiOrDanau/selayar/pantaiSunari.jpg",
     content: `
       <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Pantai Sunari</h3>
       <p class="text-liver mb-6">
@@ -557,7 +557,7 @@ Namun, budaya lokal Punaga juga tengah menghadapi tantangan serius—abrasi pant
   8: {
     title: "Pantai Pinang",
     location: "Pesisir Timur Pulau Selayar, Kecamatan Bontosikuyu",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    image: "wisata/pantaiOrDanau/selayar/pantaiPinang.jpg",
     content: `
       <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Pantai Pinang</h3>
       <p class="text-liver mb-6">
@@ -572,7 +572,7 @@ Namun, budaya lokal Punaga juga tengah menghadapi tantangan serius—abrasi pant
  9: {
     title: "Puncak Pusera",
     location: "Dusun Taipadada, Desa Bonea Makmur, Bontomanai, Kepulauan Selayar",
-    image: "https://images.unsplash.com/photo-1550517164-3f0f5f56bcdc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+    image: "wisata/pegunungan/selayar/puncakPusera.jpg",
     content: `
       <h3 class="text-2xl font-bold text-midnight-green mb-4">Sejarah Puncak Pusera</h3>
       <p class="text-liver mb-6">
